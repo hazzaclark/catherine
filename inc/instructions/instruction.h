@@ -54,11 +54,13 @@ extern "C" {
     typedef struct
     {
         CATH_INSTR_ID INSTR_ID;
+        CATH_INSTR_ID_TYPE ID_TYPE;
         const SH_DESCRIPTOR* DESCRIPTOR;
         CATH_INSTR_CAT CATEGORY;
         
         U32 FLAGS;
-        U32 WORD;
+        U32 PC;
+        U16 WORD;
         U32 BITS;
 
     } SH_INSTRUCTION;
@@ -86,6 +88,20 @@ extern "C" {
     #define         SH2_INSTR_GET_CACHE(VALUE)                  ((CATH_SHIFT_R(VALUE)->WORD, 0, 8))
     #define         SH2_INSTR_GET_MAC(VALUE)                    ((CATH_SHIFT_R(VALUE)->WORD, 1, 1))
     #define         SH2_INSTR_GET_IMASK(VALUE)                  ((CATH_SHIFT_R(VALUE), 4, 4))
+
+    // ACCESS COMMON ADDRESSING MODES (SATURN SPECIFIC)
+    #define         SH2_INSTR_GET_GBR_DISP(VALUE)               (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
+    #define         SH2_INSTR_GET_PC_DISP(VALUE)                (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
+
+
+    /////////////////////////////////////////////////////////
+    //                FUNCTION PROTOTYPES
+    /////////////////////////////////////////////////////////
+
+    void CATH_INSTRUCTION_INIT(SH_INSTRUCTION*, U16, U32);
+    void CATH_INSTRUCTION_FREE(SH_INSTRUCTION*);
+
+    extern const SH_DESCRIPTOR INSTR_DESCRIPTORS[];
     
 
 #ifdef __cplusplus
