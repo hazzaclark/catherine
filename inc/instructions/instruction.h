@@ -12,8 +12,10 @@
 
 #include <common.h>
 
+#include "util.h"
 #include "instructions/operands.h"
 #include "enums/instructions.h"
+#include "enums/category.h"
 
 // SYSTEM INCLUDES
 
@@ -34,8 +36,7 @@ extern "C" {
     // OF EACH INSTRUCTION TYPE
     typedef struct  
     {   
-        SH_OPERAND_TYPE OPERAND_TYPE;
-        CATH_INSTR_ID INSTR_ID;
+        SH_OPERAND_TYPE OPERAND_TYPE[OPERAND_MAX+1];
 
         bool IS_BRANCH;         // LOCAL BRANCH FOR CURRENT SYMBOL
         bool IS_JUMP;           // SAME CONDITION AS BRANCH EXCEPT FOR JUMP ROUTINES
@@ -44,6 +45,7 @@ extern "C" {
         bool IS_HALT;           // HAS THE HALT LINE BEEN ACTIVATED?
         
         bool IS_FLOAT;
+        bool IS_UNSIGNED;
 
     } SH_DESCRIPTOR;
 
@@ -51,10 +53,27 @@ extern "C" {
     // TYPES AND THEIR CHARACTERISTICS
     typedef struct
     {
+        CATH_INSTR_ID INSTR_ID;
+        const SH_DESCRIPTOR* DESCRIPTOR;
+        CATH_INSTR_CAT CATEGORY;
+        
+        U32 FLAGS;
         U32 WORD;
         U32 BITS;
 
     } SH_INSTRUCTION;
+
+    // PRE PROCESSOR DIRECTIVES TO HELP WITH ACCESS TO SPECIFIC CHARACTERISTICS CPU-WISE
+    // ACCEES TO OPCODE WORD, FUNCTION ID AND CALLBACKS
+    
+    // ACCESS OPCODE WORD VALUES BASED ON TOP NTH BITS
+    #define         SH2_INSTR_GET_OPCODE4(VALUE)                ((CATH_SHIFT_R((VALUE)->WORD, 12, 4)))
+    #define         SH2_INSTR_GET_OPCODE8(VALUE)                ((CATH_SHIFT_R(VALUE)->WORD, 8, 8))
+    #define         SH2_INSTR_GET_OPCODE12(VALUE)               ((CATH_SHIFT_R(VALUE)->WORD, 4, 12))
+
+    // ACCESS REGISTER FIELDS
+    #define         SH2_INSTR_GET_RN(VALUE)                     ((CATH_SHIFT_R(VALUE)->WORD, 8, 4))
+    #define         SH2_INSTR_GET_RM(VALUE)                     ((CATH_SHIFT_R(VALUE)->WORD, 4, 4))
 
 
 #ifdef __cplusplus
