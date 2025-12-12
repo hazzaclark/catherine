@@ -13,6 +13,7 @@
 #include <common.h>
 
 #include "instructions/operands.h"
+#include "enums/instructions.h"
 
 // SYSTEM INCLUDES
 
@@ -34,6 +35,7 @@ extern "C" {
     typedef struct  
     {   
         SH_OPERAND_TYPE OPERAND_TYPE;
+        CATH_INSTR_ID INSTR_ID;
 
         bool IS_BRANCH;         // LOCAL BRANCH FOR CURRENT SYMBOL
         bool IS_JUMP;           // SAME CONDITION AS BRANCH EXCEPT FOR JUMP ROUTINES
@@ -44,6 +46,15 @@ extern "C" {
         bool IS_FLOAT;
 
     } SH_DESCRIPTOR;
+
+    // DEFINE THE BASIS FOR ACCESSING INSTRUCTION
+    // TYPES AND THEIR CHARACTERISTICS
+    typedef struct
+    {
+        U32 WORD;
+        U32 BITS;
+
+    } SH_INSTRUCTION;
 
 
 #ifdef __cplusplus
