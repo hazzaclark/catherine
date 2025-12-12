@@ -69,25 +69,25 @@ extern "C" {
     // ACCEES TO OPCODE WORD, FUNCTION ID AND CALLBACKS
     
     // ACCESS OPCODE WORD VALUES BASED ON TOP NTH BITS
-    #define         SH2_INSTR_GET_OPCODE4(VALUE)                ((CATH_SHIFT_R((VALUE)->WORD, 12, 4)))
-    #define         SH2_INSTR_GET_OPCODE8(VALUE)                ((CATH_SHIFT_R(VALUE)->WORD, 8, 8))
-    #define         SH2_INSTR_GET_OPCODE12(VALUE)               ((CATH_SHIFT_R(VALUE)->WORD, 4, 12))
+    #define         SH2_INSTR_GET_OPCODE4(VALUE)                (CATH_SHIFT_R((VALUE)->WORD, 12, 4))
+    #define         SH2_INSTR_GET_OPCODE8(VALUE)                (CATH_SHIFT_R((VALUE)->WORD, 8, 8))
+    #define         SH2_INSTR_GET_OPCODE12(VALUE)               (CATH_SHIFT_R((VALUE)->WORD, 4, 12))
 
     // ACCESS REGISTER FIELDS
-    #define         SH2_INSTR_GET_RN(VALUE)                     ((CATH_SHIFT_R(VALUE)->WORD, 8, 4))
-    #define         SH2_INSTR_GET_RM(VALUE)                     ((CATH_SHIFT_R(VALUE)->WORD, 4, 4))
+    #define         SH2_INSTR_GET_RN(VALUE)                     (CATH_SHIFT_R((VALUE)->WORD, 8, 4))
+    #define         SH2_INSTR_GET_RM(VALUE)                     (CATH_SHIFT_R((VALUE)->WORD, 4, 4))
 
     // ACCESS IMMEDIATE/DISP FIELDS
-    #define         SH2_INSTR_GET_IMM4(VALUE)                   ((CATH_SHIFT_R(VALUE)->WORD, 0, 4))
-    #define         SH2_INSTR_GET_IMM8(VALUE)                   ((CATH_SHIFT_R(VALUE)->WORD, 0, 8))
-    #define         SH2_INSTR_GET_DISP4(VALUE)                  ((CATH_SHIFT_R(VALUE)->WORD, 0, 4))
-    #define         SH2_INSTR_GET_DISP8(VALUE)                  ((CATH_SHIFT_R(VALUE)->WORD, 0, 8))
-    #define         SH2_INSTR_GET_DISP12(VALUE)                 ((CATH_SHIFT_R(VALUE)->WORD, 0, 12))
+    #define         SH2_INSTR_GET_IMM4(VALUE)                   (CATH_SHIFT_((VALUE)->WORD, 0, 4))
+    #define         SH2_INSTR_GET_IMM8(VALUE)                   (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
+    #define         SH2_INSTR_GET_DISP4(VALUE)                  (CATH_SHIFT_R((VALUE)->WORD, 0, 4))
+    #define         SH2_INSTR_GET_DISP8(VALUE)                  (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
+    #define         SH2_INSTR_GET_DISP12(VALUE)                 (CATH_SHIFT_R((VALUE)->WORD, 0, 12))
 
     // ACCESS CACHE CONTROL
-    #define         SH2_INSTR_GET_CACHE(VALUE)                  ((CATH_SHIFT_R(VALUE)->WORD, 0, 8))
-    #define         SH2_INSTR_GET_MAC(VALUE)                    ((CATH_SHIFT_R(VALUE)->WORD, 1, 1))
-    #define         SH2_INSTR_GET_IMASK(VALUE)                  ((CATH_SHIFT_R(VALUE), 4, 4))
+    #define         SH2_INSTR_GET_CACHE(VALUE)                  (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
+    #define         SH2_INSTR_GET_MAC(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 1, 1))
+    #define         SH2_INSTR_GET_IMASK(VALUE)                  (CATH_SHIFT_R((VALUE), 4, 4))
 
     // ACCESS COMMON ADDRESSING MODES (SATURN SPECIFIC)
     #define         SH2_INSTR_GET_GBR_DISP(VALUE)               (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
@@ -100,6 +100,10 @@ extern "C" {
 
     void CATH_INSTRUCTION_INIT(SH_INSTRUCTION*, U16, U32);
     void CATH_INSTRUCTION_FREE(SH_INSTRUCTION*);
+    S32 CATH_INSTRUCTION_GET_IMM(const SH_INSTRUCTION*);
+
+
+    static U16 CATH_GET_RAW(const SH_INSTRUCTION* INSTR) { return INSTR->WORD; }
 
     extern const SH_DESCRIPTOR INSTR_DESCRIPTORS[];
     
