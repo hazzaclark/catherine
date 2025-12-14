@@ -5,9 +5,6 @@
 // FOR ALL OF THE INSTRUCTION NAMES - TO HELP WITH VALIDATING THEIR
 // RESPECTIVE ID'S AGAINST EACH OTHER
 
-#ifndef CATH_INSTR_ID_NAMES_H
-#define CATH_INSTR_ID_NAMES_H
-
 // NESTED INCLUDES
 
 #include "enums/instructions.h"
@@ -135,5 +132,3 @@ const char* CATH_INSTR_ID_NAMES[] =
     [CATH_INSTR_ID_XORM] = "XOR.B #imm, @(R0, GBR)",
     [CATH_INSTR_ID_XTRCT] = "XTRCT",
 };
-
-#endif
