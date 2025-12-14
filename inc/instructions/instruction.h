@@ -47,6 +47,8 @@ extern "C" {
         bool IS_FLOAT;
         bool IS_UNSIGNED;
 
+        bool HAS_DELAY_SLOT;    // DOES THE INSTRUCTION HAVE A DELAY SLOT FOR IMMEDIATE BRANCH?
+
     } SH_DESCRIPTOR;
 
     // DEFINE THE BASIS FOR ACCESSING INSTRUCTION
@@ -108,10 +110,11 @@ extern "C" {
     S32 CATH_INSTRUCTION_GET_IMM(const SH_INSTRUCTION*);
     S32 CATH_INSTRUCTION_GET_DISP(const SH_INSTRUCTION*);
 
-
-    static U16 CATH_GET_RAW(const SH_INSTRUCTION* INSTR) { return INSTR->WORD; }
+    inline U16 CATH_GET_RAW(const SH_INSTRUCTION* INSTR) { return INSTR->WORD; }
 
     extern const SH_DESCRIPTOR INSTR_DESCRIPTORS[];
+    extern const char* CATH_INSTR_ID_NAMES[];
+    const char* CATH_GET_OPCODE_NAME(CATH_INSTR_ID INSTR_ID);
     
 
 #ifdef __cplusplus
