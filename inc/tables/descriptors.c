@@ -283,8 +283,43 @@ const SH_DESCRIPTOR INSTR_DESCRIPTORS[CATH_INSTR_ID_ALL_MAX] =
         .IS_FLOAT = false, .IS_UNSIGNED = false,
     },
 
-    [CATH_INSTR_ID_LDC] = {
+    [CATH_INSTR_ID_LDCSR] = {
         .OPERAND_TYPE = {OPERAND_RM, OPERAND_SR, OPERAND_NONE},
+        .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
+        .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
+        .IS_FLOAT = false, .IS_UNSIGNED = false,
+    },
+
+    [CATH_INSTR_ID_LDCGBR] = {
+        .OPERAND_TYPE = {OPERAND_RM, OPERAND_GBR, OPERAND_NONE},
+        .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
+        .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
+        .IS_FLOAT = false, .IS_UNSIGNED = false,
+    },
+
+    [CATH_INSTR_ID_LDCVBR] = {
+        .OPERAND_TYPE = {OPERAND_RM, OPERAND_VBR, OPERAND_NONE},
+        .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
+        .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
+        .IS_FLOAT = false, .IS_UNSIGNED = false,
+    },
+
+    [CATH_INSTR_ID_LDCPISR] = {
+        .OPERAND_TYPE = {OPERAND_AT_RM_POST_INC, OPERAND_SR, OPERAND_NONE},
+        .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
+        .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
+        .IS_FLOAT = false, .IS_UNSIGNED = false,
+    },
+
+    [CATH_INSTR_ID_LDCPIGBR] = {
+        .OPERAND_TYPE = {OPERAND_AT_RM_POST_INC, OPERAND_GBR, OPERAND_NONE},
+        .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
+        .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
+        .IS_FLOAT = false, .IS_UNSIGNED = false,
+    },
+
+    [CATH_INSTR_ID_LDCPIVBR] = {
+        .OPERAND_TYPE = {OPERAND_AT_RM_POST_INC, OPERAND_VBR, OPERAND_NONE},
         .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
         .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
         .IS_FLOAT = false, .IS_UNSIGNED = false,
