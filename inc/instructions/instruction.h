@@ -84,6 +84,11 @@ extern "C" {
     #define         SH2_INSTR_GET_DISP8(VALUE)                  (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
     #define         SH2_INSTR_GET_DISP12(VALUE)                 (CATH_SHIFT_R((VALUE)->WORD, 0, 12))
 
+    #define         SH2_INSTR_GET_DISP_SCALE(VALUE, SCALE)      ((SCALE) == 0 ? 0 : \
+                                                                (SCALE) == 4 ? SH2_INSTR_GET_DISP12(VALUE) : \
+                                                                (SCALE) == 2 ? SH2_INSTR_GET_DISP8(VALUE) : \
+                                                                               SH2_INSTR_GET_DISP4(VALUE))
+
     // ACCESS CACHE CONTROL
     #define         SH2_INSTR_GET_CACHE(VALUE)                  (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
     #define         SH2_INSTR_GET_MAC(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 1, 1))
@@ -101,6 +106,7 @@ extern "C" {
     void CATH_INSTRUCTION_INIT(SH_INSTRUCTION*, U16, U32);
     void CATH_INSTRUCTION_FREE(SH_INSTRUCTION*);
     S32 CATH_INSTRUCTION_GET_IMM(const SH_INSTRUCTION*);
+    S32 CATH_INSTRUCTION_GET_DISP(const SH_INSTRUCTION*);
 
 
     static U16 CATH_GET_RAW(const SH_INSTRUCTION* INSTR) { return INSTR->WORD; }
