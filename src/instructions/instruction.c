@@ -39,3 +39,33 @@ S32 CATH_INSTRUCTION_GET_IMM(const SH_INSTRUCTION* INSTR)
     // SIGN EXTEND TO 32 BIT AS EVENTUAL RET 
     return (S32)(S8)IMM;
 }
+
+// GET THE CURRENT DISPLACEMENT VALUES ASSOCIATED WITH AN INSTRUCTION
+S32 CATH_INSTRUCTION_GET_DISP(const SH_INSTRUCTION* INSTR)
+{
+    // DETERMINE THE SIZE OF THE DISPLACEMENT BASED ON INSTRUCTION
+    // RANGING FROM 4 TO 12 BIT PER 16 BIT WORD
+    switch(INSTR->INSTR_ID)
+    {
+        case CATH_INSTR_ID_MOVBL4:
+        case CATH_INSTR_ID_MOVWL4:
+        case CATH_INSTR_ID_MOVLL4:
+        case CATH_INSTR_ID_MOVBS4:
+        case CATH_INSTR_ID_MOVWS4:
+        case CATH_INSTR_ID_MOVLS4:
+        {
+            U8 DISP_4 = SH2_INSTR_GET_DISP4(INSTR);
+
+            // SCALE DISPLACEMENT VALUE BASED ON ACCESS SIZE
+            if(INSTR->INSTR_ID == CATH_INSTR_ID_MOVBL4 ||
+                INSTR->INSTR_ID == CATH_INSTR_ID_MOVBS4)
+                return DISP_4;
+
+            else if(INSTR->INSTR_ID == CATH_INSTR_ID_MOVWL4 ||
+                    INSTR->INSTR_ID == CATH_INSTR_ID_MOVWS4)
+                return DISP_4 * 2;
+            else
+                return DISP_4 * 4;
+        }
+    }
+}
