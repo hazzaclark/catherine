@@ -24,6 +24,8 @@
         OPERAND_RN,
         OPERAND_RM,
         OPERAND_AT_RN,
+        OPERAND_AT_RM,
+        OPERAND_AT_RM_POST_INC,
         OPERAND_AT_RN_POST_INC,
         OPERAND_AT_RN_PRE_DEC,
         OPERAND_AT_RN_DISP_RN,
