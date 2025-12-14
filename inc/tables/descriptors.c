@@ -340,42 +340,42 @@ const SH_DESCRIPTOR INSTR_DESCRIPTORS[CATH_INSTR_ID_ALL_MAX] =
     },
 
     [CATH_INSTR_ID_MOVBL] = {
-        .OPERAND_TYPE = {OPERAND_AT_RN, OPERAND_RN, OPERAND_NONE},
+        .OPERAND_TYPE = {OPERAND_AT_RM, OPERAND_RN, OPERAND_NONE},
         .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
         .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
         .IS_FLOAT = false, .IS_UNSIGNED = false,
     },
 
     [CATH_INSTR_ID_MOVWL] = {
-        .OPERAND_TYPE = {OPERAND_AT_RN, OPERAND_RN, OPERAND_NONE},
+        .OPERAND_TYPE = {OPERAND_AT_RM, OPERAND_RN, OPERAND_NONE},
         .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
         .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
         .IS_FLOAT = false, .IS_UNSIGNED = false,
     },
 
     [CATH_INSTR_ID_MOVLL] = {
-        .OPERAND_TYPE = {OPERAND_AT_RN, OPERAND_RN, OPERAND_NONE},
+        .OPERAND_TYPE = {OPERAND_AT_RM, OPERAND_RN, OPERAND_NONE},
         .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
         .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
         .IS_FLOAT = false, .IS_UNSIGNED = false,
     },
 
     [CATH_INSTR_ID_MOVBP] = {
-        .OPERAND_TYPE = {OPERAND_AT_RN_POST_INC, OPERAND_RN, OPERAND_NONE},
+        .OPERAND_TYPE = {OPERAND_AT_RM_POST_INC, OPERAND_RN, OPERAND_NONE},
         .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
         .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
         .IS_FLOAT = false, .IS_UNSIGNED = false,
     },
 
     [CATH_INSTR_ID_MOVWP] = {
-        .OPERAND_TYPE = {OPERAND_AT_RN_POST_INC, OPERAND_RN, OPERAND_NONE},
+        .OPERAND_TYPE = {OPERAND_AT_RM_POST_INC, OPERAND_RN, OPERAND_NONE},
         .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
         .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
         .IS_FLOAT = false, .IS_UNSIGNED = false,
     },
 
     [CATH_INSTR_ID_MOVLP] = {
-        .OPERAND_TYPE = {OPERAND_AT_RN_POST_INC, OPERAND_RN, OPERAND_NONE},
+        .OPERAND_TYPE = {OPERAND_AT_RM_POST_INC, OPERAND_RN, OPERAND_NONE},
         .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
         .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
         .IS_FLOAT = false, .IS_UNSIGNED = false,
