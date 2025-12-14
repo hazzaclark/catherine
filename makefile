@@ -23,9 +23,16 @@ WARNINGS		:= -Wall -Wextra -Wpedantic -Wunused-value -Wunused-parameter -O3
 #####################################
 
 SRC_DIR			:= src
-C_FILES			:= $(wildcard $(SRC_DIR)/*.c)
-H_FILES			:= $(wildcard inc/*.h)
-O_FILES			:= $(patsubst $(SRC_DIR)/%.c,build/%.o,$(C_FILES))
+TABLES_DIR		:= inc/tables
+C_FILES			:= $(wildcard $(SRC_DIR)/*.c) $(wildcard $(SRC_DIR)/*/*.c) $(wildcard $(TABLES_DIR)/*.c)
+H_FILES			:= $(wildcard inc/*.h) \
+				   $(wildcard inc/enums/*.h) \
+				   $(wildcard inc/instructions/*.h) \
+				   $(wildcard inc/tables/*.h)
+INC_FILES		:= $(wildcard inc/tables/*.inc)
+O_FILES			:= $(patsubst $(SRC_DIR)/%.c,build/%.o,$(filter $(SRC_DIR)/%.c,$(C_FILES))) \
+				   $(patsubst $(SRC_DIR)/%,build/%,$(patsubst %.c,%.o,$(filter $(SRC_DIR)/%/*.c,$(C_FILES)))) \
+				   $(patsubst $(TABLES_DIR)/%.c,build/tables_%.o,$(filter $(TABLES_DIR)/%.c,$(C_FILES)))
 
 SRCX_DIR		:= c++/src
 CXX_FILES		:= $(wildcard $(SRCX_DIR)/*.cpp)
@@ -41,13 +48,19 @@ OXX_FILES		:= $(patsubst $(SRCX_DIR)/%.cpp,build/%.o,$(CXX_FILES))
 all: dirs build/libcath.a build/catherine
 
 dirs:
-	@mkdir build
+	@mkdir -p build/instructions
 
-build/%.o: $(SRC_DIR)/%.c $(H_FILES)
-	$(CC) -c $(CSTD) $(IINC) $(WARNINGS) $(CFLAGS) -o $@ $<
+build/%.o: $(SRC_DIR)/%.c $(H_FILES) $(INC_FILES)
+	$(CC) -c $(CSTD) $(IINC) $(WARNINGS) $(CFLAGS) -o $@ $(SRC_DIR)/$*.c
+
+build/instructions/%.o: $(SRC_DIR)/instructions/%.c $(H_FILES) $(INC_FILES)
+	$(CC) -c $(CSTD) $(IINC) $(WARNINGS) $(CFLAGS) -o $@ $(SRC_DIR)/instructions/$*.c
+
+build/tables_%.o: $(TABLES_DIR)/%.c $(H_FILES) $(INC_FILES)
+	$(CC) -c $(CSTD) $(IINC) $(WARNINGS) $(CFLAGS) -o $@ $(TABLES_DIR)/$*.c
 
 build/%.o: $(SRCX_DIR)/%.cpp $(HXX_FILES)
-	$(CXX) -c $(CXX_STD) $(IINC_XX) $(WARNINGS) $(CXXFLAGS) -o $@ $<
+	$(CXX) -c $(CXX_STD) $(IINC_XX) $(WARNINGS) $(CXXFLAGS) -o $@ $(SRCX_DIR)/$*.cpp
 
 build/libcath.a: $(O_FILES)
 	$(AR) rcs $@ $^
