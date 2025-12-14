@@ -424,21 +424,21 @@ const SH_DESCRIPTOR INSTR_DESCRIPTORS[CATH_INSTR_ID_ALL_MAX] =
     },
 
     [CATH_INSTR_ID_MOVBL0] = {
-        .OPERAND_TYPE = {OPERAND_AT_R0_RN, OPERAND_RN, OPERAND_NONE},
+        .OPERAND_TYPE = {OPERAND_AT_R0_RM, OPERAND_RN, OPERAND_NONE},
         .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
         .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
         .IS_FLOAT = false, .IS_UNSIGNED = false,
     },
 
     [CATH_INSTR_ID_MOVWL0] = {
-        .OPERAND_TYPE = {OPERAND_AT_R0_RN, OPERAND_RN, OPERAND_NONE},
+        .OPERAND_TYPE = {OPERAND_AT_R0_RM, OPERAND_RN, OPERAND_NONE},
         .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
         .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
         .IS_FLOAT = false, .IS_UNSIGNED = false,
     },
 
     [CATH_INSTR_ID_MOVLL0] = {
-        .OPERAND_TYPE = {OPERAND_AT_R0_RN, OPERAND_RN, OPERAND_NONE},
+        .OPERAND_TYPE = {OPERAND_AT_R0_RM, OPERAND_RN, OPERAND_NONE},
         .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
         .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
         .IS_FLOAT = false, .IS_UNSIGNED = false,
@@ -466,21 +466,21 @@ const SH_DESCRIPTOR INSTR_DESCRIPTORS[CATH_INSTR_ID_ALL_MAX] =
     },
 
     [CATH_INSTR_ID_MOVBL4] = {
-        .OPERAND_TYPE = {OPERAND_AT_RN_DISP_RN, OPERAND_RN, OPERAND_NONE},
+        .OPERAND_TYPE = {OPERAND_AT_DISP_RM, OPERAND_RN, OPERAND_NONE},
         .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
         .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
         .IS_FLOAT = false, .IS_UNSIGNED = false,
     },
 
     [CATH_INSTR_ID_MOVWL4] = {
-        .OPERAND_TYPE = {OPERAND_AT_RN_DISP_RN, OPERAND_RN, OPERAND_NONE},
+        .OPERAND_TYPE = {OPERAND_AT_DISP_RM, OPERAND_RN, OPERAND_NONE},
         .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
         .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
         .IS_FLOAT = false, .IS_UNSIGNED = false,
     },
 
     [CATH_INSTR_ID_MOVLL4] = {
-        .OPERAND_TYPE = {OPERAND_AT_RN_DISP_RN, OPERAND_RN, OPERAND_NONE},
+        .OPERAND_TYPE = {OPERAND_AT_DISP_RM, OPERAND_RN, OPERAND_NONE},
         .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
         .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
         .IS_FLOAT = false, .IS_UNSIGNED = false,
@@ -592,21 +592,21 @@ const SH_DESCRIPTOR INSTR_DESCRIPTORS[CATH_INSTR_ID_ALL_MAX] =
     },
 
     [CATH_INSTR_ID_MOVBS4] = {
-        .OPERAND_TYPE = {OPERAND_RN, OPERAND_AT_RN_DISP_RN, OPERAND_NONE},
+        .OPERAND_TYPE = {OPERAND_RN, OPERAND_AT_DISP_RN, OPERAND_NONE},
         .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
         .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
         .IS_FLOAT = false, .IS_UNSIGNED = false,
     },
 
     [CATH_INSTR_ID_MOVWS4] = {
-        .OPERAND_TYPE = {OPERAND_RN, OPERAND_AT_RN_DISP_RN, OPERAND_NONE},
+        .OPERAND_TYPE = {OPERAND_RN, OPERAND_AT_DISP_RN, OPERAND_NONE},
         .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
         .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
         .IS_FLOAT = false, .IS_UNSIGNED = false,
     },
 
     [CATH_INSTR_ID_MOVLS4] = {
-        .OPERAND_TYPE = {OPERAND_RM, OPERAND_AT_RN_DISP_RN, OPERAND_NONE},
+        .OPERAND_TYPE = {OPERAND_RM, OPERAND_AT_DISP_RN, OPERAND_NONE},
         .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
         .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
         .IS_FLOAT = false, .IS_UNSIGNED = false,
@@ -780,8 +780,43 @@ const SH_DESCRIPTOR INSTR_DESCRIPTORS[CATH_INSTR_ID_ALL_MAX] =
         .IS_FLOAT = false, .IS_UNSIGNED = false,
     },
 
-    [CATH_INSTR_ID_STC] = {
+    [CATH_INSTR_ID_STCSR] = {
         .OPERAND_TYPE = {OPERAND_SR, OPERAND_RN, OPERAND_NONE},
+        .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
+        .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
+        .IS_FLOAT = false, .IS_UNSIGNED = false,
+    },
+
+    [CATH_INSTR_ID_STCGBR] = {
+        .OPERAND_TYPE = {OPERAND_GBR, OPERAND_RN, OPERAND_NONE},
+        .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
+        .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
+        .IS_FLOAT = false, .IS_UNSIGNED = false,
+    },
+
+    [CATH_INSTR_ID_STCVBR] = {
+        .OPERAND_TYPE = {OPERAND_VBR, OPERAND_RN, OPERAND_NONE},
+        .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
+        .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
+        .IS_FLOAT = false, .IS_UNSIGNED = false,
+    },
+
+    [CATH_INSTR_ID_STCSRPD] = {
+        .OPERAND_TYPE = {OPERAND_SR, OPERAND_AT_RN_PRE_DEC, OPERAND_NONE},
+        .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
+        .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
+        .IS_FLOAT = false, .IS_UNSIGNED = false,
+    },
+
+    [CATH_INSTR_ID_STCGBRPD] = {
+        .OPERAND_TYPE = {OPERAND_GBR, OPERAND_AT_RN_PRE_DEC, OPERAND_NONE},
+        .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
+        .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
+        .IS_FLOAT = false, .IS_UNSIGNED = false,
+    },
+
+    [CATH_INSTR_ID_STCVBRPD] = {
+        .OPERAND_TYPE = {OPERAND_VBR, OPERAND_AT_RN_PRE_DEC, OPERAND_NONE},
         .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
         .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
         .IS_FLOAT = false, .IS_UNSIGNED = false,
