@@ -68,6 +68,14 @@ extern "C" {
 
     } SH_INSTRUCTION;
 
+    typedef struct SH_ENTRY
+    {
+        U16 MASK;
+        U16 PATTERN;
+        CATH_INSTR_ID ID;
+
+    } SH_ENTRY;
+
     // PRE PROCESSOR DIRECTIVES TO HELP WITH ACCESS TO SPECIFIC CHARACTERISTICS CPU-WISE
     // ACCEES TO OPCODE WORD, FUNCTION ID AND CALLBACKS
     
@@ -81,7 +89,7 @@ extern "C" {
     #define         SH2_INSTR_GET_RM(VALUE)                     (CATH_SHIFT_R((VALUE)->WORD, 4, 4))
 
     // ACCESS IMMEDIATE/DISP FIELDS
-    #define         SH2_INSTR_GET_IMM4(VALUE)                   (CATH_SHIFT_((VALUE)->WORD, 0, 4))
+    #define         SH2_INSTR_GET_IMM4(VALUE)                   (CATH_SHIFT_R((VALUE)->WORD, 0, 4))
     #define         SH2_INSTR_GET_IMM8(VALUE)                   (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
     #define         SH2_INSTR_GET_DISP4(VALUE)                  (CATH_SHIFT_R((VALUE)->WORD, 0, 4))
     #define         SH2_INSTR_GET_DISP8(VALUE)                  (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
