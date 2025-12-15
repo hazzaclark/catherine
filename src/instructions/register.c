@@ -25,3 +25,15 @@ const char* CATH_REGISTER_GET_GPRNAME(U8 VALUE)
     assert(VALUE < SH2_REG_MAX);
     return CATH_GPR_NAMES[VALUE][CC.REG_ALIAS];
 }
+
+const char* CATH_REGISTER_GET_CTRLNAME(U8 VALUE)
+{
+    assert(VALUE < SH2_REG_CTRL_MAX);;
+    return CATH_CTRL_NAMES[VALUE];
+}
+
+const char* CATH_REGISTER_GET_SYSNAME(U8 VALUE)
+{
+    assert(VALUE < SH2_REG_SYS_MAX);;
+    return CATH_SYS_NAMES[VALUE];
+}
