@@ -35,7 +35,7 @@ extern "C" {
 
     // DEFINE THE BASIS FOR THE DESCRIPTOR
     // OF EACH INSTRUCTION TYPE
-    typedef struct  
+    typedef struct SH_DESCRIPTOR
     {   
         SH_OPERAND_TYPE OPERAND_TYPE[OPERAND_MAX+1];
 
@@ -54,7 +54,7 @@ extern "C" {
 
     // DEFINE THE BASIS FOR ACCESSING INSTRUCTION
     // TYPES AND THEIR CHARACTERISTICS
-    typedef struct
+    typedef struct SH_INSTRUCTION
     {
         CATH_INSTR_ID INSTR_ID;
         CATH_INSTR_ID_TYPE ID_TYPE;
@@ -87,6 +87,8 @@ extern "C" {
     #define         SH2_INSTR_GET_DISP8(VALUE)                  (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
     #define         SH2_INSTR_GET_DISP12(VALUE)                 (CATH_SHIFT_R((VALUE)->WORD, 0, 12))
 
+    #define         SH2_INSTR_GET_IMM(VALUE)
+
     #define         SH2_INSTR_GET_DISP_SCALE(VALUE, SCALE)      ((SCALE) == 0 ? 0 : \
                                                                 (SCALE) == 4 ? SH2_INSTR_GET_DISP12(VALUE) : \
                                                                 (SCALE) == 2 ? SH2_INSTR_GET_DISP8(VALUE) : \
@@ -113,6 +115,9 @@ extern "C" {
     S32 CATH_INSTRUCTION_GET_DISP(const SH_INSTRUCTION*);
 
     inline U16 CATH_GET_RAW(const SH_INSTRUCTION* INSTR) { return INSTR->WORD; }
+    inline U32 CATH_GET_PC(const SH_INSTRUCTION* INSTR) { return INSTR->PC; }
+    inline S32 CATH_GET_BRANCH_OFFSET(const SH_INSTRUCTION* INSTR) { S32 DISP; return (DISP * 2) + 2; }
+
     UNK CATH_INSTRUCTION_DISASM_DATA(const SH_INSTRUCTION*, char*);
 
     UNK CATH_INSTRUCTION_GET_SIZE(const SH_INSTRUCTION*);
