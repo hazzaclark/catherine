@@ -20,8 +20,8 @@
     #define CATH_OPERAND
 
     struct SH_INSTRUCTION;
-
-    typedef enum
+ 
+    typedef enum SH_OPERAND_TYPE
     {
         OPERAND_NONE,
         OPERAND_IMM,
