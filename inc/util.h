@@ -54,7 +54,7 @@ extern "C" {
     // SPRINTF FOR AIDING IN STRING FORMATTING  
 
     #define         CATH_SPRINTF(BUFFER, SIZE, FMT, ...)        \
-        do                                                      \  
+        do                                                      \
         {                                                       \
             int LENGTH;                                         \
             if((BUFFER) != NULL)                                \
@@ -76,9 +76,9 @@ extern "C" {
         do                                                      \
         {                                                       \
             UNK TEMP_SIZE = strlen(FMT);                        \
-            if((BUFFER) != NULL)                                \   
+            if((BUFFER) != NULL)                                \
             {                                                   \
-                memcpy(BUFFER, FMT, TEMP_SIZE);              \
+                memcpy(BUFFER, FMT, TEMP_SIZE);                 \
             }                                                   \
                                                                 \
             CATH_BUFFER(BUFFER, SIZE, TEMP_SIZE);               \
