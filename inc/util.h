@@ -26,6 +26,7 @@ extern "C" {
     // FOR SHIFT_R - VALUE IS SHIFTED, THEN LOWER BITS ARE MASKED
     // BITFULL - MASKS AND SHIFTS THE FULL MANTISSA OF BITS WITHIN A SEQUENCE
 
+    #define         CATH_ARRAY(ARRAY)                           (sizeof(ARRAY) / sizeof((ARRAY)[0]))
     #define         CATH_MASK(VALUE, WORD)                      ((VALUE) & ((1U << (WORD)) - 1U))
     #define         CATH_SHIFT_L(VALUE, SHIFT, WORD)            (CATH_MASK((VALUE), (WORD)) <<  (SHIFT))
     #define         CATH_SHIFT_R(VALUE, SHIFT, WORD)            (CATH_MASK((VALUE) >> (SHIFT), (WORD)))
