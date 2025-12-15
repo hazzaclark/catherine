@@ -14,6 +14,7 @@
 // SYSTEM INCLUDES
 
 #include <stddef.h>
+#include <string.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -68,6 +69,20 @@ extern "C" {
             CATH_BUFFER(BUFFER, SIZE, LENGTH);                  \
                                                                 \
         } while(0)
+
+    // COPY THE CURRENT STRING HOUSED WITHIN THE BUFFER 
+    // INTO THE MAIN BUFFER STREAM
+    #define         CATH_BUFFER_CPY(BUFFER, SIZE, FMT)          \
+        do                                                      \
+        {                                                       \
+            UNK TEMP_SIZE = strlen(FMT);                        \
+            if((BUFFER) != NULL)                                \   
+            {                                                   \
+                memcpy(BUFFER, FMT, TEMP_SIZE);              \
+            }                                                   \
+                                                                \
+            CATH_BUFFER(BUFFER, SIZE, TEMP_SIZE);               \
+        } while(0)  
 
 #ifdef __cplusplus
 }
