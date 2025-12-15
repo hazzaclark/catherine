@@ -12,8 +12,6 @@
 
 #include <common.h>
 
-#include "instructions/instruction.h"
-
 #if defined(CATH_OPERAND)
     #define CATH_OPERAND
 #else
@@ -27,6 +25,7 @@
         OPERAND_IMM,
         OPERAND_RN,
         OPERAND_RM,
+        OPERAND_R0,
         OPERAND_AT_RN,
         OPERAND_AT_RM,
         OPERAND_AT_RM_POST_INC,
@@ -55,7 +54,7 @@
 
     // FUNCTION CALLBACK FOR ACCESSING THE CURRENT OPERAND PER INSTRUCTION 
     // AND IT'S RELEVANT CHARACTERISTICS
-    typedef UNK(*SH2_OPERAND_CALLBACK)(const struct SH_INSTRUCTION* INSTR, char* DEST);
+    typedef UNK(*SH2_OPERAND_CALLBACK)(const struct SH_INSTRUCTION* INSTR, char* DEST, UNK SIZE);
 
     extern const SH2_OPERAND_CALLBACK INSTR_CALLBACKS[OPERAND_MAX];
 
@@ -66,6 +65,7 @@
     UNK CATH_OPERAND_TYPE_NONE(const struct SH_INSTRUCTION*, char*, UNK);
     UNK CATH_OPERAND_TYPE_RM(const struct SH_INSTRUCTION*, char*, UNK);
     UNK CATH_OPERAND_TYPE_RN(const struct SH_INSTRUCTION*, char*, UNK);
+    UNK CATH_OPERAND_TYPE_R0(const struct SH_INSTRUCTION*, char*, UNK);
     UNK CATH_OPERAND_TYPE_IMM(const struct SH_INSTRUCTION*, char*, UNK);
     UNK CATH_OPERAND_TYPE_AT_RN(const struct SH_INSTRUCTION*, char*, UNK);
     UNK CATH_OPERAND_TYPE_AT_RM(const struct SH_INSTRUCTION*, char*, UNK);
