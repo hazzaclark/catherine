@@ -111,15 +111,19 @@ extern "C" {
     /////////////////////////////////////////////////////////
 
     void CATH_INSTRUCTION_INIT(SH_INSTRUCTION*, U16, U32);
+    void CATH_INSTRUCTION_PROCESS(SH_INSTRUCTION*);
     S32 CATH_INSTRUCTION_GET_IMM(const SH_INSTRUCTION*);
     S32 CATH_INSTRUCTION_GET_DISP(const SH_INSTRUCTION*);
 
     inline U16 CATH_GET_RAW(const SH_INSTRUCTION* INSTR) { return INSTR->WORD; }
     inline U32 CATH_GET_PC(const SH_INSTRUCTION* INSTR) { return INSTR->PC; }
-    inline S32 CATH_GET_BRANCH_OFFSET(const SH_INSTRUCTION* INSTR) { S32 DISP; return (DISP * 2) + 2; }
+    inline S32 CATH_GET_BRANCH_OFFSET(const struct SH_INSTRUCTION* INSTR) 
+    { 
+        S32 DISP = CATH_INSTRUCTION_GET_DISP(INSTR); 
+        return INSTR->PC + 4 + (DISP * 2); 
+    }
 
     UNK CATH_INSTRUCTION_DISASM_DATA(const SH_INSTRUCTION*, char*);
-
     UNK CATH_INSTRUCTION_GET_SIZE(const SH_INSTRUCTION*);
 
     extern const SH_DESCRIPTOR INSTR_DESCRIPTORS[];
@@ -127,7 +131,8 @@ extern "C" {
     extern const char* CATH_GET_OPCODE_NAME(CATH_INSTR_ID INSTR_ID);
 
     UNK CATH_INSTRUCTION_DISASM_INSTR(const SH_INSTRUCTION*, char*);
-    UNK CATH_INSTRUCTION_DISASM(const SH_INSTRUCTION*, char*, UNK);
+    UNK CATH_INSTRUCTION_DISASM_OPERAND(const SH_INSTRUCTION*, char*);
+    UNK CATH_INSTRUCTION_DISASM(const SH_INSTRUCTION*, char*);
 
 #ifdef __cplusplus
 }
