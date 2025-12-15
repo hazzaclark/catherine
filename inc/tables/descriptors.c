@@ -284,21 +284,21 @@
         },
 
         [CATH_INSTR_ID_LDCSR] = {
-            .OPERAND_TYPE = {OPERAND_RM, OPERAND_SR, OPERAND_NONE},
+            .OPERAND_TYPE = {OPERAND_RN, OPERAND_SR, OPERAND_NONE},
             .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
             .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
             .IS_FLOAT = false, .IS_UNSIGNED = false,
         },
 
         [CATH_INSTR_ID_LDCGBR] = {
-            .OPERAND_TYPE = {OPERAND_RM, OPERAND_GBR, OPERAND_NONE},
+            .OPERAND_TYPE = {OPERAND_RN, OPERAND_GBR, OPERAND_NONE},
             .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
             .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
             .IS_FLOAT = false, .IS_UNSIGNED = false,
         },
 
         [CATH_INSTR_ID_LDCVBR] = {
-            .OPERAND_TYPE = {OPERAND_RM, OPERAND_VBR, OPERAND_NONE},
+            .OPERAND_TYPE = {OPERAND_RN, OPERAND_VBR, OPERAND_NONE},
             .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
             .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
             .IS_FLOAT = false, .IS_UNSIGNED = false,
@@ -445,7 +445,7 @@
         },
 
         [CATH_INSTR_ID_MOVBLG] = {
-            .OPERAND_TYPE = {OPERAND_AT_DISP_GBR, OPERAND_RN, OPERAND_NONE},
+            .OPERAND_TYPE = {OPERAND_AT_DISP_GBR, OPERAND_R0, OPERAND_NONE},
             .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
             .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
             .IS_FLOAT = false, .IS_UNSIGNED = false,
