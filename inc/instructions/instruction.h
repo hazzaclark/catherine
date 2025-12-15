@@ -22,6 +22,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
+#include <string.h>
 
 #if defined(CATH_INSTR)
     #define CATH_INSTR
@@ -100,22 +101,28 @@ extern "C" {
     #define         SH2_INSTR_GET_GBR_DISP(VALUE)               (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
     #define         SH2_INSTR_GET_PC_DISP(VALUE)                (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
 
+    #define         SH2_INSTR_VALID(VALUE)                      ((VALUE)->INSTR_ID == CATH_INSTR_ID_INVALID || (VALUE)->DESCRIPTOR == NULL)
+
 
     /////////////////////////////////////////////////////////
     //                FUNCTION PROTOTYPES
     /////////////////////////////////////////////////////////
 
     void CATH_INSTRUCTION_INIT(SH_INSTRUCTION*, U16, U32);
-    void CATH_INSTRUCTION_FREE(SH_INSTRUCTION*);
     S32 CATH_INSTRUCTION_GET_IMM(const SH_INSTRUCTION*);
     S32 CATH_INSTRUCTION_GET_DISP(const SH_INSTRUCTION*);
 
     inline U16 CATH_GET_RAW(const SH_INSTRUCTION* INSTR) { return INSTR->WORD; }
+    inline UNK CATH_INSTRUCTION_DISASM_DATA(const SH_INSTRUCTION* INSTR, char* DEST, UNK DEST_SIZE)
+    {
+        return snprintf(DEST, DEST_SIZE, "0x%04X", INSTR->WORD);
+    }
 
     extern const SH_DESCRIPTOR INSTR_DESCRIPTORS[];
     extern const char* CATH_INSTR_ID_NAMES[];
-    const char* CATH_GET_OPCODE_NAME(CATH_INSTR_ID INSTR_ID);
-    
+    extern const char* CATH_GET_OPCODE_NAME(CATH_INSTR_ID INSTR_ID);
+
+    UNK CATH_INSTRUCTION_DISASM(const SH_INSTRUCTION*, char*, UNK);
 
 #ifdef __cplusplus
 }
