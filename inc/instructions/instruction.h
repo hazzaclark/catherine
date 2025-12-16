@@ -97,11 +97,6 @@ extern "C" {
 
     #define         SH2_INSTR_GET_IMM(VALUE)
 
-    #define         SH2_INSTR_GET_DISP_SCALE(VALUE, SCALE)      ((SCALE) == 0 ? 0 : \
-                                                                (SCALE) == 4 ? SH2_INSTR_GET_DISP12(VALUE) : \
-                                                                (SCALE) == 2 ? SH2_INSTR_GET_DISP8(VALUE) : \
-                                                                               SH2_INSTR_GET_DISP4(VALUE))
-
     // ACCESS CACHE CONTROL
     #define         SH2_INSTR_GET_CACHE(VALUE)                  (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
     #define         SH2_INSTR_GET_MAC(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 1, 1))
@@ -128,7 +123,7 @@ extern "C" {
     inline S32 CATH_GET_BRANCH_OFFSET(const struct SH_INSTRUCTION* INSTR) 
     { 
         S32 DISP = CATH_INSTRUCTION_GET_DISP(INSTR); 
-        return INSTR->PC + 4 + (DISP * 2); 
+        return INSTR->PC + 4 + (DISP); 
     }
 
     UNK CATH_INSTRUCTION_DISASM_DATA(const SH_INSTRUCTION*, char*);
