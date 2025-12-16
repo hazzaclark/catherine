@@ -193,7 +193,7 @@
         },
 
         [CATH_INSTR_ID_CMPEQI] = {
-            .OPERAND_TYPE = {OPERAND_IMM, OPERAND_RN, OPERAND_NONE},
+            .OPERAND_TYPE = {OPERAND_IMM, OPERAND_RM, OPERAND_NONE},
             .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
             .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
             .IS_FLOAT = false, .IS_UNSIGNED = false,
@@ -480,7 +480,7 @@
         },
 
         [CATH_INSTR_ID_MOVLL4] = {
-            .OPERAND_TYPE = {OPERAND_AT_DISP_RM, OPERAND_RN, OPERAND_NONE},
+            .OPERAND_TYPE = {OPERAND_AT_DISP_RN, OPERAND_RM, OPERAND_NONE},
             .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
             .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
             .IS_FLOAT = false, .IS_UNSIGNED = false,
