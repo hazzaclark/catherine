@@ -160,6 +160,36 @@ namespace catherine
             CATH_INSTR_ID_ALL_MAX
         };
 
+        enum class CATH_INSTR_TYPE_CXX
+        {
+            CATH_INSTR_ID_TYPE_INVALID = 0,
+            CATH_INSTR_ID_TYPE_NORMAL,
+            CATH_INSTR_ID_TYPE_SPECIAL,
+            CATH_INSTR_ID_TYPE_ALU,
+            CATH_INSTR_ID_TYPE_SHIFT,
+            CATH_INSTR_ID_TYPE_LOAD,
+            CATH_INSTR_ID_TYPE_STORE,
+            CATH_INSTR_ID_TYPE_BRANCH,
+            CATH_INSTR_ID_TYPE_BRANCH_COND,
+            CATH_INSTR_ID_TYPE_JUMP,
+            CATH_INSTR_ID_TYPE_RTS,
+            CATH_INSTR_ID_TYPE_MUL,
+            CATH_INSTR_ID_TYPE_DIV,
+            CATH_INSTR_ID_TYPE_MAC,
+
+            CATH_INSTR_ID_TYPE_SYS,
+            CATH_INSTR_ID_TYPE_PRIV,
+            CATH_INSTR_ID_TYPE_STATUS,
+            CATH_INSTR_ID_TYPE_GBR_ACCESS,
+            CATH_INSTR_ID_TYPE_PC_REL,
+
+            CATH_INSTR_ID_TYPE_TEST,
+            CATH_INSTR_ID_TYPE_COMP,
+
+            CATH_INSTR_ID_TYPE_CACHE,
+            CATH_INSTR_ID_TYPE_MAX
+        };
+
         ////////////////////////////////////////
         //         FUNCTION PROTOTYPES
         ////////////////////////////////////////
