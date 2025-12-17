@@ -75,7 +75,7 @@ void CATH_INSTRUCTION_PROCESS(SH_INSTRUCTION* INSTR)
 
 ## What is the end goal?
 
-The eventual end goal with this instruction decoder is to provide a dynamic and fast implementation for producing matching Assembly based on sophisticated O(1) lookup and extraction from all of the API featrues.
+The eventual end goal with this instruction decoder is to provide a dynamic and fast implementation for producing matching Assembly based on sophisticated O(1) lookup and extraction from all of the API features.
 
 Demonstrated by this snippet of Assembly code from NiGHTS into Dreams [MK-81020] running on the [Ymir](https://github.com/StrikerX3/Ymir/tree/main/) SEGA Saturn Emulator
 
