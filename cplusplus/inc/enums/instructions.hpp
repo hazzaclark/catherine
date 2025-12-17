@@ -194,7 +194,13 @@ namespace catherine
         //         FUNCTION PROTOTYPES
         ////////////////////////////////////////
 
-        std::string GET_OPCODE_NAME(CATH_INSTR_ID_CXX ID) noexcept;
+        // ACCESS THE PROVIDED OPCODE NAME IN CONJUNCTION WITH THE PROVIDED API
+        // THE DIFFERENCE HERE IS THAT WE HAVE TO TYPE CAST ACCORDINGLY TO ACCESS
+        static inline std::string GET_OPCODE_NAME(CATH_INSTR_ID_CXX UNIQUE)
+        {
+            CATH_INSTR_ID ID = static_cast<CATH_INSTR_ID>(UNIQUE);
+            return std::string(CATH_GET_OPCODE_NAME(ID));
+        }
     }
 }
 
