@@ -9,13 +9,13 @@ CC				:= gcc
 CXX				:= g++
 AR 				:= ar
 IINC			:= -I inc
-IINC_XX			:= -I inc -I c++
+IINC_XX			:= -I inc -I cplusplus
 CSTD			:= --std=c99
 CXX_STD			:= --std=c++17
 CFLAGS			:= -fPIC -fno-common
 CXXFLAGS		:= -fPIC -fno-common
 LDFLAGS			:= -Lbuild -lcath
-LDXXFLAGS		:= -Lbuild -lcathcpp
+LDXXFLAGS		:= -Lbuild -lcathcxx
 WARNINGS		:= -Wall -Wextra -Wpedantic -Wunused-value -Wunused-parameter -O3
 
 #####################################
@@ -34,18 +34,20 @@ O_FILES			:= $(patsubst $(SRC_DIR)/%.c,build/%.o,$(filter $(SRC_DIR)/%.c,$(C_FIL
 				   $(patsubst $(SRC_DIR)/%,build/%,$(patsubst %.c,%.o,$(filter $(SRC_DIR)/%/*.c,$(C_FILES)))) \
 				   $(patsubst $(TABLES_DIR)/%.c,build/tables_%.o,$(filter $(TABLES_DIR)/%.c,$(C_FILES)))
 
-SRCX_DIR		:= c++/src
+SRCX_DIR		:= cplusplus/src
 CXX_FILES		:= $(wildcard $(SRCX_DIR)/*.cpp)
-HXX_FILES		:= $(wildcard inc/*.hpp)
+HXX_FILES		:= $(wildcard cplusplus/*.hpp) $(wildcard inc/*.hpp)
 OXX_FILES		:= $(patsubst $(SRCX_DIR)/%.cpp,build/%.o,$(CXX_FILES))
 
 #####################################
 ## 			    TARGETS
 #####################################
 
-.PHONY: all clean dirs
+.PHONY: all clean dirs cxx
 
 all: dirs build/libcath.a build/catherine
+
+cxx: dirs build/libcathcxx.a
 
 dirs:
 	@mkdir -p build/instructions
@@ -63,6 +65,9 @@ build/%.o: $(SRCX_DIR)/%.cpp $(HXX_FILES)
 	$(CXX) -c $(CXX_STD) $(IINC_XX) $(WARNINGS) $(CXXFLAGS) -o $@ $(SRCX_DIR)/$*.cpp
 
 build/libcath.a: $(O_FILES)
+	$(AR) rcs $@ $^
+
+build/libcathcxx.a: $(OXX_FILES)
 	$(AR) rcs $@ $^
 
 build/catherine: $(O_FILES)
