@@ -42,6 +42,20 @@ namespace catherine
 
             U8 CATH_GET_RN() const;
             U8 CATH_GET_RM() const;
+
+            U8 CATH_GET_IMM4() const;
+            U8 CATH_GET_IMM8() const;
+            
+            U8 CATH_GET_DISP4() const;
+            U8 CATH_GET_DISP8() const;
+            U8 CATH_GET_DISP12() const;
+
+            U8 CATH_GET_CACHE() const;
+            U8 CATH_GET_MAC() const;
+            U8 CATH_GET_IMASK() const;
+
+            U8 CATH_GET_GBR_DISP() const;
+            U8 CATH_GET_PC_DISP() const;
     };
 }
 
