@@ -31,6 +31,11 @@ namespace catherine
             virtual ~CATH_INSTRUCTION() = default;
         
         public:
+
+            // ACCESS THE RAW POINTER FOR THE INSTRUCTION
+            // WE CAN REFERENCE ACCORDINGLY
+            SH_INSTRUCTION* CATH_GET_RAW_PTR();
+
             // THE FOLLOWING METHODS SERVE TO ACT AS
             // GENERAL GETTERS AND SETTERS WHICH ACCESS
             // THE API FEATURES AND JUST REWORK THEM 
@@ -56,7 +61,19 @@ namespace catherine
 
             U8 CATH_GET_GBR_DISP() const;
             U8 CATH_GET_PC_DISP() const;
+
+            CATH_GPR CATH_GET_RN_REG() const;
+            CATH_GPR CATH_GET_RM_REG() const;
+            CATH_CTRL CATH_GET_CTRL_REG() const;
+            CATH_SYS CATH_GET_SYS_REG() const;
     };
+
+    // INLINE IMPLEMENTATIONS ACCESSING RAW POINTERS
+    // FROM THE BASELINE API
+    inline SH_INSTRUCTION* CATH_INSTRUCTION::CATH_GET_RAW_PTR()
+    {
+        return &INSTR;
+    }
 }
 
 #endif
