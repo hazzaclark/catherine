@@ -20,9 +20,10 @@ namespace catherine
 {
     class CATH_INSTRUCTION_HELPER : public CATH_INSTRUCTION
     {
-
+        public:
+            inline U16 CATH_GET_RAW_INSTR() const { return CATH_GET_RAW(&INSTR); }
+            inline U32 CATH_GET_RAW_PC() const { return CATH_GET_PC(&INSTR); }
     };
 }
-
 
 #endif
