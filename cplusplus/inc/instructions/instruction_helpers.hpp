@@ -23,6 +23,7 @@ namespace catherine
         public:
             inline U16 CATH_GET_RAW_INSTR() const { return CATH_GET_RAW(&INSTR); }
             inline U32 CATH_GET_RAW_PC() const { return CATH_GET_PC(&INSTR); }
+            inline S32 CATH_GET_BRA_OFFSET() const { return CATH_GET_BRANCH_OFFSET(&INSTR); }
     };
 }
 
