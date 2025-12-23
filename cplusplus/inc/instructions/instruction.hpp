@@ -28,6 +28,7 @@ namespace catherine
             SH_INSTRUCTION INSTR;
 
             CATH_INSTRUCTION() = default;
+            CATH_INSTRUCTION(U16, U32) noexcept;
             virtual ~CATH_INSTRUCTION() = default;
         
         public:
@@ -66,6 +67,23 @@ namespace catherine
             CATH_GPR CATH_GET_RM_REG() const;
             CATH_CTRL CATH_GET_CTRL_REG() const;
             CATH_SYS CATH_GET_SYS_REG() const;
+
+            void CATH_SET_IMM8(U8 VAL);
+            void CATH_SET_DISP8(U8 VAL);
+            void CATH_SET_DISP12(U8 VAL);
+
+            void CATH_SET_RN_REG(CATH_GPR REG);
+            void CATH_SET_RM_REG(CATH_GPR REG);
+            void CATH_SET_CTRL_REG(CATH_CTRL REG);
+            void CATH_SET_SYS_REG(CATH_SYS REG);
+
+            // THESE GETTERS WILL ACCESS THE CHANGED VALUES
+            // PROVIDED FOR A GIVEN PROCESSED VALUE
+            // ONLY EVER ACCESSED DURING FUNCTION CALL RUNTIMES
+            
+            S32 CATH_GET_PROC_IMM() const;
+            S32 CATH_GET_PROC_DISP() const;
+            S32 CATH_GET_BRA_TARGET() const;
     };
 
     // INLINE IMPLEMENTATIONS ACCESSING RAW POINTERS
@@ -77,3 +95,4 @@ namespace catherine
 }
 
 #endif
+
