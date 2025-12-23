@@ -46,9 +46,6 @@ namespace catherine
             U8 CATH_GET_OPCODE8() const;
             U8 CATH_GET_OPCODE12() const;
 
-            U8 CATH_GET_RN() const;
-            U8 CATH_GET_RM() const;
-
             U8 CATH_GET_IMM4() const;
             U8 CATH_GET_IMM8() const;
             
@@ -84,6 +81,24 @@ namespace catherine
             S32 CATH_GET_PROC_IMM() const;
             S32 CATH_GET_PROC_DISP() const;
             S32 CATH_GET_BRA_TARGET() const;
+
+            inline U16 CATH_GET_RAW_INSTR() const { return CATH_GET_RAW(&INSTR); }
+            inline U32 CATH_GET_RAW_PC() const { return CATH_GET_PC(&INSTR); }
+            inline S32 CATH_GET_BRA_OFFSET() const { return CATH_GET_BRANCH_OFFSET(&INSTR); }
+
+            // ACCESS THE CONTENTS OF THE REGISTERS SAFELY THROUGH
+            // THEIR RESPECTIVE ACCESS METHOD
+            static constexpr U16 CATH_SET_RN(U16 WORD, U16 VALUE)
+            {
+                return (WORD & static_cast<U16>(~(0xF << 8))) 
+                | static_cast<U16>((VALUE & 0xF) << 8);
+            }
+
+            static constexpr U16 CATH_SET_RM(U16 WORD, U16 VALUE)
+            {
+                return (WORD & static_cast<U16>(~(0xF << 4))) 
+                | static_cast<U16>((VALUE & 0xF) << 4);
+            }
     };
 
     // INLINE IMPLEMENTATIONS ACCESSING RAW POINTERS
