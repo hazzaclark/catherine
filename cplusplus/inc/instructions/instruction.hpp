@@ -197,7 +197,9 @@ namespace catherine
             inline U8 CATH_GET_GBR_DISP() const { return CATH_GET_GBR_DISP(INSTR.WORD); }
             inline U8 CATH_GET_PC_DISP() const { return CATH_GET_PC_DISP(INSTR.WORD); }
 
-            std::string CATH_DISASSEMBLE_OPERANDS() const; 
+            std::string CATH_DISASSEMBLE_OPERANDS() const;
+            std::string CATH_DISASSEMBLE_INSTR() const;
+            std::string CATH_DISASSEMBLE_DATA() const;
     };
 
     // INLINE IMPLEMENTATIONS ACCESSING RAW POINTERS
