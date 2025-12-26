@@ -109,8 +109,11 @@ extern "C" {
     #define         SH2_INSTR_GET_GBR_DISP(VALUE)               (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
     #define         SH2_INSTR_GET_PC_DISP(VALUE)                (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
 
-    #define         SH2_INSTR_VALID(VALUE)                      ((VALUE)->INSTR_ID == CATH_INSTR_ID_INVALID || (VALUE)->DESCRIPTOR == NULL)
+    #define         SH2_BYTE_ALIGN(PC)                          ((PC) + 4)
+    #define         SH2_WORD_ALIGN(PC)                          (((PC) + 4) & ~1)
+    #define         SH2_LONG_ALIGN(PC)                          (((PC) + 4) & ~3)
 
+    #define         SH2_INSTR_VALID(VALUE)                      ((VALUE)->INSTR_ID == CATH_INSTR_ID_INVALID || (VALUE)->DESCRIPTOR == NULL)
 
     /////////////////////////////////////////////////////////
     //                FUNCTION PROTOTYPES
