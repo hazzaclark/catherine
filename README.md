@@ -93,3 +93,5 @@ Note that the following contexts of the Emulator in question serves to provide a
 [SUPERH1/2 PROGRAMMING MANUAL](http://bitsavers.informatik.uni-stuttgart.de/components/hitachi/superH/1995_SH1_SH2_Programming_Manual_3rd_Edition.pdf)
 
 [SUPERH2 DSP](https://datasheet.octopart.com/HS6000EIP01H-Renesas-datasheet-11547753.pdf)
+
+[Ymir (for the documentation of Instruction Aliases)](https://github.com/StrikerX3/Ymir/blob/main/libs/ymir-core/include/ymir/hw/sh2/sh2.hpp)
