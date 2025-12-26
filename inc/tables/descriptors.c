@@ -459,14 +459,14 @@
         },
 
         [CATH_INSTR_ID_MOVWLG] = {
-            .OPERAND_TYPE = {OPERAND_AT_DISP_GBR, OPERAND_RN, OPERAND_NONE},
+            .OPERAND_TYPE = {OPERAND_AT_DISP_GBR, OPERAND_R0, OPERAND_NONE},
             .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
             .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
             .IS_FLOAT = false, .IS_UNSIGNED = false,
         },
 
         [CATH_INSTR_ID_MOVLLG] = {
-            .OPERAND_TYPE = {OPERAND_AT_DISP_GBR, OPERAND_RN, OPERAND_NONE},
+            .OPERAND_TYPE = {OPERAND_AT_DISP_GBR, OPERAND_R0, OPERAND_NONE},
             .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
             .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
             .IS_FLOAT = false, .IS_UNSIGNED = false,
