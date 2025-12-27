@@ -48,3 +48,10 @@ std::string CATH_INSTRUCTION::CATH_DISASSEMBLE_DATA() const
     CATH_INSTRUCTION_DISASM_DATA(&this->INSTR, BUFFER);
     return std::string(BUFFER);
 }
+
+std::string CATH_INSTRUCTION::CATH_DISASSEMBLE() const
+{
+    char BUFFER[256];
+    CATH_INSTRUCTION_DISASM(&this->INSTR, BUFFER);
+    return std::string(BUFFER);
+}
