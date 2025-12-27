@@ -23,7 +23,7 @@ namespace catherine
     {
         public:
             CATH_INSTRUCTION_SH2(U16 WORD, U32 ADDRESS);
-            virtual ~CATH_INSTRUCTION_SH2(); 
+            virtual ~CATH_INSTRUCTION_SH2() = default;
     };
 }
 
