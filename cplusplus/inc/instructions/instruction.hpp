@@ -20,6 +20,10 @@
 #include "enums/instructions.h"
 #include "enums/register.h"
 
+// SYSTEM INCLUDES
+
+#include <string>
+
 namespace catherine
 {
     class CATH_INSTRUCTION
@@ -200,6 +204,7 @@ namespace catherine
             std::string CATH_DISASSEMBLE_OPERANDS() const;
             std::string CATH_DISASSEMBLE_INSTR() const;
             std::string CATH_DISASSEMBLE_DATA() const;
+            std::string CATH_DISASSEMBLE() const;
     };
 
     // INLINE IMPLEMENTATIONS ACCESSING RAW POINTERS
