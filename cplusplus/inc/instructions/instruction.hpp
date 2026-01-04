@@ -29,7 +29,7 @@ namespace catherine
     class CATH_INSTRUCTION
     {
         protected:
-            SH_INSTRUCTION INSTR;
+            ::SH_INSTRUCTION INSTR;
 
             CATH_INSTRUCTION() = default;
             virtual ~CATH_INSTRUCTION() = default;
@@ -38,6 +38,12 @@ namespace catherine
             // ACCESS THE RAW POINTER FOR THE INSTRUCTION
             // WE CAN REFERENCE ACCORDINGLY
             SH_INSTRUCTION* CATH_GET_RAW_PTR();
+
+            // GET UNIQUE INSTRUCTION ID
+            inline INSTR_ID::CATH_INSTR_ID_CXX CATH_GET_UNIQUE_ID() const
+            {
+                return static_cast<INSTR_ID::CATH_INSTR_ID_CXX>(this->INSTR.INSTR_ID);
+            }
 
             // THE FOLLOWING METHODS SERVE TO ACT AS
             // GENERAL GETTERS AND SETTERS WHICH ACCESS
@@ -205,6 +211,8 @@ namespace catherine
             std::string CATH_DISASSEMBLE_INSTR() const;
             std::string CATH_DISASSEMBLE_DATA() const;
             std::string CATH_DISASSEMBLE() const;
+
+
     };
 
     // INLINE IMPLEMENTATIONS ACCESSING RAW POINTERS
