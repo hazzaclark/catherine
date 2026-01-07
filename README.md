@@ -15,7 +15,7 @@ Given that this API is developed with the SEGA Saturn's architectural design, ar
 
   - Simple per-word instruction decoding
   - Static Analysis for handling said decoding
-  - (WIP) Bindings for C++
+  - Bindings for C++
   - Multiple SH architectures aim to be suppoerted: with the main focus on SuperH2.
   - SEGA Saturn DSP (SCU)
 
