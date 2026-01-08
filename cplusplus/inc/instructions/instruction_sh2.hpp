@@ -18,7 +18,7 @@
 #include "instructions/instruction.hpp"
 
 namespace catherine
-{
+{    
     class CATH_INSTRUCTION_SH2 : public CATH_INSTRUCTION
     {
         public:
@@ -28,10 +28,10 @@ namespace catherine
 
     // HELPER FUNCTIONS MOSTLY TO DO WITH ACCESSING SPECIFIC
     // INSTRUCTION TYPES - SOME NECESSARY FOR THE RECOMPILED BLOCKS
-    
+
     inline bool CATH_INSTR_IS_RTS(const CATH_INSTRUCTION& INSTR)
     { 
-        return INSTR.CATH_GET_UNIQUE_ID() == INSTR_ID::CATH_INSTR_ID_CXX::CATH_INSTR_ID_RTS;
+        return INSTR.CATH_GET_UNIQUE_ID() == catherine::CATH_INSTR_ID_CXX::CATH_INSTR_ID_RTS;
     }
 }
 
