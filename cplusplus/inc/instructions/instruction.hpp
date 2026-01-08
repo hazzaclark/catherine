@@ -45,14 +45,6 @@ namespace catherine
                 return static_cast<INSTR_ID::CATH_INSTR_ID_CXX>(this->INSTR.INSTR_ID);
             }
 
-            // MORE HELPERS FUNCTIONS 
-            // (MOSTLY HERE TO HELP WITH ACCESS WITH PARTICULAR MODES AND CONDS.)
-        
-            inline bool CATH_INSTR_IS_RTS(const CATH_INSTRUCTION_SH2& INSTR) 
-            { 
-                return CATH_GET_UNIQUE_ID() == SIENA_INSTR::CATH_INSTR_ID_RTS; 
-            }
-
             // THE FOLLOWING METHODS SERVE TO ACT AS
             // GENERAL GETTERS AND SETTERS WHICH ACCESS
             // THE API FEATURES AND JUST REWORK THEM 
