@@ -19,6 +19,7 @@
 #include "enums/category.h"
 #include "enums/instructions.h"
 #include "enums/register.h"
+#include "enums/instructions.hpp"
 
 // SYSTEM INCLUDES
 
@@ -40,9 +41,9 @@ namespace catherine
             SH_INSTRUCTION* CATH_GET_RAW_PTR();
 
             // GET UNIQUE INSTRUCTION ID
-            inline INSTR_ID::CATH_INSTR_ID_CXX CATH_GET_UNIQUE_ID() const
+            inline CATH_INSTR_ID_CXX CATH_GET_UNIQUE_ID() const
             {
-                return static_cast<INSTR_ID::CATH_INSTR_ID_CXX>(this->INSTR.INSTR_ID);
+                return static_cast<CATH_INSTR_ID_CXX>(this->INSTR.INSTR_ID);
             }
 
             // THE FOLLOWING METHODS SERVE TO ACT AS
