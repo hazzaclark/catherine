@@ -19,6 +19,9 @@
 
 namespace catherine
 {    
+    using CATH_INSTR_DIR = catherine::CATH_INSTR_ID_CXX;
+
+
     class CATH_INSTRUCTION_SH2 : public CATH_INSTRUCTION
     {
         public:
@@ -31,12 +34,30 @@ namespace catherine
 
     inline bool CATH_INSTR_IS_RTS(const CATH_INSTRUCTION& INSTR)
     { 
-        return INSTR.CATH_GET_UNIQUE_ID() == catherine::CATH_INSTR_ID_CXX::CATH_INSTR_ID_RTS;
+        return INSTR.CATH_GET_UNIQUE_ID() == CATH_INSTR_DIR::CATH_INSTR_ID_RTS;
     }
     
     inline bool CATH_INSTR_IS_BRANCH(CATH_INSTRUCTION& INSTR)
     {
         return INSTR.CATH_GET_RAW_PTR()->DESCRIPTOR->IS_BRANCH;
+    }
+
+    inline bool CATH_INSTR_IS_JMP(CATH_INSTRUCTION& INSTR)
+    {
+        return INSTR.CATH_GET_RAW_PTR()->DESCRIPTOR->IS_JUMP;
+    }
+
+    inline bool CATH_INSTR_HAS_DELAY_SLOT(CATH_INSTRUCTION& INSTR)
+    {
+        return INSTR.CATH_GET_RAW_PTR()->DESCRIPTOR->HAS_DELAY_SLOT;
+    }
+
+    inline bool CATH_INSTR_IS_FUNCTION_CALL(const CATH_INSTRUCTION& INSTR)
+    {
+        CATH_INSTR_DIR ID = INSTR.CATH_GET_UNIQUE_ID();
+        return (ID == CATH_INSTR_DIR::CATH_INSTR_ID_BSR     || 
+                ID == CATH_INSTR_DIR::CATH_INSTR_ID_BSRF    ||
+                ID == CATH_INSTR_DIR::CATH_INSTR_ID_JSR);
     }
 }
 
