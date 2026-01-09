@@ -33,6 +33,11 @@ namespace catherine
     { 
         return INSTR.CATH_GET_UNIQUE_ID() == catherine::CATH_INSTR_ID_CXX::CATH_INSTR_ID_RTS;
     }
+    
+    inline bool CATH_INSTR_IS_BRANCH(CATH_INSTRUCTION& INSTR)
+    {
+        return INSTR.CATH_GET_RAW_PTR()->DESCRIPTOR->IS_BRANCH;
+    }
 }
 
 #endif
