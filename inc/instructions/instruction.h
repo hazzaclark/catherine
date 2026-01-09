@@ -129,7 +129,7 @@ extern "C" {
     inline S32 CATH_GET_BRANCH_OFFSET(const struct SH_INSTRUCTION* INSTR) 
     { 
         S32 DISP = CATH_INSTRUCTION_GET_DISP(INSTR); 
-        return INSTR->PC + 4 + (DISP); 
+        return INSTR->PC + 4 + (DISP * 2); 
     }
 
     UNK CATH_INSTRUCTION_DISASM_DATA(const SH_INSTRUCTION*, char*);
