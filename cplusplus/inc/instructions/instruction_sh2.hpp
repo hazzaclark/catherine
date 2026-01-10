@@ -36,6 +36,11 @@ namespace catherine
     { 
         return INSTR.CATH_GET_UNIQUE_ID() == CATH_INSTR_DIR::CATH_INSTR_ID_RTS;
     }
+
+    inline bool CATH_INSTR_IS_MOVA(const CATH_INSTRUCTION& INSTR)
+    {
+        return INSTR.CATH_GET_UNIQUE_ID() == CATH_INSTR_DIR::CATH_INSTR_ID_MOVA;
+    }
     
     inline bool CATH_INSTR_IS_BRANCH(CATH_INSTRUCTION& INSTR)
     {
@@ -60,6 +65,13 @@ namespace catherine
                 ID == CATH_INSTR_DIR::CATH_INSTR_ID_JSR);
     }
 
+    inline bool CATH_INSTR_IS_INDIRECT_JMP(const CATH_INSTRUCTION& INSTR)
+    {
+        CATH_INSTR_DIR ID = INSTR.CATH_GET_UNIQUE_ID();
+        return (ID == CATH_INSTR_DIR::CATH_INSTR_ID_JMP     ||
+                ID == CATH_INSTR_DIR::CATH_INSTR_ID_BRAF); 
+    }
+
     // ACCESS THE CURRENT PC VALUE AGAINST IT'S PROVIDED DISPLACEMENT LABEL
     // DISPLACEMENT FOR JUMP CONDITIONS SUPPOSE THE BIT SHIFT ACCOUNTING
     // FOR THAT LENGTH OF THE INSTRUCTION AGAINST AN OFFSET    
@@ -69,6 +81,27 @@ namespace catherine
         U8 DISP = INSTR.CATH_GET_DISP8();
 
         return (PC & ~3U) + 4 + (static_cast<U32>(DISP) * 4);
+    }
+
+    // ACCESS THE REQUIRED INDEXXED LOAD FROM THE PROVIDED
+    // JTLB INSTRCTION BASE
+    inline bool CATH_INSTR_IS_INDEXXED_LOAD(const CATH_INSTRUCTION& INSTR)
+    {
+        return INSTR.CATH_GET_UNIQUE_ID() == CATH_INSTR_DIR::CATH_INSTR_ID_MOVLL0;
+    }
+
+    // DEFINE THE BASIS FOR ACCESSING RELEVANT METHODS
+    // ASSOCIATED WITH A PRE-COMPUTED JUMP TABLE
+    //
+    // WE DO THIS TO BE ABLE TO DETERMINE WHICH
+    // SECTIONS ARE CODE AND DATA
+    inline bool CATH_IS_JTLB_PATTERN(const CATH_INSTRUCTION& MOV, 
+                                    const CATH_INSTRUCTION& LOAD, 
+                                    const CATH_INSTRUCTION& JUMP)
+    {
+        return CATH_INSTR_IS_MOVA(MOV) && 
+        CATH_INSTR_IS_INDEXXED_LOAD(LOAD) && CATH_INSTR_IS_INDIRECT_JMP(JUMP);
+        
     }
 }
 
