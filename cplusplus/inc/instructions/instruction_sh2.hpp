@@ -47,7 +47,7 @@ namespace catherine
         return INSTR.CATH_GET_RAW_PTR()->DESCRIPTOR->IS_JUMP;
     }
 
-    inline bool CATH_INSTR_HAS_DELAY_SLOT(CATH_INSTRUCTION& INSTR)
+    inline bool CATH_INSTR_HAS_DELAY_SLOT(const CATH_INSTRUCTION& INSTR) 
     {
         return INSTR.CATH_GET_RAW_PTR()->DESCRIPTOR->HAS_DELAY_SLOT;
     }
