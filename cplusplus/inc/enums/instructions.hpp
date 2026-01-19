@@ -10,6 +10,15 @@
 
 #pragma once 
 
+// NESTED INCLUDES
+
+#include "instructions/instruction.h"
+#include "instructions/operands.h"
+#include "instructions/register.h"
+#include "enums/instructions.h"
+#include "enums/category.h"
+#include "enums/register.h"
+
 // SYSTEM INCLUDES
 
 #include <string>
@@ -68,6 +77,7 @@ namespace catherine
             CATH_INSTR_ID_LDSMACH,
             CATH_INSTR_ID_LDSMACL,
             CATH_INSTR_ID_LDSPR,
+            CATH_INSTR_ID_LDSPRPI,
             CATH_INSTR_ID_MACW,
             CATH_INSTR_ID_MACL,
             CATH_INSTR_ID_MOV,
@@ -196,7 +206,7 @@ namespace catherine
 
         // ACCESS THE PROVIDED OPCODE NAME IN CONJUNCTION WITH THE PROVIDED API
         // THE DIFFERENCE HERE IS THAT WE HAVE TO TYPE CAST ACCORDINGLY TO ACCESS
-        static inline std::string GET_OPCODE_NAME(CATH_INSTR_ID_CXX UNIQUE)
+        static inline std::string CATH_GET_OPCODE_NAME_CXX(CATH_INSTR_ID_CXX UNIQUE)
         {
             CATH_INSTR_ID ID = static_cast<CATH_INSTR_ID>(UNIQUE);
             return std::string(CATH_GET_OPCODE_NAME(ID));
