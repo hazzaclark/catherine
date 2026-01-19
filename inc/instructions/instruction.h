@@ -84,28 +84,24 @@ extern "C" {
     #define         SH2_INSTR_GET_OPCODE8(VALUE)                (CATH_SHIFT_R((VALUE)->WORD, 8, 8))
     #define         SH2_INSTR_GET_OPCODE12(VALUE)               (CATH_SHIFT_R((VALUE)->WORD, 4, 12))
 
-    // ACCESS REGISTER FIELDS
     #define         SH2_INSTR_GET_RN(VALUE)                     (CATH_SHIFT_R((VALUE)->WORD, 8, 4))
     #define         SH2_INSTR_GET_RM(VALUE)                     (CATH_SHIFT_R((VALUE)->WORD, 4, 4))
 
-    // ACCESS IMMEDIATE/DISP FIELDS
     #define         SH2_INSTR_GET_IMM4(VALUE)                   (CATH_SHIFT_R((VALUE)->WORD, 0, 4))
     #define         SH2_INSTR_GET_IMM8(VALUE)                   (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
     #define         SH2_INSTR_GET_DISP4(VALUE)                  (CATH_SHIFT_R((VALUE)->WORD, 0, 4))
     #define         SH2_INSTR_GET_DISP8(VALUE)                  (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
     #define         SH2_INSTR_GET_DISP12(VALUE)                 (CATH_SHIFT_R((VALUE)->WORD, 0, 12))
 
-    #define         SH2_INSTR_DISP_SIGNBIT                      0x800
+    #define         SH2_INSTR_DISP_SIGN_BIT                     0x800
     #define         SH2_INSTR_DISP_SIGN_MASK                    0xFFFFF000
 
     #define         SH2_INSTR_GET_IMM(VALUE)
 
-    // ACCESS CACHE CONTROL
     #define         SH2_INSTR_GET_CACHE(VALUE)                  (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
     #define         SH2_INSTR_GET_MAC(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 1, 1))
     #define         SH2_INSTR_GET_IMASK(VALUE)                  (CATH_SHIFT_R((VALUE), 4, 4))
 
-    // ACCESS COMMON ADDRESSING MODES (SATURN SPECIFIC)
     #define         SH2_INSTR_GET_GBR_DISP(VALUE)               (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
     #define         SH2_INSTR_GET_PC_DISP(VALUE)                (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
 
@@ -129,7 +125,7 @@ extern "C" {
     inline S32 CATH_GET_BRANCH_OFFSET(const struct SH_INSTRUCTION* INSTR) 
     { 
         S32 DISP = CATH_INSTRUCTION_GET_DISP(INSTR); 
-        return INSTR->PC + 4 + (DISP * 2); 
+        return INSTR->PC + 4 + (DISP); 
     }
 
     UNK CATH_INSTRUCTION_DISASM_DATA(const SH_INSTRUCTION*, char*);
