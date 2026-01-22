@@ -339,6 +339,20 @@
             .IS_FLOAT = false, .IS_UNSIGNED = false,
         },
 
+        [CATH_INSTR_ID_LDSMACHPI] = {
+            .OPERAND_TYPE = {OPERAND_AT_RN_POST_INC, OPERAND_MACH, OPERAND_NONE},
+            .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
+            .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
+            .IS_FLOAT = false, .IS_UNSIGNED = false,
+        },
+
+        [CATH_INSTR_ID_LDSMACLPI] = {
+            .OPERAND_TYPE = {OPERAND_AT_RN_POST_INC, OPERAND_MACL, OPERAND_NONE},
+            .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
+            .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
+            .IS_FLOAT = false, .IS_UNSIGNED = false,
+        },
+
         [CATH_INSTR_ID_LDSPR] = {
             .OPERAND_TYPE = {OPERAND_RN, OPERAND_PR, OPERAND_NONE},
             .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
@@ -347,7 +361,7 @@
         },
 
         [CATH_INSTR_ID_LDSPRPI] = {
-            .OPERAND_TYPE = {OPERAND_AT_RM_POST_INC, OPERAND_PR, OPERAND_NONE},
+            .OPERAND_TYPE = {OPERAND_AT_RN_POST_INC, OPERAND_PR, OPERAND_NONE},
             .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
             .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
             .IS_FLOAT = false, .IS_UNSIGNED = false,
