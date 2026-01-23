@@ -21,7 +21,7 @@ Given that this API is developed with the SEGA Saturn's architectural design, ar
 
 ## Implementation:
 
-Throughout development, the main goal was to make this as dynamic as it is simple to navigate and implement - akin to the likeness and contemporaires of the source inspiration. The main features of this decoder is mapping all of the characteristics of a related instruction in a general sense, to a holistc instruction structure
+Throughout development, the main goal was to make this as dynamic as it is simple to navigate and implement - akin to the likeness to it's contemporaires. The main features of this decoder is mapping all of the characteristics of a related instruction, in a general sense, to a holistc instruction structure.
 
 ```c
 typedef struct SH_INSTRUCTION
