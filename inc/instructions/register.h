@@ -29,6 +29,9 @@ extern "C" {
     extern const char* CATH_CTRL_NAMES[SH2_REG_CTRL_MAX];
     extern const char* CATH_SYS_NAMES[SH2_REG_SYS_MAX];
 
+    // DEPRACATED
+    extern const char* CATH_MISC_NAMES[CATH_INSTR_ID_ALL_MAX][2];
+
     // DEFINE THE CHARACTERISTICS PER REGISTER TYPE
     // TO BE ABLE TO READ PROPERLY FROM THEIR RESPECTIVE ENUM
     typedef enum CATH_REG_ALIAS
@@ -54,6 +57,8 @@ extern "C" {
     const char* CATH_REGISTER_GET_GPRNAME(U8);
     const char* CATH_REGISTER_GET_CTRLNAME(U8);
     const char* CATH_REGISTER_GET_SYSNAME(U8);
+
+    extern CATH_CONFIG CC;
 
 #ifdef __cplusplus
 }
