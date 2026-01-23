@@ -41,9 +41,9 @@ namespace catherine
             const SH_INSTRUCTION* CATH_GET_RAW_PTR() const;
 
             // GET UNIQUE INSTRUCTION ID
-            inline CATH_INSTR_ID_CXX CATH_GET_UNIQUE_ID() const
+            inline INSTR_ID::CATH_INSTR_ID_CXX CATH_GET_UNIQUE_ID() const
             {
-                return static_cast<CATH_INSTR_ID_CXX>(this->INSTR.INSTR_ID);
+                return static_cast<INSTR_ID::CATH_INSTR_ID_CXX>(this->INSTR.INSTR_ID);
             }
 
             // THE FOLLOWING METHODS SERVE TO ACT AS
@@ -70,11 +70,11 @@ namespace catherine
             
             S32 CATH_GET_PROC_IMM() const;
             S32 CATH_GET_PROC_DISP() const;
+            S32 CATH_GET_BRA_TARGET() const;
 
             inline U16 CATH_GET_RAW_INSTR() const { return CATH_GET_RAW(&INSTR); }
             inline U32 CATH_GET_RAW_PC() const { return CATH_GET_PC(&INSTR); }
             inline S32 CATH_GET_BRA_OFFSET() const { return CATH_GET_BRANCH_OFFSET(&INSTR); }
-            inline S32 CATH_GET_BRA_TARGET() const { return static_cast<U32>(CATH_GET_BRA_OFFSET()); }
 
             // ACCESS ALL OF THE CONTENTS OF THE RESPECTIVE FIELD
             // LEVERAGE CONSTEXPR FOR COMPILE TIME EVALUATION
@@ -214,12 +214,13 @@ namespace catherine
             std::string CATH_DISASSEMBLE() const;
     };
 
-    // INLINE IMPLEMENTATIONS ACCESSING RAW POINTERS
+    // INLINE IMPLEMENTATIONS ACCESSING RAW REFERENCES
     // FROM THE BASELINE API
-    inline const SH_INSTRUCTION* CATH_INSTRUCTION::CATH_GET_RAW_PTR() const
+    inline const SH_INSTRUCTION* CATH_INSTRUCTION::CATH_GET_RAW_PTR() const 
     {
         return &INSTR;
     }
 }
 
 #endif
+
