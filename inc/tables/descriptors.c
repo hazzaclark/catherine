@@ -326,14 +326,14 @@
         },
 
         [CATH_INSTR_ID_LDSMACH] = {
-            .OPERAND_TYPE = {OPERAND_RM, OPERAND_MACH, OPERAND_NONE},
+            .OPERAND_TYPE = {OPERAND_RN, OPERAND_MACH, OPERAND_NONE},
             .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
             .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
             .IS_FLOAT = false, .IS_UNSIGNED = false,
         },
 
         [CATH_INSTR_ID_LDSMACL] = {
-            .OPERAND_TYPE = {OPERAND_RM, OPERAND_MACL, OPERAND_NONE},
+            .OPERAND_TYPE = {OPERAND_RN, OPERAND_MACL, OPERAND_NONE},
             .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
             .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
             .IS_FLOAT = false, .IS_UNSIGNED = false,
