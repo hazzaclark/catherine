@@ -7,7 +7,7 @@
 
 // NESTED INCLUDES
 
-#include "enums/instr_enum.h"
+#include "enums/instructions.h"
 
 // SYSTEM INCLUDES
 
