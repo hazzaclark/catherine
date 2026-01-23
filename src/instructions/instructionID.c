@@ -8,14 +8,15 @@
 // NESTED INCLUDES
 
 #include "enums/instructions.h"
+#include "instructions/instruction.h"
 
 // SYSTEM INCLUDES
 
 #include <assert.h>
 
 // DETERMINE THE VALIDITY OF EACH OF THE INSTRUCTION NAMES FROM THE RESPECTIVE ENUM
-static const char* CATH_GET_OPCODE_NAME(CATH_INSTR_ID INSTR_ID)
+const char* CATH_GET_OPCODE_NAME(CATH_INSTR_ID INSTR_ID)
 {
-    const char* NAME; 
     assert(INSTR_ID >= CATH_INSTR_ID_INVALID && INSTR_ID < CATH_INSTR_ID_ALL_MAX);
+    return CATH_INSTR_ID_NAMES[INSTR_ID];
 }
