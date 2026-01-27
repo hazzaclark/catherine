@@ -88,7 +88,7 @@
         },
 
         [CATH_INSTR_ID_BRAF] = {
-            .OPERAND_TYPE = {OPERAND_RM, OPERAND_NONE},
+            .OPERAND_TYPE = {OPERAND_RN, OPERAND_NONE},
             .IS_BRANCH = true, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
             .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = true,
             .IS_FLOAT = false, .IS_UNSIGNED = false,
@@ -102,7 +102,7 @@
         },
 
         [CATH_INSTR_ID_BSRF] = {
-            .OPERAND_TYPE = {OPERAND_RM, OPERAND_NONE},
+            .OPERAND_TYPE = {OPERAND_RN, OPERAND_NONE},
             .IS_BRANCH = true, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
             .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = true,
             .IS_FLOAT = false, .IS_UNSIGNED = false,
@@ -690,7 +690,7 @@
         },
 
         [CATH_INSTR_ID_ORI] = {
-            .OPERAND_TYPE = {OPERAND_IMM, OPERAND_RN, OPERAND_NONE},
+            .OPERAND_TYPE = {OPERAND_IMM, OPERAND_NONE, OPERAND_NONE},
             .IS_BRANCH = false, .IS_JUMP = false, .IS_JUMP_ADDRESS = false,
             .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = false,
             .IS_FLOAT = false, .IS_UNSIGNED = true,
