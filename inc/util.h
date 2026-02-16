@@ -32,59 +32,13 @@ extern "C" {
     #define         CATH_SHIFT_R(VALUE, SHIFT, WORD)            (CATH_MASK((VALUE) >> (SHIFT), (WORD)))
     #define         CATH_BITFULL(FULL, VALUE, SHIFT, WORD)      ((CATH_SHIFT_R((FULL), (SHIFT) + (WORD), 32U - ((SHIFT) + (WORD))) | CATH_SHIFT_L((VALUE, (SHIFT), (WORD)) | CATH_MASK((FULL), (SHIFT)))))
 
-    // CREATES A DIRECTIVE TO HELP WITH PRE-PROCESSED 
-    // BUFFER SIZES AT COMPILE TIME
-    // 
-    // DETERMINES THE CURRENT SIZE AND ADDS TO
-    // THE TOTAL - HELPS WITH POSITIONS OF BUFFER READERS
-
-    #define         CATH_BUFFER(BUFFER, SIZE, EXP)              \
-        do                                                      \
-        {                                                       \
-            UNK TEMP_SIZE = (UNK)(EXP);                         \
-            if((BUFFER) != NULL)                                \
-            {                                                   \
-                (BUFFER) += TEMP_SIZE;                          \
-            }                                                   \
-            (SIZE) += TEMP_SIZE;                                \
-                                                                \
-        } while(0)
-
-
-    // DEFINE THE BASIS FOR BEING ABLE TO LEVERAGE 
-    // SPRINTF FOR AIDING IN STRING FORMATTING  
-
-    #define         CATH_SPRINTF(BUFFER, SIZE, FMT, ...)        \
-        do                                                      \
-        {                                                       \
-            int LENGTH;                                         \
-            if((BUFFER) != NULL)                                \
-            {                                                   \
-                LENGTH = sprintf(BUFFER, FMT, __VA_ARGS__);     \
-            }                                                   \
-            else                                                \
-            {                                                   \
-                LENGTH = snprintf(NULL, 0, FMT, __VA_ARGS__);   \
-            }                                                   \
-                                                                \
-            CATH_BUFFER(BUFFER, SIZE, LENGTH);                  \
-                                                                \
-        } while(0)
-
-    // COPY THE CURRENT STRING HOUSED WITHIN THE BUFFER 
-    // INTO THE MAIN BUFFER STREAM
-    #define         CATH_BUFFER_CPY(BUFFER, SIZE, FMT)          \
-        do                                                      \
-        {                                                       \
-            UNK TEMP_SIZE = strlen(FMT);                        \
-            if((BUFFER) != NULL)                                \
-            {                                                   \
-                memcpy(BUFFER, FMT, TEMP_SIZE);                 \
-            }                                                   \
-                                                                \
-            CATH_BUFFER(BUFFER, SIZE, TEMP_SIZE);               \
-        } while(0)  
-
+    // PACKS BITS BASED ON THEIR WIDTH
+    // HELPS WITH ACCOMMODATING FOR EXTRACTING BITS
+    // FROM MULTI-OPERAND INSTRUCTIONS SUCH AS DSP INSTRUCTIONS
+    #define         CATH_PACK_BITS(WORD, VALUE, SHIFT, WIDTH)       \
+            (((WORD) & ~(((1U << (WIDTH)) -1) << (SHIFT))) |        \
+            (((VALUE) & ((1U << (WIDTH)) - 1)) << (SHIFT)))
+    
 #ifdef __cplusplus
 }
 #endif
