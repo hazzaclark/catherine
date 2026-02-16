@@ -13,6 +13,7 @@
 // NESTED INCLUDES
 
 #include "instructions/instruction.h"
+#include "instructions/operandsDSP.h"
 
 #if defined(CATH_INSTR_DSP)
     #define CATH_INSTR_DSP
@@ -35,6 +36,36 @@ extern "C" {
         U32 WORD;
 
     } SH_DSP_INSTRUCTION;
+
+    // DEFINE THE BASIS FOR THE DESCRIPTOR
+    // OF EACH INSTRUCTION TYPE
+    typedef struct SH_DSP_DESCRIPTOR
+    {
+        SH_DSP_OPERAND_TYPE X_BUS_SRC;
+        SH_DSP_OPERAND_TYPE Y_BUS_SRC;
+        SH_DSP_OPERAND_TYPE D_BUS_SRC;
+        SH_DSP_OPERAND_TYPE DEST;
+
+        bool IS_ALU_OP;
+        bool IS_MULTIPLY;
+        bool IS_MOVE;
+        bool IS_LOAD_STORE;
+
+        bool IS_END;
+        bool IS_END_JMP;
+        bool IS_LOOP;
+        bool IS_JUMP;
+        bool IS_COND;
+
+        bool HAS_EXE_FLAG;
+        bool IS_NOP;
+
+        U8 X_BUS : 1;
+        U8 Y_BUS : 1;
+        U8 D_BUS : 1;
+        U8 WRITE_DEST : 1;
+
+    } SH_DSP_DESCRIPTOR;
 
     // PRE PROCESSOR DIRECTIVES TO HELP WITH ACCESS TO SPECIFIC CHARACTERISTICS CPU-WISE
     // ACCEES TO OPCODE WORD, FUNCTION ID AND CALLBACKS
