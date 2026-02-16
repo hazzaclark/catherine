@@ -21,6 +21,7 @@
 
     typedef enum SH_DSP_OPERAND_TYPE
     {
+        DSP_OPERAND_NONE,
         DSP_OPERAND_MC0,
         DSP_OPERAND_MC1,
         DSP_OPERAND_MC2,
@@ -32,7 +33,7 @@
 
         DSP_OPERAND_MUL,
         DSP_OPERAND_ALU,
-        DSP_OPERAND_A,
+        DSP_OPERAND_ACC,
 
         DSP_OPERAND_RAM0_ADDR,
         DSP_OPERAND_RAM1_ADDR,
@@ -43,6 +44,12 @@
         DSP_OPERAND_RAM1_DATA,
         DSP_OPERAND_RAM2_DATA,
         DSP_OPERAND_RAM3_DATA,
+
+        DSP_OPERAND_CT0,
+        DSP_OPERAND_CT1,
+        DSP_OPERAND_CT2,
+
+        DSP_OPERAND_IMM,
     };
 
 #endif
