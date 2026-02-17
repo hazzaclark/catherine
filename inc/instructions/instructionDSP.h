@@ -71,7 +71,41 @@ extern "C" {
     // ACCEES TO OPCODE WORD, FUNCTION ID AND CALLBACKS
 
     #define         SCU_DSP_GET_OPERAND(VALUE)                  (CATH_SHIFT_R((VALUE)->WORD, 26, 6))
+    #define         SCU_DSP_GET_END(VALUE)                      (CATH_SHIFT_R((VALUE)->WORD, 15, 1))
+    #define         SCU_DSP_GET_EXE(VALUE)                      (CATH_SHIFT_R((VALUE)->WORD, 14, 1))
+
+    #define         SCU_DSP_GET_SRC_X(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 20, 6))
+    #define         SCU_DSP_GET_SRC_Y(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 14, 6))
+    #define         SCU_DSP_GET_SRC_D(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 8, 6))
+
+    #define         SCU_DSP_GET_DESTINATION(VALUE)              (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
+
+    #define         SCU_DSP_GET_ALU(VALUE)                      (CATH_SHIFT_R((VALUE)->WORD, 24, 4))
+
+    #define         SCU_DSP_GET_IMM(VALUE)                      (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
+    #define         SCU_DSP_GET_IMM16(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 0, 16))
+
+    #define         SCU_DSP_GET_JUMP_ADDR(VALUE)                (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
+    #define         SCU_DSP_GET_COND(VALUE)                     (CATH_SHIFT_R((VALUE)->WORD, 8, 4))
+
     #define         SCU_DSP_PACK_OPERAND(WORD, VALUE)           (CATH_PACK_BITS((WORD), (VALUE), 26, 6))
+    #define         SCU_DSP_PACK_SRC_X(WORD, VALUE)             (CATH_PACK_BITS((WORD), (VALUE), 20, 6))
+    #define         SCU_DSP_PACK_SRC_Y(WORD, VALUE)             (CATH_PACK_BITS((WORD), (VALUE), 14, 6))
+    #define         SCU_DSP_PACK_DESTINATION(WORD, VALUE)       (CATH_PACK_BITS((WORD), (VALUE), 0, 8))
+    #define         SCU_DSP_PACK_ALU(WORD, VALUE)               (CATH_PACK_BITS((WORD), (VALUE), 24, 4))
+
+    /////////////////////////////////////////////////////////
+    //                FUNCTION PROTOTYPES
+    /////////////////////////////////////////////////////////
+
+    void CATH_DSP_INSTRUCTION_INIT(SH_DSP_INSTRUCTION*, U32, U32);
+    void CATH_DSP_INSTRUCTION_PROCESS(SH_DSP_INSTRUCTION*);
+    UNK CATH_DSP_INSTRUCTION_DISASM(const SH_DSP_INSTRUCTION*, char*);
+    UNK CATH_DSP_INSTRUCTION_DISASM_OPERAND(const SH_DSP_INSTRUCTION*, char*);
+
+    extern const SH_DSP_DESCRIPTOR DSP_DESCRIPTORS[];
+    extern const char* CATH_DSP_INSTR_ID_NAMES[];
+    extern const char* CATH_GET_DSP_OPCODE_NAME(CATH_INSTR_ID_DSP INSTR_ID);
 }
 
 #endif
