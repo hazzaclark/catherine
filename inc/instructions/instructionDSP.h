@@ -106,7 +106,9 @@ extern "C" {
     extern const SH_DSP_DESCRIPTOR DSP_DESCRIPTORS[];
     extern const char* CATH_DSP_INSTR_ID_NAMES[];
     extern const char* CATH_GET_DSP_OPCODE_NAME(CATH_INSTR_ID_DSP INSTR_ID);
+    
+#ifdef __cplusplus
 }
-
+#endif
 #endif
 #endif
