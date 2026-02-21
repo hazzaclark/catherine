@@ -166,7 +166,7 @@ UNK CATH_OPERAND_TYPE_AT_DISP_RN(const SH_INSTRUCTION* INSTR, char* BUFFER, UNK 
         case CATH_INSTR_ID_MOVWS4:
         case CATH_INSTR_ID_MOVBL4:
         case CATH_INSTR_ID_MOVWL4:
-            RN = CATH_SHIFT_R(INSTR->WORD, 4, 4); 
+            RN = SH2_INSTR_GET_DISP_SPECIAL(INSTR);
             break;
             
         default:
