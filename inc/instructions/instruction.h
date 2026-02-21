@@ -93,6 +93,10 @@ extern "C" {
     #define         SH2_INSTR_GET_DISP8(VALUE)                  (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
     #define         SH2_INSTR_GET_DISP12(VALUE)                 (CATH_SHIFT_R((VALUE)->WORD, 0, 12))
 
+    // RESERVED FOR SPECIAL CASES WHERE ACCESS FOR DISPLACEMENT
+    // IS OFFSET BY THE LOWEST NIBBLE OF AN INSTRUCTION'S DESCRIPTOR
+    #define         SH2_INSTR_GET_DISP_SPECIAL(VALUE)           (CATH_SHIFT_R((VALUE)->WORD, 4, 4))
+
     #define         SH2_INSTR_DISP_SIGN_BIT                     0x800
     #define         SH2_INSTR_DISP_SIGN_MASK                    0xFFFFF000
 
