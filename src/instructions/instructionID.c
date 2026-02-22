@@ -9,6 +9,7 @@
 
 #include "enums/instructions.h"
 #include "instructions/instruction.h"
+#include "instructions/instructionDSP.h"
 
 // SYSTEM INCLUDES
 
@@ -19,4 +20,10 @@ const char* CATH_GET_OPCODE_NAME(CATH_INSTR_ID INSTR_ID)
 {
     assert(INSTR_ID >= CATH_INSTR_ID_INVALID && INSTR_ID < CATH_INSTR_ID_ALL_MAX);
     return CATH_INSTR_ID_NAMES[INSTR_ID];
+}
+
+const char* CATH_GET_DSP_OPCODE_NAME(CATH_INSTR_ID_DSP INSTR_ID)
+{
+    assert(INSTR_ID >= CATH_INSTR_ID_DSP_INVALID && INSTR_ID < CATH_INSTR_ID_DSP_ALL_MAX);
+    return CATH_DSP_INSTR_ID_NAMES[INSTR_ID];
 }
