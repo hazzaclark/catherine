@@ -16,7 +16,7 @@ CFLAGS          := -fPIC -fno-common
 CXXFLAGS        := -fPIC -fno-common
 LDFLAGS         := 
 LDXXFLAGS       := -Lbuild -lcath
-WARNINGS        := -Wall -Wextra -Wno-format-extra-args -Wpedantic -Wunused-value -Wunused-parameter -O3
+WARNINGS        := -Wall -Wextra -Wno-format-extra-args -Wpedantic -Wunused-value -Wunused-parameter -Wformat-zero-length -O3
 
 #####################################
 ##            DIRECTORIES
@@ -24,15 +24,20 @@ WARNINGS        := -Wall -Wextra -Wno-format-extra-args -Wpedantic -Wunused-valu
 
 SRC_DIR         := src
 TABLES_DIR      := inc/tables
-C_FILES         := $(wildcard $(SRC_DIR)/*.c) $(wildcard $(SRC_DIR)/*/*.c) $(wildcard $(TABLES_DIR)/*.c)
+C_FILES 		:= $(wildcard $(SRC_DIR)/*.c) 		\
+        			$(wildcard $(SRC_DIR)/*/*.c) 	\
+        		    $(wildcard $(SRC_DIR)/*/*/*.c) 	\
+        		    $(wildcard $(TABLES_DIR)/*.c)
 H_FILES         := $(wildcard inc/*.h) \
                    $(wildcard inc/enums/*.h) \
                    $(wildcard inc/instructions/*.h) \
                    $(wildcard inc/tables/*.h)
 INC_FILES       := $(wildcard inc/tables/*.inc)
-O_FILES         := $(patsubst $(SRC_DIR)/%.c,build/%.o,$(filter $(SRC_DIR)/%.c,$(C_FILES))) \
-                   $(patsubst $(SRC_DIR)/%,build/%,$(patsubst %.c,%.o,$(filter $(SRC_DIR)/%/*.c,$(C_FILES)))) \
-                   $(patsubst $(TABLES_DIR)/%.c,build/tables_%.o,$(filter $(TABLES_DIR)/%.c,$(C_FILES)))
+
+O_FILES 		:= $(patsubst $(SRC_DIR)/%.c,build/%.o,$(filter $(SRC_DIR)/%.c,$(C_FILES))) \
+        		   $(patsubst $(SRC_DIR)/%,build/%,$(patsubst %.c,%.o,$(filter $(SRC_DIR)/%/*.c,$(C_FILES)))) \
+        		   $(patsubst $(SRC_DIR)/%,build/%,$(patsubst %.c,%.o,$(filter $(SRC_DIR)/*/*/*.c,$(C_FILES)))) \
+        		   $(patsubst $(TABLES_DIR)/%.c,build/tables_%.o,$(filter $(TABLES_DIR)/%.c,$(C_FILES)))
 
 SRCX_DIR        := cplusplus/src
 CXX_FILES       := $(wildcard $(SRCX_DIR)/*.cpp) $(wildcard $(SRCX_DIR)/*/*.cpp)
@@ -47,12 +52,13 @@ OXX_FILES       := $(patsubst $(SRCX_DIR)/%.cpp,build/cxx/%.o,$(CXX_FILES))
 
 .PHONY: all clean dirs cxx
 
-all: dirs build/libcath.a build/catherine
+all: dirs build/libcath.a build/libcath.so build/catherine
 
-cxx: dirs build/libcath.a build/cathcxx
+cxx: dirs build/libcath.a build/libcath.so build/cathcxx
 
 dirs:
 	@mkdir -p build/instructions
+	@mkdir -p build/instructions/DSP
 	@mkdir -p build/cxx/instructions
 
 build/%.o: $(SRC_DIR)/%.c $(H_FILES) $(INC_FILES)
@@ -62,6 +68,9 @@ build/instructions/%.o: $(SRC_DIR)/instructions/%.c $(H_FILES) $(INC_FILES)
 	$(CC) -c $(CSTD) $(IINC) $(WARNINGS) $(CFLAGS) -o $@ $<
 
 build/tables_%.o: $(TABLES_DIR)/%.c $(H_FILES) $(INC_FILES)
+	$(CC) -c $(CSTD) $(IINC) $(WARNINGS) $(CFLAGS) -o $@ $<
+
+build/instructions/DSP/%.o: $(SRC_DIR)/instructions/DSP/%.c $(H_FILES) $(INC_FILES)
 	$(CC) -c $(CSTD) $(IINC) $(WARNINGS) $(CFLAGS) -o $@ $<
 
 build/cxx/%.o: $(SRCX_DIR)/%.cpp $(HXX_FILES)
@@ -74,6 +83,9 @@ build/cxx/instructions/%.o: $(SRCX_DIR)/instructions/%.cpp $(HXX_FILES)
 
 build/libcath.a: $(O_FILES)
 	$(AR) rcs $@ $^
+
+build/libcath.so: build/libcath.a
+	$(CC) -shared -o $@ -Wl,--whole-archive $< -Wl,--no-whole-archive
 
 build/libcathcxx.a: $(OXX_FILES)
 	$(AR) rcs $@ $^
