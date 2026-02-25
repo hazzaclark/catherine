@@ -108,6 +108,8 @@ extern "C" {
     #define         SCU_DSP_PACK_DESTINATION(WORD, VALUE)       (CATH_PACK_BITS((WORD), (VALUE), 0, 8))
     #define         SCU_DSP_PACK_ALU(WORD, VALUE)               (CATH_PACK_BITS((WORD), (VALUE), 24, 4))
 
+    #define         SCU_DSP_SLOT_COUNT(TABLE)                   (sizeof(TABLE) / sizeof(TABLE[0]))
+
     /////////////////////////////////////////////////////////
     //                FUNCTION PROTOTYPES
     /////////////////////////////////////////////////////////
@@ -120,6 +122,7 @@ extern "C" {
     extern const SH_DSP_DESCRIPTOR DSP_DESCRIPTORS[];
     extern const char* CATH_DSP_INSTR_ID_NAMES[];
     extern const char* CATH_GET_DSP_OPCODE_NAME(CATH_INSTR_ID_DSP INSTR_ID);
+    extern SH_DSP_PARALLEL_SLOT CATH_DSP_SLOT_TABLE[256];
 
 #ifdef __cplusplus
 }
