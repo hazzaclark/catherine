@@ -3,7 +3,7 @@ Hitachi SuperH Instruction Decoder
 
 ## Motive:
 
-The ambition behind this project is to provide an all-encompassing API for decoding Hitachi SuperH-related ISA's- focussing primiarily on the SuperH2 for usage with the SEGA Saturn and it's respective peripherals.
+The ambition behind this project is to provide an all-encompassing API for decoding Hitachi SuperH-related ISA's- focusing primarily on the SuperH2 for usage with the SEGA Saturn and it's respective peripherals.
 
 The main intention is to provide a simple and static implementation to help with recompilation of architectures.
 
