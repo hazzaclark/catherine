@@ -124,9 +124,9 @@ extern "C" {
     S32 CATH_INSTRUCTION_GET_IMM(const SH_INSTRUCTION*);
     S32 CATH_INSTRUCTION_GET_DISP(const SH_INSTRUCTION*);
 
-    inline U16 CATH_GET_RAW(const SH_INSTRUCTION* INSTR) { return INSTR->WORD; }
-    inline U32 CATH_GET_PC(const SH_INSTRUCTION* INSTR) { return INSTR->PC; }
-    inline S32 CATH_GET_BRANCH_OFFSET(const struct SH_INSTRUCTION* INSTR) 
+    static inline U16 CATH_GET_RAW(const SH_INSTRUCTION* INSTR) { return INSTR->WORD; }
+    static inline U32 CATH_GET_PC(const SH_INSTRUCTION* INSTR) { return INSTR->PC; }
+    static inline S32 CATH_GET_BRANCH_OFFSET(const struct SH_INSTRUCTION* INSTR) 
     { 
         S32 DISP = CATH_INSTRUCTION_GET_DISP(INSTR); 
         return INSTR->PC + 4 + (DISP); 
