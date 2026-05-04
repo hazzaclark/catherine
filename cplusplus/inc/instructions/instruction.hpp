@@ -80,7 +80,7 @@ namespace catherine
             // LEVERAGE CONSTEXPR FOR COMPILE TIME EVALUATION
             static constexpr U8 CATH_GET_OPCODE4(U16 WORD)
             {
-                return static_cast<U8>((WORD >> 12) & 0xF);
+                return static_cast<U8>(CATH_SHIFT_R(WORD, 12, 4));
             }
 
             static constexpr U8 CATH_GET_OPCODE8(U16 WORD)
