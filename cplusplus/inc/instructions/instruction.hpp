@@ -78,118 +78,38 @@ namespace catherine
 
             // ACCESS ALL OF THE CONTENTS OF THE RESPECTIVE FIELD
             // LEVERAGE CONSTEXPR FOR COMPILE TIME EVALUATION
-            static constexpr U8 CATH_GET_OPCODE4(U16 WORD)
-            {
-                return static_cast<U8>(CATH_SHIFT_R(WORD, 12, 4));
-            }
 
-            static constexpr U8 CATH_GET_OPCODE8(U16 WORD)
-            {
-                return static_cast<U8>((WORD >> 8) & 0xFF);
-            }
-
-            static constexpr U8 CATH_GET_OPCODE12(U16 WORD)
-            {
-                return static_cast<U8>((WORD >> 4) & 0xFFF);
-            }
+            static constexpr U8 CATH_GET_OPCODE4(U16 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 12, 4)); }
+            static constexpr U8 CATH_GET_OPCODE8(U16 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 8, 8)); }
+            static constexpr U8 CATH_GET_OPCODE12(U16 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 4, 12)); }
 
             // ACCESS THE CONTENTS OF THE REGISTERS SAFELY THROUGH
             // THEIR RESPECTIVE ACCESS METHOD
-            static constexpr U8 CATH_GET_RN(U16 WORD)
-            {
-                return static_cast<U8>((WORD >> 8) & 0xF);
-            }
 
-            static constexpr U8 CATH_GET_RM(U16 WORD)
-            {
-                return static_cast<U8>((WORD >> 4) & 0xF);
-            }
+            static constexpr U8 CATH_GET_RN(U16 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 8, 4)); }
+            static constexpr U8 CATH_GET_RM(U16 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 4, 4)); }
+            static constexpr U8 CATH_GET_IMM4(U16 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 0, 4)); }
+            static constexpr U8 CATH_GET_IMM8(U16 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 0, 8)); }
 
-            static constexpr U8 CATH_GET_IMM4(U16 WORD)
-            {
-                return static_cast<U8>(WORD & 0xF);
-            }
+            static constexpr U8 CATH_GET_DISP4(U16 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 0, 4)); }
+            static constexpr U8 CATH_GET_DISP8(U16 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 0, 8)); }
+            static constexpr U16 CATH_GET_DISP12(U16 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 0, 12)); }
 
-            static constexpr U8 CATH_GET_IMM8(U16 WORD)
-            {
-                return static_cast<U8>(WORD & 0xFF);
-            }
+            static constexpr U8 CATH_GET_CACHE(U16 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 0, 8)); }
+            static constexpr U8 CATH_GET_MAC(U16 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 1, 1)); }
 
-            static constexpr U8 CATH_GET_DISP4(U16 WORD)
-            {
-                return static_cast<U8>(WORD & 0xF);
-            }
+            static constexpr U8 CATH_GET_IMASK(U16 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 4, 4)); }
+            static constexpr U8 CATH_GET_GBR_DISP(U16 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 0, 8)); }
+            static constexpr U8 CATH_GET_PC_DISP(U16 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 0, 8)); }
 
-            static constexpr U8 CATH_GET_DISP8(U16 WORD)
-            {
-                return static_cast<U8>(WORD & 0xFF);
-            }
+            static constexpr U16 CATH_SET_RN(U16 WORD, U16 VALUE) { return static_cast<U16>(CATH_PACK_BITS(WORD, VALUE, 8, 4)); }
+            static constexpr U16 CATH_SET_RM(U16 WORD, U16 VALUE) { return static_cast<U16>(CATH_PACK_BITS(WORD, VALUE, 4, 4)); }
 
-            static constexpr U16 CATH_GET_DISP12(U16 WORD)
-            {
-                return static_cast<U16>(WORD & 0xFFF);
-            }
+            static constexpr U16 CATH_SET_IMM4(U16 WORD, U8 VALUE) { return static_cast<U16>(CATH_PACK_BITS(WORD, VALUE, 0, 4)); }
+            static constexpr U16 CATH_SET_IMM8(U16 WORD, U8 VALUE) { return static_cast<U16>(CATH_PACK_BITS(WORD, VALUE, 0, 8)); }
 
-            static constexpr U8 CATH_GET_CACHE(U16 WORD)
-            {
-                return static_cast<U8>(WORD & 0xFF);
-            }
-
-            static constexpr U8 CATH_GET_MAC(U16 WORD)
-            {
-                return static_cast<U8>((WORD >> 1) & 0x1);
-            }
-
-            static constexpr U8 CATH_GET_IMASK(U16 WORD)
-            {
-                return static_cast<U8>((WORD >> 4) & 0xF);
-            }
-
-            static constexpr U8 CATH_GET_GBR_DISP(U16 WORD)
-            {
-                return static_cast<U8>(WORD & 0xFF);
-            }
-
-            static constexpr U8 CATH_GET_PC_DISP(U16 WORD)
-            {
-                return static_cast<U8>(WORD & 0xFF);
-            }
-
-            static constexpr U16 CATH_SET_RN(U16 WORD, U16 VALUE)
-            {
-                return (WORD & static_cast<U16>(~(0xF << 8))) 
-                | static_cast<U16>((VALUE & 0xF) << 8);
-            }
-
-            static constexpr U16 CATH_SET_RM(U16 WORD, U16 VALUE)
-            {
-                return (WORD & static_cast<U16>(~(0xF << 4))) 
-                | static_cast<U16>((VALUE & 0xF) << 4);
-            }
-
-            static constexpr U16 CATH_SET_IMM4(U16 WORD, U8 VALUE)
-            {
-                return (WORD & static_cast<U16>(~0xF)) 
-                     | static_cast<U16>(VALUE & 0xF);
-            }
-
-            static constexpr U16 CATH_SET_IMM8(U16 WORD, U8 VALUE)
-            {
-                return (WORD & static_cast<U16>(~0xFF)) 
-                     | static_cast<U16>(VALUE);
-            }
-
-            static constexpr U16 CATH_SET_DISP8(U16 WORD, U8 VALUE)
-            {
-                return (WORD & static_cast<U16>(~0xFF)) 
-                     | static_cast<U16>(VALUE);
-            }
-
-            static constexpr U16 CATH_SET_DISP12(U16 WORD, U16 VALUE)
-            {
-                return (WORD & static_cast<U16>(~0xFFF)) 
-                     | static_cast<U16>(VALUE & 0xFFF);
-            }
+            static constexpr U16 CATH_SET_DISP8(U16 WORD, U8 VALUE) { return static_cast<U16>(CATH_PACK_BITS(WORD, VALUE, 0, 8)); }
+            static constexpr U16 CATH_SET_DISP12(U16 WORD, U16 VALUE) { return static_cast<U16>(CATH_PACK_BITS(WORD, VALUE, 0, 12)); }
 
             // MEMBER DECLARATIONS TO ACCESS CONSTEXPR'S
             inline U8 CATH_GET_OPCODE4() const { return CATH_GET_OPCODE4(INSTR.WORD); }
