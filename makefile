@@ -15,8 +15,8 @@ CXX_STD         := --std=c++17
 CFLAGS          := -fPIC -fno-common
 CXXFLAGS        := -fPIC -fno-common
 LDFLAGS         := 
-LDXXFLAGS       := -Lbuild -lcath
-WARNINGS        := -Wall -Wextra -Wno-format-extra-args -Wpedantic -Wunused-value -Wunused-parameter -Wformat-zero-length -O3
+LDXXFLAGS       := -Lbuild -lcath -Wl,-rpath,'$$ORIGIN'
+WARNINGS        := -Wall -Wextra -Wno-format-extra-args -Wpedantic -Wunused-value -Wunused-parameter -Wformat-zero-length -O0
 
 #####################################
 ##            DIRECTORIES
