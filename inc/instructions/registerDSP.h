@@ -29,6 +29,14 @@ extern "C" {
     extern const char* CATH_DSP_CT_NAMES[DSP_REG_CT_MAX];
     extern const char* CATH_DSP_SPECIAL_NAMES[DSP_REG_SPECIAL_MAX];
 
+    //////////////////////////////////////////
+    //         FUNCTION PROTOTYPES
+    //////////////////////////////////////////
+
+    extern const char* CATH_REGISTER_GET_MC_NAME(U8);
+    extern const char* CATH_REGISTER_GET_CT_NAME(U8);
+    extern const char* CATH_REGISTER_GET_RAM_ADDR_NAME(U8);
+
 #ifdef __cplusplus
 }
 
