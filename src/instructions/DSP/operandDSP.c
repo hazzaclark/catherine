@@ -29,3 +29,21 @@ UNK CATH_DSP_OPERAND_TYPE_MC0(const struct SH_DSP_INSTRUCTION* INSTR, char* BUFF
     (void)INSTR;
     return snprintf(BUFFER, SIZE, "%s", CATH_REGISTER_GET_MC_NAME(0));
 }
+
+UNK CATH_DSP_OPERAND_TYPE_MC1(const struct SH_DSP_INSTRUCTION* INSTR, char* BUFFER, UNK SIZE)
+{
+    (void)INSTR;
+    return snprintf(BUFFER, SIZE, "%s", CATH_REGISTER_GET_MC_NAME(1));
+}
+
+UNK CATH_DSP_OPERAND_TYPE_MC2(const struct SH_DSP_INSTRUCTION* INSTR, char* BUFFER, UNK SIZE)
+{
+    (void)INSTR;
+    return snprintf(BUFFER, SIZE, "%s", CATH_REGISTER_GET_MC_NAME(2));
+}
+
+UNK CATH_DSP_OPERAND_TYPE_MC3(const struct SH_DSP_INSTRUCTION* INSTR, char* BUFFER, UNK SIZE)
+{
+    (void)INSTR;
+    return snprintf(BUFFER, SIZE, "%s", CATH_REGISTER_GET_MC_NAME(3));
+}
