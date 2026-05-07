@@ -38,6 +38,27 @@ extern "C" {
     #define         CATH_PACK_BITS(WORD, VALUE, SHIFT, WIDTH)       \
             (((WORD) & ~(((1U << (WIDTH)) -1) << (SHIFT))) |        \
             (((VALUE) & ((1U << (WIDTH)) - 1)) << (SHIFT)))
+
+
+    // DEFINE THE CHARACTERISTICS PER REGISTER TYPE
+    // TO BE ABLE TO READ PROPERLY FROM THEIR RESPECTIVE ENUM
+    typedef enum CATH_REG_ALIAS
+    {
+        CATH_REG_UPPER,
+        CATH_REG_LOWER,
+        
+    } CATH_REG_ALIAS;
+
+    // SIMPLE CONFIG TO HOUSE THE CHARACTERISTICS
+    // ENCOMPASSING REGISTER TYPES
+    typedef struct CATH_CONFIG
+    {
+        CATH_REG_ALIAS REG_ALIAS;
+        bool USE_ALIAS;
+
+    } CATH_CONFIG;
+
+    extern CATH_CONFIG CC;
     
 #ifdef __cplusplus
 }
