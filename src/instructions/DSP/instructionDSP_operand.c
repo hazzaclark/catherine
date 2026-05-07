@@ -69,14 +69,24 @@ UNK CATH_DSP_INSTRUCTION_DISASM_OPERAND(const SH_DSP_INSTRUCTION* INSTR, char* D
 
     if(DSP_DESC->D_BUS)
     {
-        TOTAL_SIZE += snprintf(DEST + TOTAL_SIZE, 64 - TOTAL_SIZE,
-                "%s", DSP_DESC->IS_ALU_OP ? ALU_NAME : "P");
+        if(TOTAL_SIZE > 0)
+        {
+            DEST[TOTAL_SIZE++] = ' ';
+            DEST[TOTAL_SIZE++] = ' ';
+        }
+
+        TOTAL_SIZE += snprintf(DEST + TOTAL_SIZE, 64 - TOTAL_SIZE, "P");
     }
 
     if(DSP_DESC->Y_BUS)
     {
-        TOTAL_SIZE += snprintf(DEST + TOTAL_SIZE, 64 - TOTAL_SIZE,
-                "%s", DSP_DESC->IS_ALU_OP ? ALU_NAME : "Y");
+        if(TOTAL_SIZE > 0)
+        {
+            DEST[TOTAL_SIZE++] = ' ';
+            DEST[TOTAL_SIZE++] = ' ';
+        }
+
+        TOTAL_SIZE += snprintf(DEST + TOTAL_SIZE, 64 - TOTAL_SIZE, "Y");
     }
     
     if(DEST) DEST[TOTAL_SIZE] = '\0';
