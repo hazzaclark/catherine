@@ -44,24 +44,30 @@ const SH_DSP_DESCRIPTOR DSP_DESCRIPTORS[CATH_INSTR_ID_DSP_ALL_MAX] =
     
     [CATH_INSTR_ID_DSP_ADD] = 
     {
-        .X_BUS_SRC = DSP_OPERAND_NONE,
-        .Y_BUS_SRC = DSP_OPERAND_NONE,
-        .D_BUS_SRC = DSP_OPERAND_NONE,
+        .X_BUS_SRC = DSP_OPERAND_X,
+        .Y_BUS_SRC = DSP_OPERAND_Y,
+        .D_BUS_SRC = DSP_OPERAND_ALU,
         .DEST = DSP_OPERAND_ACC,
         .IS_ALU_OP = true,
-        .IS_MULTIPLY = false,
-        .IS_MOVE = true,
+        .IS_MOVE = false,
+        .X_BUS = 1,
+        .Y_BUS = 1,
+        .D_BUS = 1,
+        .WRITE_DEST = 1,
     },
     
     [CATH_INSTR_ID_DSP_AND] = 
     {
-        .X_BUS_SRC = DSP_OPERAND_NONE,
-        .Y_BUS_SRC = DSP_OPERAND_NONE,
-        .D_BUS_SRC = DSP_OPERAND_NONE,
+        .X_BUS_SRC = DSP_OPERAND_X,
+        .Y_BUS_SRC = DSP_OPERAND_Y,
+        .D_BUS_SRC = DSP_OPERAND_ALU,
         .DEST = DSP_OPERAND_ACC,
         .IS_ALU_OP = true,
-        .IS_MULTIPLY = false,
-        .IS_MOVE = true,
+        .IS_MOVE = false,
+        .X_BUS = 0,
+        .Y_BUS = 0,
+        .D_BUS = 1,
+        .WRITE_DEST = 1,
     },
     
     [CATH_INSTR_ID_DSP_BF] = 
