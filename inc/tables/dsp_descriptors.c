@@ -27,8 +27,22 @@ const SH_DSP_DESCRIPTOR DSP_DESCRIPTORS[CATH_INSTR_ID_DSP_ALL_MAX] =
         .IS_NOP = true,
         .IS_ALU_OP = false,
     },
-
+    
     [CATH_INSTR_ID_DSP_AD2] = 
+    {
+        .X_BUS_SRC = DSP_OPERAND_X,
+        .Y_BUS_SRC = DSP_OPERAND_Y,
+        .D_BUS_SRC = DSP_OPERAND_ALU,
+        .DEST = DSP_OPERAND_ACC,
+        .IS_ALU_OP = true,
+        .IS_MOVE = false,
+        .X_BUS = 1,
+        .Y_BUS = 1,
+        .D_BUS = 1,
+        .WRITE_DEST = 1,
+    },
+    
+    [CATH_INSTR_ID_DSP_ADD] = 
     {
         .X_BUS_SRC = DSP_OPERAND_NONE,
         .Y_BUS_SRC = DSP_OPERAND_NONE,
@@ -38,8 +52,224 @@ const SH_DSP_DESCRIPTOR DSP_DESCRIPTORS[CATH_INSTR_ID_DSP_ALL_MAX] =
         .IS_MULTIPLY = false,
         .IS_MOVE = true,
     },
-
-    [CATH_INSTR_ID_DSP_ADD] = 
+    
+    [CATH_INSTR_ID_DSP_AND] = 
+    {
+        .X_BUS_SRC = DSP_OPERAND_NONE,
+        .Y_BUS_SRC = DSP_OPERAND_NONE,
+        .D_BUS_SRC = DSP_OPERAND_NONE,
+        .DEST = DSP_OPERAND_ACC,
+        .IS_ALU_OP = true,
+        .IS_MULTIPLY = false,
+        .IS_MOVE = true,
+    },
+    
+    [CATH_INSTR_ID_DSP_BF] = 
+    {
+        .X_BUS_SRC = DSP_OPERAND_NONE,
+        .Y_BUS_SRC = DSP_OPERAND_NONE,
+        .D_BUS_SRC = DSP_OPERAND_NONE,
+        .DEST = DSP_OPERAND_NONE,
+        .IS_JUMP = true,
+        .IS_COND = true,
+    },
+    
+    [CATH_INSTR_ID_DSP_BTM] = 
+    {
+        .X_BUS_SRC = DSP_OPERAND_NONE,
+        .Y_BUS_SRC = DSP_OPERAND_NONE,
+        .D_BUS_SRC = DSP_OPERAND_NONE,
+        .DEST = DSP_OPERAND_NONE,
+        .IS_JUMP = true,
+        .IS_COND = true,
+    },
+    
+    [CATH_INSTR_ID_DSP_CLR] = 
+    {
+        .X_BUS_SRC = DSP_OPERAND_NONE,
+        .Y_BUS_SRC = DSP_OPERAND_NONE,
+        .D_BUS_SRC = DSP_OPERAND_NONE,
+        .DEST = DSP_OPERAND_ACC,
+        .IS_ALU_OP = true,
+        .IS_MULTIPLY = false,
+        .IS_MOVE = true,
+    },
+    
+    [CATH_INSTR_ID_DSP_DMA] = 
+    {
+        .X_BUS_SRC = DSP_OPERAND_NONE,
+        .Y_BUS_SRC = DSP_OPERAND_NONE,
+        .D_BUS_SRC = DSP_OPERAND_NONE,
+        .DEST = DSP_OPERAND_NONE,
+        .IS_LOAD_STORE = true,
+    },
+    
+    [CATH_INSTR_ID_DSP_END] = 
+    {
+        .X_BUS_SRC = DSP_OPERAND_NONE,
+        .Y_BUS_SRC = DSP_OPERAND_NONE,
+        .D_BUS_SRC = DSP_OPERAND_NONE,
+        .DEST = DSP_OPERAND_NONE,
+        .IS_END = true,
+    },
+    
+    [CATH_INSTR_ID_DSP_ENDI] = 
+    {
+        .X_BUS_SRC = DSP_OPERAND_NONE,
+        .Y_BUS_SRC = DSP_OPERAND_NONE,
+        .D_BUS_SRC = DSP_OPERAND_NONE,
+        .DEST = DSP_OPERAND_NONE,
+        .IS_END = true,
+        .IS_END_JMP = true,
+    },
+    
+    [CATH_INSTR_ID_DSP_JMP] = 
+    {
+        .X_BUS_SRC = DSP_OPERAND_NONE,
+        .Y_BUS_SRC = DSP_OPERAND_NONE,
+        .D_BUS_SRC = DSP_OPERAND_NONE,
+        .DEST = DSP_OPERAND_NONE,
+        .IS_JUMP = true,
+    },
+    
+    [CATH_INSTR_ID_DSP_LOOP] = 
+    {
+        .X_BUS_SRC = DSP_OPERAND_NONE,
+        .Y_BUS_SRC = DSP_OPERAND_NONE,
+        .D_BUS_SRC = DSP_OPERAND_NONE,
+        .DEST = DSP_OPERAND_NONE,
+        .IS_LOOP = true,
+    },
+    
+    [CATH_INSTR_ID_DSP_LPS] = 
+    {
+        .X_BUS_SRC = DSP_OPERAND_NONE,
+        .Y_BUS_SRC = DSP_OPERAND_NONE,
+        .D_BUS_SRC = DSP_OPERAND_NONE,
+        .DEST = DSP_OPERAND_NONE,
+        .IS_LOOP = true,
+    },
+    
+    [CATH_INSTR_ID_DSP_MOV] = 
+    {
+        .X_BUS_SRC = DSP_OPERAND_NONE,
+        .Y_BUS_SRC = DSP_OPERAND_NONE,
+        .D_BUS_SRC = DSP_OPERAND_NONE,
+        .DEST = DSP_OPERAND_NONE,
+        .IS_ALU_OP = false,
+        .IS_MULTIPLY = false,
+        .IS_MOVE = true,
+    },
+    
+    [CATH_INSTR_ID_DSP_MUL] = 
+    {
+        .X_BUS_SRC = DSP_OPERAND_NONE,
+        .Y_BUS_SRC = DSP_OPERAND_NONE,
+        .D_BUS_SRC = DSP_OPERAND_NONE,
+        .DEST = DSP_OPERAND_MUL,
+        .IS_ALU_OP = false,
+        .IS_MULTIPLY = true,
+        .IS_MOVE = true,
+    },
+    
+    [CATH_INSTR_ID_DSP_MVI] = 
+    {
+        .X_BUS_SRC = DSP_OPERAND_NONE,
+        .Y_BUS_SRC = DSP_OPERAND_NONE,
+        .D_BUS_SRC = DSP_OPERAND_NONE,
+        .DEST = DSP_OPERAND_NONE,
+        .IS_ALU_OP = false,
+        .IS_MULTIPLY = false,
+        .IS_MOVE = true,
+    },
+    
+    [CATH_INSTR_ID_DSP_NOP] = 
+    {
+        .X_BUS_SRC = DSP_OPERAND_NONE,
+        .Y_BUS_SRC = DSP_OPERAND_NONE,
+        .D_BUS_SRC = DSP_OPERAND_NONE,
+        .DEST = DSP_OPERAND_NONE,
+        .IS_NOP = true,
+    },
+    
+    [CATH_INSTR_ID_DSP_NOT] = 
+    {
+        .X_BUS_SRC = DSP_OPERAND_NONE,
+        .Y_BUS_SRC = DSP_OPERAND_NONE,
+        .D_BUS_SRC = DSP_OPERAND_NONE,
+        .DEST = DSP_OPERAND_ACC,
+        .IS_ALU_OP = true,
+        .IS_MULTIPLY = false,
+        .IS_MOVE = true,
+    },
+    
+    [CATH_INSTR_ID_DSP_OR] = 
+    {
+        .X_BUS_SRC = DSP_OPERAND_NONE,
+        .Y_BUS_SRC = DSP_OPERAND_NONE,
+        .D_BUS_SRC = DSP_OPERAND_NONE,
+        .DEST = DSP_OPERAND_ACC,
+        .IS_ALU_OP = true,
+        .IS_MULTIPLY = false,
+        .IS_MOVE = true,
+    },
+    
+    [CATH_INSTR_ID_DSP_RL] = 
+    {
+        .X_BUS_SRC = DSP_OPERAND_NONE,
+        .Y_BUS_SRC = DSP_OPERAND_NONE,
+        .D_BUS_SRC = DSP_OPERAND_NONE,
+        .DEST = DSP_OPERAND_ACC,
+        .IS_ALU_OP = true,
+        .IS_MULTIPLY = false,
+        .IS_MOVE = true,
+    },
+    
+    [CATH_INSTR_ID_DSP_RR] = 
+    {
+        .X_BUS_SRC = DSP_OPERAND_NONE,
+        .Y_BUS_SRC = DSP_OPERAND_NONE,
+        .D_BUS_SRC = DSP_OPERAND_NONE,
+        .DEST = DSP_OPERAND_ACC,
+        .IS_ALU_OP = true,
+        .IS_MULTIPLY = false,
+        .IS_MOVE = true,
+    },
+    
+    [CATH_INSTR_ID_DSP_SL] = 
+    {
+        .X_BUS_SRC = DSP_OPERAND_NONE,
+        .Y_BUS_SRC = DSP_OPERAND_NONE,
+        .D_BUS_SRC = DSP_OPERAND_NONE,
+        .DEST = DSP_OPERAND_ACC,
+        .IS_ALU_OP = true,
+        .IS_MULTIPLY = false,
+        .IS_MOVE = true,
+    },
+    
+    [CATH_INSTR_ID_DSP_SR] = 
+    {
+        .X_BUS_SRC = DSP_OPERAND_NONE,
+        .Y_BUS_SRC = DSP_OPERAND_NONE,
+        .D_BUS_SRC = DSP_OPERAND_NONE,
+        .DEST = DSP_OPERAND_ACC,
+        .IS_ALU_OP = true,
+        .IS_MULTIPLY = false,
+        .IS_MOVE = true,
+    },
+    
+    [CATH_INSTR_ID_DSP_SUB] = 
+    {
+        .X_BUS_SRC = DSP_OPERAND_NONE,
+        .Y_BUS_SRC = DSP_OPERAND_NONE,
+        .D_BUS_SRC = DSP_OPERAND_NONE,
+        .DEST = DSP_OPERAND_ACC,
+        .IS_ALU_OP = true,
+        .IS_MULTIPLY = false,
+        .IS_MOVE = true,
+    },
+    
+    [CATH_INSTR_ID_DSP_XOR] = 
     {
         .X_BUS_SRC = DSP_OPERAND_NONE,
         .Y_BUS_SRC = DSP_OPERAND_NONE,
