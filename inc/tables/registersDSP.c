@@ -23,7 +23,7 @@ const char* CATH_DSP_MC_NAMES[DSP_REG_MC_MAX][2] =
     [DSP_REG_MC3]   =   { "MC3", "mc3" },
 };
 
-const char* CATH_DSP_CT_NAMES[DSP_REG_CT_MAX] =
+const char* CATH_DSP_CT_NAMES[DSP_REG_CT_MAX][2] =
 {
     [DSP_REG_CT0]   =   { "CT0", "ct0" },
     [DSP_REG_CT1]   =   { "CT1", "ct1" },
@@ -34,4 +34,7 @@ const char* CATH_DSP_CT_NAMES[DSP_REG_CT_MAX] =
 const char* CATH_DSP_RA_NAMES[DSP_REG_RA_MAX] =
 {
     [DSP_REG_RA0]   =   { "RAM0" },
+    [DSP_REG_RA1]   =   { "RAM1" },
+    [DSP_REG_RA2]   =   { "RAM2" },
+    [DSP_REG_RA3]   =   { "RAM3" },
 };
