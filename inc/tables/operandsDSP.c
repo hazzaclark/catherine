@@ -14,4 +14,8 @@
 const SH_DSP_OPERAND_CALLBACK DSP_INSTR_CALLBACKS[DSP_OPERAND_MAX] = 
 {
     [DSP_OPERAND_NONE]                      = CATH_DSP_OPERAND_TYPE_NONE,
+    [DSP_OPERAND_MC0]                       = CATH_DSP_OPERAND_TYPE_MC0,
+    [DSP_OPERAND_MC1]                       = CATH_DSP_OPERAND_TYPE_MC1,
+    [DSP_OPERAND_MC2]                       = CATH_DSP_OPERAND_TYPE_MC2,
+    [DSP_OPERAND_MC3]                       = CATH_DSP_OPERAND_TYPE_MC3,
 };
