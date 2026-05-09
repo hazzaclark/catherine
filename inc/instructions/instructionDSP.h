@@ -99,14 +99,13 @@ extern "C" {
     #define         SCU_DSP_GET_OPERAND(VALUE)                  (CATH_SHIFT_R((VALUE)->WORD, 26, 6))
     #define         SCU_DSP_GET_END(VALUE)                      (CATH_SHIFT_R((VALUE)->WORD, 15, 1))
     #define         SCU_DSP_GET_EXE(VALUE)                      (CATH_SHIFT_R((VALUE)->WORD, 14, 1))
+    #define         SCU_DSP_GET_ALU(VALUE)                      (CATH_SHIFT_R((VALUE)->WORD, 26, 6))
 
     #define         SCU_DSP_GET_SRC_X(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 20, 6))
     #define         SCU_DSP_GET_SRC_Y(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 14, 6))
     #define         SCU_DSP_GET_SRC_D(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 8, 6))
 
     #define         SCU_DSP_GET_DESTINATION(VALUE)              (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
-
-    #define         SCU_DSP_GET_ALU(VALUE)                      (CATH_SHIFT_R((VALUE)->WORD, 24, 4))
 
     #define         SCU_DSP_GET_IMM(VALUE)                      (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
     #define         SCU_DSP_GET_IMM16(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 0, 16))
@@ -120,6 +119,9 @@ extern "C" {
     #define         SCU_DSP_PACK_DESTINATION(WORD, VALUE)       (CATH_PACK_BITS((WORD), (VALUE), 0, 8))
     #define         SCU_DSP_PACK_ALU(WORD, VALUE)               (CATH_PACK_BITS((WORD), (VALUE), 24, 4))
 
+    #define         SCU_DSP_GET_D_OP(VALUE)                     (CATH_SHIFT_R((VALUE)->WORD, 11, 3))
+    #define         SCU_DSP_GET_D_DEST(VALUE)                   (CATH_SHIFT_R((VALUE)->WORD, 8, 3))
+
     #define         SCU_DSP_GET_RAM_BANK(VALUE)                 ((VALUE >> 4) & 0x3)
     #define         SCU_DSP_GET_CT(VALUE)                       ((VALUE >> 2) & 0x3)
     #define         SCU_DSP_ACC_CMP_MASK(VALUE)                 (((VALUE) & 0x01))
@@ -129,7 +131,12 @@ extern "C" {
     #define         SCU_DSP_INSTR_VALID(VALUE)                  \              
         ((VALUE) != NULL &&                                     \
         (VALUE)->DESCRIPTOR != NULL &&                          \
-        (VALUE)->INSTR_ID != CATH_INSTR_ID_DSP_INVALID)                           
+        (VALUE)->INSTR_ID != CATH_INSTR_ID_DSP_INVALID)          
+        
+
+    #define         SCU_DSP_D_OP_NOP                            0x00
+    #define         SCU_DSP_D_OP_MOV_IMM_MC                     0x03
+    #define         SCU_DSP_D_OP_MOV_IMM_CT                     0x04
 
     /////////////////////////////////////////////////////////
     //                FUNCTION PROTOTYPES
