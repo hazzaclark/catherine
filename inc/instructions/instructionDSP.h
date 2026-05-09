@@ -117,6 +117,10 @@ extern "C" {
     #define         SCU_DSP_PACK_DESTINATION(WORD, VALUE)       (CATH_PACK_BITS((WORD), (VALUE), 0, 8))
     #define         SCU_DSP_PACK_ALU(WORD, VALUE)               (CATH_PACK_BITS((WORD), (VALUE), 24, 4))
 
+    #define         SCU_DSP_GET_RAM_BANK(VALUE)                 ((VALUE >> 4) & 0x3)
+    #define         SCU_DSP_GET_CT(VALUE)                       ((VALUE >> 2) & 0x3)
+    #define         SCU_DSP_ACC_CMP_MASK(VALUE)                 (((VALUE) & 0x01))
+
     #define         SCU_DSP_SLOT_COUNT(TABLE)                   (sizeof(TABLE) / sizeof(TABLE[0]))
 
     /////////////////////////////////////////////////////////
@@ -127,13 +131,11 @@ extern "C" {
     void CATH_DSP_INSTRUCTION_PROCESS(SH_DSP_INSTRUCTION*);
     UNK CATH_DSP_INSTRUCTION_DISASM(const SH_DSP_INSTRUCTION*, char*);
     UNK CATH_DSP_INSTRUCTION_DISASM_OPERAND(const SH_DSP_INSTRUCTION*, char*);
-
-    void CATH_DSP_BUILD_SLOT_TABLE(const SH_DSP_DESCRIPTOR*);
+    UNK CATH_DSP_INSTRUCTION_GET_SIZE(const SH_DSP_INSTRUCTION*);
 
     extern const SH_DSP_DESCRIPTOR DSP_DESCRIPTORS[];
     extern const char* CATH_DSP_INSTR_ID_NAMES[];
     extern const char* CATH_GET_DSP_OPCODE_NAME(CATH_INSTR_ID_DSP INSTR_ID);
-    extern SH_DSP_PARALLEL_SLOT CATH_DSP_SLOT_TABLE[];
 
     extern const SH_DSP_ENTRY CATH_DSP_ENTRY_TABLE[];
     extern const UNK CATH_DSP_ENTRY_TABLE_SIZE;
