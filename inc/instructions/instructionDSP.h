@@ -67,6 +67,9 @@ extern "C" {
         U32 PC;
         U32 WORD;
 
+        bool IS_PARALLEL;
+        SH_DSP_PARALLEL_SLOT D_SLOT;
+
     } SH_DSP_INSTRUCTION;
 
     // DEFINE THE BASIS FOR ACCESSING
@@ -123,7 +126,10 @@ extern "C" {
 
     #define         SCU_DSP_SLOT_COUNT(TABLE)                   (sizeof(TABLE) / sizeof(TABLE[0]))
 
-    #define         SCU_DSP_INSTR_VALID(VALUE)                  ((VALUE)->INSTR_ID == CATH_INSTR_ID_DSP_INVALID || (VALUE)->DESCRIPTOR == NULL)
+    #define         SCU_DSP_INSTR_VALID(VALUE)                  \              
+        ((VALUE) != NULL &&                                     \
+        (VALUE)->DESCRIPTOR != NULL &&                          \
+        (VALUE)->INSTR_ID != CATH_INSTR_ID_DSP_INVALID)                           
 
     /////////////////////////////////////////////////////////
     //                FUNCTION PROTOTYPES
