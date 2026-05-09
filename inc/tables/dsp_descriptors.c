@@ -101,7 +101,7 @@ const SH_DSP_DESCRIPTOR DSP_DESCRIPTORS[CATH_INSTR_ID_DSP_ALL_MAX] =
         .X_BUS = 0,
         .Y_BUS = 0,
         .D_BUS = 1,
-        .WRITE_DEST = 1,
+        .WRITE_DEST = 0,
     },
     
     [CATH_INSTR_ID_DSP_DMA] = 
@@ -111,9 +111,6 @@ const SH_DSP_DESCRIPTOR DSP_DESCRIPTORS[CATH_INSTR_ID_DSP_ALL_MAX] =
         .D_BUS_SRC = DSP_OPERAND_NONE,
         .DEST = DSP_OPERAND_NONE,
         .IS_LOAD_STORE = true,
-        .X_BUS = 0,
-        .Y_BUS = 0,
-        .D_BUS = 0,
         .WRITE_DEST = 0,
     },
     
@@ -178,7 +175,7 @@ const SH_DSP_DESCRIPTOR DSP_DESCRIPTORS[CATH_INSTR_ID_DSP_ALL_MAX] =
         .X_BUS = 1,
         .Y_BUS = 0,
         .D_BUS = 1,
-        .WRITE_DEST = 1,
+        .WRITE_DEST = 0,
     },
     
     [CATH_INSTR_ID_DSP_MUL] = 
@@ -201,7 +198,7 @@ const SH_DSP_DESCRIPTOR DSP_DESCRIPTORS[CATH_INSTR_ID_DSP_ALL_MAX] =
         .X_BUS_SRC = DSP_OPERAND_NONE,
         .Y_BUS_SRC = DSP_OPERAND_NONE,
         .D_BUS_SRC = DSP_OPERAND_IMM,
-        .DEST = DSP_OPERAND_NONE,
+        .DEST = DSP_OPERAND_IMM,
         .IS_ALU_OP = false,
         .IS_MULTIPLY = false,
         .IS_MOVE = true,
@@ -231,7 +228,7 @@ const SH_DSP_DESCRIPTOR DSP_DESCRIPTORS[CATH_INSTR_ID_DSP_ALL_MAX] =
         .X_BUS = 1,
         .Y_BUS = 0,
         .D_BUS = 1,
-        .WRITE_DEST = 1,
+        .WRITE_DEST = 0,
     },
     
     [CATH_INSTR_ID_DSP_OR] = 
@@ -245,7 +242,7 @@ const SH_DSP_DESCRIPTOR DSP_DESCRIPTORS[CATH_INSTR_ID_DSP_ALL_MAX] =
         .X_BUS = 1,
         .Y_BUS = 1,
         .D_BUS = 1,
-        .WRITE_DEST = 1,
+        .WRITE_DEST = 0,
     },
     
     [CATH_INSTR_ID_DSP_RL] = 
@@ -259,7 +256,7 @@ const SH_DSP_DESCRIPTOR DSP_DESCRIPTORS[CATH_INSTR_ID_DSP_ALL_MAX] =
         .X_BUS = 1,
         .Y_BUS = 0,
         .D_BUS = 1,
-        .WRITE_DEST = 1,
+        .WRITE_DEST = 0,
     },
     
     [CATH_INSTR_ID_DSP_RR] = 
@@ -273,7 +270,7 @@ const SH_DSP_DESCRIPTOR DSP_DESCRIPTORS[CATH_INSTR_ID_DSP_ALL_MAX] =
         .X_BUS = 1,
         .Y_BUS = 0,
         .D_BUS = 1,
-        .WRITE_DEST = 1,
+        .WRITE_DEST = 0,
     },
     
     [CATH_INSTR_ID_DSP_SL] = 
@@ -287,7 +284,7 @@ const SH_DSP_DESCRIPTOR DSP_DESCRIPTORS[CATH_INSTR_ID_DSP_ALL_MAX] =
         .X_BUS = 1,
         .Y_BUS = 0,
         .D_BUS = 1,
-        .WRITE_DEST = 1,
+        .WRITE_DEST = 0,
     },
     
     [CATH_INSTR_ID_DSP_SR] = 
@@ -301,7 +298,7 @@ const SH_DSP_DESCRIPTOR DSP_DESCRIPTORS[CATH_INSTR_ID_DSP_ALL_MAX] =
         .X_BUS = 1,
         .Y_BUS = 0,
         .D_BUS = 1,
-        .WRITE_DEST = 1,
+        .WRITE_DEST = 0,
     },
     
     [CATH_INSTR_ID_DSP_SUB] = 
@@ -315,7 +312,7 @@ const SH_DSP_DESCRIPTOR DSP_DESCRIPTORS[CATH_INSTR_ID_DSP_ALL_MAX] =
         .X_BUS = 1,
         .Y_BUS = 1,
         .D_BUS = 1,
-        .WRITE_DEST = 1,
+        .WRITE_DEST = 0,
     },
     
     [CATH_INSTR_ID_DSP_XOR] = 
@@ -329,6 +326,6 @@ const SH_DSP_DESCRIPTOR DSP_DESCRIPTORS[CATH_INSTR_ID_DSP_ALL_MAX] =
         .X_BUS = 1,
         .Y_BUS = 1,
         .D_BUS = 1,
-        .WRITE_DEST = 1,
+        .WRITE_DEST = 0,
     },
 };
