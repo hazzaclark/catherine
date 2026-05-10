@@ -25,9 +25,14 @@ extern "C" {
 
     // DEFINE THE BASIS FOR THE LABELS ENCOMPASSING ALL REGISTER TYPES
     extern const char* CATH_DSP_MC_NAMES[DSP_REG_MC_MAX][2];
-    extern const char* CATH_DSP_RA_NAMES[DSP_REG_RA_MAX];
-    extern const char* CATH_DSP_CT_NAMES[DSP_REG_CT_MAX];
+    extern const char* CATH_DSP_RA_NAMES[DSP_REG_RA_MAX][2];
+    extern const char* CATH_DSP_CT_NAMES[DSP_REG_CT_MAX][2];
     extern const char* CATH_DSP_SPECIAL_NAMES[DSP_REG_SPECIAL_MAX];
+
+    // DEFINE THE BASIS FOR THE D1 BUS DESTINATION AND SOURCE SELECTION TABLES
+    // INDEXED BY BITS 11-8 ANDS BITS 3-0 OF THE D1 BUS FIELD RESPECTIVELY 
+    extern const char* CATH_DSP_D_DEST_NAMES[16];
+    extern const char* CATH_DSP_D_SRC_NAMES[16];
 
     //////////////////////////////////////////
     //         FUNCTION PROTOTYPES
