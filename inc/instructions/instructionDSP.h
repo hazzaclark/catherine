@@ -133,8 +133,10 @@ extern "C" {
     #define         SCU_DSP_PACK_DESTINATION(WORD, VALUE)       (CATH_PACK_BITS((WORD), (VALUE), 0, 8))
     #define         SCU_DSP_PACK_ALU(WORD, VALUE)               (CATH_PACK_BITS((WORD), (VALUE), 24, 4))
 
-    #define         SCU_DSP_GET_D_OP(VALUE)                     (CATH_SHIFT_R((VALUE)->WORD, 11, 3))
-    #define         SCU_DSP_GET_D_DEST(VALUE)                   (CATH_SHIFT_R((VALUE)->WORD, 8, 3))
+    #define         SCU_DSP_GET_D_OP(VALUE)                     (CATH_SHIFT_R((VALUE)->WORD, 12, 2))
+    #define         SCU_DSP_GET_D_DEST(VALUE)                   (CATH_SHIFT_R((VALUE)->WORD, 8, 4))
+    #define         SCU_DSP_GET_D_SRC(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 0, 4))
+    #define         SCU_DSP_GET_D_SIMM(VALUE)                   (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
 
     #define         SCU_DSP_GET_RAM_BANK(VALUE)                 ((VALUE >> 4) & 0x3)
     #define         SCU_DSP_GET_CT(VALUE)                       ((VALUE >> 2) & 0x3)
@@ -148,8 +150,8 @@ extern "C" {
         (VALUE)->INSTR_ID != CATH_INSTR_ID_DSP_INVALID)          
         
     #define         SCU_DSP_D_OP_NOP                            0x00
-    #define         SCU_DSP_D_OP_MOV_IMM_MC                     0x03
-    #define         SCU_DSP_D_OP_MOV_IMM_CT                     0x04
+    #define         SCU_DSP_D_OP_MOV_SIMM                       0x01
+    #define         SCU_DSP_D_OP_MOV_SRC                        0x03
 
     // DEFINED ACCESS MASK VALUES FOR DETERMING THE CONTROL FLOW
     // OVER PARALLELISED INSTRUCTION FORMATS FOR COMBINATORIAL INSTRUCTIONS
