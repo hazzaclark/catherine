@@ -55,6 +55,18 @@ extern "C" {
 
     } SH_DSP_DESCRIPTOR;
 
+    // DEFINE THE BASIS FOR ACCESSING
+    // THE PARALLELISED STATE OF THE DSP SLOTS
+    // AND THEIR ACTIVITY
+    typedef struct SH_DSP_PARALLEL_SLOT
+    {
+        SH_DSP_OPERAND_TYPE SOURCE;
+        const char* DEST_NAME;
+        bool IS_ACTIVE;
+        bool IS_ALU;
+
+    } SH_DSP_PARALLEL_SLOT;
+
     // DEFINE THE BASIS FOR ACCESSING INSTRUCTION
     // TYPES AND THEIR CHARACTERISTICS
     typedef struct SH_DSP_INSTRUCTION
@@ -71,18 +83,6 @@ extern "C" {
         SH_DSP_PARALLEL_SLOT D_SLOT;
 
     } SH_DSP_INSTRUCTION;
-
-    // DEFINE THE BASIS FOR ACCESSING
-    // THE PARALLELISED STATE OF THE DSP SLOTS
-    // AND THEIR ACTIVITY
-    typedef struct SH_DSP_PARALLEL_SLOT
-    {
-        SH_DSP_OPERAND_TYPE SOURCE;
-        const char* DEST_NAME;
-        bool IS_ACTIVE;
-        bool IS_ALU;
-
-    } SH_DSP_PARALLEL_SLOT;
 
     // DEFINE THE BASIS FOR AN ENTRY WITHIN THE SLOT TABLE 
     typedef struct SH_DSP_ENTRY
@@ -133,10 +133,13 @@ extern "C" {
         (VALUE)->DESCRIPTOR != NULL &&                          \
         (VALUE)->INSTR_ID != CATH_INSTR_ID_DSP_INVALID)          
         
-
     #define         SCU_DSP_D_OP_NOP                            0x00
     #define         SCU_DSP_D_OP_MOV_IMM_MC                     0x03
     #define         SCU_DSP_D_OP_MOV_IMM_CT                     0x04
+
+    // WHOLE-WORD EVALUATION DESIGNED TO DETECT THE TOP 6 BITS 
+    // OF AN IDENTIFIED WORD TO DETERMINE ITS CONTROL FLOW STATE
+    #define         SCU_DSP_IS_CONTROL_FLOW(VALUE)              \
 
     /////////////////////////////////////////////////////////
     //                FUNCTION PROTOTYPES
