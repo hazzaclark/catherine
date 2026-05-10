@@ -137,9 +137,33 @@ extern "C" {
     #define         SCU_DSP_D_OP_MOV_IMM_MC                     0x03
     #define         SCU_DSP_D_OP_MOV_IMM_CT                     0x04
 
+    // DEFINED ACCESS MASK VALUES FOR DETERMING THE CONTROL FLOW
+    // OVER PARALLELISED INSTRUCTION FORMATS FOR COMBINATORIAL INSTRUCTIONS
+
+    #define             SCU_DSP_END_MASK                    0x01
+    #define             SCU_DSP_ENDI_MASK                   0x02
+    #define             SCU_DSP_LOOP_MASK                   0x10
+    #define             SCU_DSP_BTM_MASK                    0x11
+    #define             SCU_DSP_LPS_MASK                    0x12
+    #define             SCU_DSP_BF_MASK                     0x18
+    #define             SCU_DSP_JMP_MASK                    0x20
+    #define             SCU_DSP_MVI_MASK                    0x28
+    #define             SCU_DSP_MOV_MASK                    0x30
+    #define             SCU_DSP_DMA_MASK                    0x31
+
     // WHOLE-WORD EVALUATION DESIGNED TO DETECT THE TOP 6 BITS 
     // OF AN IDENTIFIED WORD TO DETERMINE ITS CONTROL FLOW STATE
-    #define         SCU_DSP_IS_CONTROL_FLOW(VALUE)              \
+    #define         SCU_DSP_IS_CONTROL_FLOW(VALUE)                              \
+        (SCU_DSP_GET_ALU(VALUE) == SCU_DSP_END_MASK                             \
+        || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_ENDI_MASK                          \
+        || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_LOOP_MASK                          \
+        || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_BTM_MASK                           \
+        || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_LPS_MASK                           \
+        || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_BF_MASK                            \
+        || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_JMP_MASK                           \
+        || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_MVI_MASK                           \
+        || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_MOV_MASK                           \
+        || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_DMA_MASK)
 
     /////////////////////////////////////////////////////////
     //                FUNCTION PROTOTYPES
