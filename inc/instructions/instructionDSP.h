@@ -103,7 +103,7 @@ extern "C" {
         U8 OP_MASK;
         U8 OP_PATTERN;
 
-        bool(*DECODE)(SH_DSP_PARALLEL_SLOT*, const SH_DSP_INSTRUCTION);
+        bool(*DECODE)(SH_DSP_PARALLEL_SLOT*, const SH_DSP_INSTRUCTION*);
 
     } SH_DSP_D_OP_ENTRY;
 
@@ -153,6 +153,10 @@ extern "C" {
     #define         SCU_DSP_D_OP_MOV_SIMM                       0x01
     #define         SCU_DSP_D_OP_MOV_SRC                        0x03
 
+    // A DISTINCTION NEEDS TO BE MADE BETWEEN JMP AND MVI
+    // WHEN THEIR ENCODING SHARE THE SAME BITS (31:26)
+    #define         SCU_DSP_GET_MVI_COND(VALUE)                 (((VALUE)->WORD >> 24) & 0xFF)
+
     // DEFINED ACCESS MASK VALUES FOR DETERMING THE CONTROL FLOW
     // OVER PARALLELISED INSTRUCTION FORMATS FOR COMBINATORIAL INSTRUCTIONS
 
@@ -176,7 +180,7 @@ extern "C" {
         || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_BTM_MASK                           \
         || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_LPS_MASK                           \
         || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_BF_MASK                            \
-        || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_JMP_MASK                           \
+        || SCU_DSP_GET_MVI_COND(VALUE) == 0x80                                  \
         || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_MVI_MASK                           \
         || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_MOV_MASK                           \
         || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_DMA_MASK)
