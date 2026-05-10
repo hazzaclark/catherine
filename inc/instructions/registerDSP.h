@@ -13,6 +13,8 @@
 #else
     #define USE_CATH_DSP_REG
 
+#pragma once
+
 #ifdef __cplusplus
 extern "C" {
 #endif
