@@ -103,7 +103,10 @@ extern "C" {
         U8 OP_MASK;
         U8 OP_PATTERN;
 
-        bool(*DECODE)(SH_DSP_PARALLEL_SLOT*, const SH_DSP_INSTRUCTION*);
+        const char* MNEMONIC;
+        const char* DEST_NAME;
+
+        SH_DSP_OPERAND_TYPE SOURCE;
 
     } SH_DSP_D_OP_ENTRY;
 
@@ -138,7 +141,7 @@ extern "C" {
 
     #define         SCU_DSP_GET_X_OP(VALUE)                     (CATH_SHIFT_R((VALUE)->WORD, 23, 3))
     #define         SCU_DSP_GET_X_SRC(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 20, 3))
-    
+
     #define         SCU_DSP_GET_Y_OP(VALUE)                     (CATH_SHIFT_R((VALUE)->WORD, 17, 3))
     #define         SCU_DSP_GET_Y_SRC(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 14, 3))
 
