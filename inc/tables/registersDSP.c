@@ -62,6 +62,30 @@ const char* CATH_DSP_D_DEST_NAMES[16] =
     [0xF]   =   "CT3",
 };
 
+const char* CATH_DSP_X_SRC_NAMES[8] =
+{
+    [0x0]   =   "DATA RAM0",
+    [0x1]   =   "DATA RAM1",
+    [0x2]   =   "DATA RAM2",
+    [0x3]   =   "DATA RAM3",
+    [0x4]   =   "DATA RAM0,CT0++",
+    [0x5]   =   "DATA RAM1,CT1++",
+    [0x6]   =   "DATA RAM2,CT2++",
+    [0x7]   =   "DATA RAM3,CT3++",
+};
+
+const char* CATH_DSP_Y_SRC_NAMES[8] =
+{
+    [0x0]   =   "DATA RAM0",
+    [0x1]   =   "DATA RAM1",
+    [0x2]   =   "DATA RAM2",
+    [0x3]   =   "DATA RAM3",
+    [0x4]   =   "DATA RAM0,CT0++",
+    [0x5]   =   "DATA RAM1,CT1++",
+    [0x6]   =   "DATA RAM2,CT2++",
+    [0x7]   =   "DATA RAM3,CT3++",
+};
+
 const char* CATH_DSP_D_SRC_NAMES[16] =
 {
     [0x0]   =   "DATA RAM0",
