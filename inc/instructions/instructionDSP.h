@@ -133,6 +133,15 @@ extern "C" {
     #define         SCU_DSP_PACK_DESTINATION(WORD, VALUE)       (CATH_PACK_BITS((WORD), (VALUE), 0, 8))
     #define         SCU_DSP_PACK_ALU(WORD, VALUE)               (CATH_PACK_BITS((WORD), (VALUE), 24, 4))
 
+    // ADDITIONAL PRE PROCESSOR DIRECTIVES TO HELP WITH ACCESS
+    // TO SUB-FIELDS FOR PARALLLISED DECODING
+
+    #define         SCU_DSP_GET_X_OP(VALUE)                     (CATH_SHIFT_R((VALUE)->WORD, 23, 3))
+    #define         SCU_DSP_GET_X_SRC(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 20, 3))
+    
+    #define         SCU_DSP_GET_Y_OP(VALUE)                     (CATH_SHIFT_R((VALUE)->WORD, 17, 3))
+    #define         SCU_DSP_GET_Y_SRC(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 14, 3))
+
     #define         SCU_DSP_GET_D_OP(VALUE)                     (CATH_SHIFT_R((VALUE)->WORD, 12, 2))
     #define         SCU_DSP_GET_D_DEST(VALUE)                   (CATH_SHIFT_R((VALUE)->WORD, 8, 4))
     #define         SCU_DSP_GET_D_SRC(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 0, 4))
