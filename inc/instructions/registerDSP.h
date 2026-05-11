@@ -33,6 +33,8 @@ extern "C" {
 
     // DEFINE THE BASIS FOR THE D1 BUS DESTINATION AND SOURCE SELECTION TABLES
     // INDEXED BY BITS 11-8 ANDS BITS 3-0 OF THE D1 BUS FIELD RESPECTIVELY 
+    extern const char* CATH_DSP_X_SRC_NAMES[8];
+    extern const char* CATH_DSP_Y_SRC_NAMES[8];
     extern const char* CATH_DSP_D_DEST_NAMES[16];
     extern const char* CATH_DSP_D_SRC_NAMES[16];
 
