@@ -81,3 +81,14 @@ const char* CATH_DSP_D_SRC_NAMES[16] =
     [0xE]   =   NULL,
     [0xF]   =   NULL,
 };
+
+const char* CATH_DSP_SPECIAL_NAMES[DSP_REG_SPECIAL_MAX] = 
+{
+    [DSP_REG_ACC]   =   "ACC",
+    [DSP_REG_ALU]   =   "ALU",
+    [DSP_REG_MUL]   =   "MUL",
+    [DSP_REG_PC]    =   "PC",
+    [DSP_REG_TOP]   =   "TOP",
+    [DSP_REG_LOP]   =   "LOP",
+    [DSP_REG_ALL]   =   "ALL",
+};
