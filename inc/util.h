@@ -10,6 +10,7 @@
 // NESTED INCLUDES
 
 #include <common.h>
+#include "enums/category.h"
 
 // SYSTEM INCLUDES
 
@@ -83,8 +84,13 @@ extern "C" {
 
         } CATH_TEST_ENTRY;
 
-        #define         CATH_TEST_ENTRY_CREATE(CATEGORY, WORD, ... )        \
-            { .CATEGORY = CATEGORY, .WORD = WORD, __VA_ARGS__ }
+        #define         CATH_TEST_ENTRY_INIT(CAT, VALUE, ... )        \
+            { .CATEGORY = CAT, .WORD = VALUE, ##__VA_ARGS__ }
+
+
+        #define         CATH_TEST_ENTRY_CREATE(WORD)        CATH_TEST_ENTRY_INIT(CATH_INSTRCAT_SH2, WORD)
+
+        extern const CATH_TEST_ENTRY ENTRIES[]; 
 
         #endif
         #endif
