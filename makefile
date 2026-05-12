@@ -46,11 +46,16 @@ HXX_FILES       := $(wildcard cplusplus/inc/*.hpp) \
                    $(wildcard cplusplus/inc/enums/*.hpp)
 OXX_FILES       := $(patsubst $(SRCX_DIR)/%.cpp,build/cxx/%.o,$(CXX_FILES))
 
+
+TESTS_DIR		:= tests
+TESTS_C			:= $(wildcard $(TESTS_DIR)/*.c)
+TEST_BINS       := $(patsubst $(TESTS_DIR)/%.c,build/tests/%,$(TESTS_C))
+
 #####################################
 ##              TARGETS
 #####################################
 
-.PHONY: all clean dirs cxx
+.PHONY: all clean dirs cxx tests
 
 all: dirs build/libcath.a build/libcath.so build/catherine
 
@@ -60,6 +65,9 @@ dirs:
 	@mkdir -p build/instructions
 	@mkdir -p build/instructions/DSP
 	@mkdir -p build/cxx/instructions
+	@mkdir -p build/tests
+
+tests: dirs build/libcath.a $(TEST_BINS)
 
 build/%.o: $(SRC_DIR)/%.c $(H_FILES) $(INC_FILES)
 	$(CC) -c $(CSTD) $(IINC) $(WARNINGS) $(CFLAGS) -o $@ $<
@@ -95,6 +103,9 @@ build/catherine: $(O_FILES)
 
 build/cathcxx: $(OXX_FILES) build/libcath.a
 	$(CXX) $(OXX_FILES) $(LDXXFLAGS) -o $@
+
+build/tests/%: $(TESTS_DIR)/%.c build/libcath.a
+	$(CC) $(CSTD) $(IINC) $(WARNINGS) $(CFLAGS) $< -Lbuild -lcath -o $@
 
 clean:
 	rm -rf build
