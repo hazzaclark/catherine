@@ -59,6 +59,36 @@ extern "C" {
     } CATH_CONFIG;
 
     extern CATH_CONFIG CC;
+
+    // SEPARATE COMPILER CLAUSE FOR PROPERLY HANDLING ALL OF
+    // THE TESTING UTILITY SUCH THAT THEY DONT GET USED 
+    // ELSEWHERE THAN THE REQUIRED SPACES
+
+    #if defined(CATH_TEST_SUITE)
+        #define CATH_TEST_SUITE
+    #else
+        #define CATH_TEST_SUITE
+
+        #ifdef CATH_USE_TEST_UTIL
+
+        // DEFINE THE BASIS FOR ALL OF THE TEST UTILITIES
+        // THE FOLOWING STRUCT, MUCH LIKE HOW IT APPEARS IN 
+        // THE SOURCE INSPIRATION, PROVIES A QUICK AND DIRTY MEANS
+        // OF CONCATENATING OBJECTS FOR VALIDATING ENTRIES
+        
+        typedef struct CATH_TEST_ENTRY
+        {
+            CATH_INSTR_CAT CATEGORY;
+            U16 WORD;
+
+        } CATH_TEST_ENTRY;
+
+        #define         CATH_TEST_ENTRY_CREATE(CATEGORY, WORD, ... )        \
+            { .CATEGORY = CATEGORY, .WORD = WORD, __VA_ARGS__ }
+
+        #endif
+        #endif
+
     
 #ifdef __cplusplus
 }
