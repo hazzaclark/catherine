@@ -194,7 +194,7 @@ extern "C" {
         || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_BTM_MASK                           \
         || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_LPS_MASK                           \
         || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_BF_MASK                            \
-        || SCU_DSP_GET_MVI_COND(VALUE) == 0x80                                  \
+        || (SCU_DSP_GET_MVI_COND(VALUE) & 0xFC) == 0x80                         \
         || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_MVI_MASK                           \
         || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_MOV_MASK                           \
         || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_DMA_MASK)
@@ -239,7 +239,7 @@ extern "C" {
         { .OP_MASK = 0x04, .OP_PATTERN = 0x04, .MNEMONIC = "MOV", .DEST_NAME = "Y",  .SOURCE = DSP_OPERAND_Y   }, 
         { .OP_MASK = 0x07, .OP_PATTERN = 0x01, .MNEMONIC = "CLR", .DEST_NAME = "A",  .SOURCE = DSP_OPERAND_NONE }, 
         { .OP_MASK = 0x07, .OP_PATTERN = 0x02, .MNEMONIC = "MOV", .DEST_NAME = "A",  .SOURCE = DSP_OPERAND_ALU }, 
-        { .OP_MASK = 0x07, .OP_PATTERN = 0x03, .MNEMONIC = "MOV", .DEST_NAME = "A",  .SOURCE = DSP_OPERAND_Y   }, 
+        { .OP_MASK = 0x07, .OP_PATTERN = 0x03, .MNEMONIC = "MOV", .DEST_NAME = "A",  .SOURCE = DSP_OPERAND_Y   },
         { .OP_MASK = 0x00, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL, .SOURCE = DSP_OPERAND_NONE },
     };
 
