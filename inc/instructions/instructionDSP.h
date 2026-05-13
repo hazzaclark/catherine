@@ -172,7 +172,7 @@ extern "C" {
 
     #define         SCU_DSP_GET_MVI_COND(VALUE)                 (((VALUE)->WORD >> 24) & 0xFF)
     #define         SCU_DSP_GET_MVI_COND_BIT(VALUE)             (((VALUE)->WORD >> 25) & 0x01)
-    #define         SCU_DSP_GET_MVI_DEST(VALUE)                 (((VALUE)->WORD >> 20) & 0x1F)
+    #define         SCU_DSP_GET_MVI_DEST(VALUE)                 (CATH_SHIFT_R((VALUE)->WORD, 26, 4))
     #define         SCU_DSP_GET_MVI_IMM(VALUE)                  ((VALUE)->WORD & 0xFFFFF)
 
     // DEFINED ACCESS MASK VALUES FOR DETERMING THE CONTROL FLOW
