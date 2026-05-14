@@ -32,6 +32,7 @@ extern "C" {
         SH_DSP_OPERAND_TYPE X_BUS_SRC;
         SH_DSP_OPERAND_TYPE Y_BUS_SRC;
         SH_DSP_OPERAND_TYPE D_BUS_SRC;
+        SH_DSP_OPERAND_TYPE SRC;
         SH_DSP_OPERAND_TYPE DEST;
 
         bool IS_ALU_OP;
@@ -170,10 +171,17 @@ extern "C" {
     // A DISTINCTION NEEDS TO BE MADE BETWEEN JMP AND MVI
     // WHEN THEIR ENCODING SHARE THE SAME BITS (31:26)
 
-    #define         SCU_DSP_GET_MVI_COND(VALUE)                 (((VALUE)->WORD >> 24) & 0xFF)
-    #define         SCU_DSP_GET_MVI_COND_BIT(VALUE)             (((VALUE)->WORD >> 25) & 0x01)
     #define         SCU_DSP_GET_MVI_DEST(VALUE)                 (CATH_SHIFT_R((VALUE)->WORD, 26, 4))
-    #define         SCU_DSP_GET_MVI_IMM(VALUE)                  ((VALUE)->WORD & 0xFFFFF)
+    #define         SCU_DSP_GET_MVI_COND_BIT(VALUE)             (CATH_SHIFT_R((VALUE)->WORD, 25, 1))
+    #define         SCU_DSP_GET_MVI_NEGATE(VALUE)               (CATH_SHIFT_R((VALUE)->WORD, 24, 1))
+    #define         SCU_DSP_GET_MVI_STATUS(VALUE)               (CATH_SHIFT_R((VALUE)->WORD, 19, 5))
+    #define         SCU_DSP_GET_MVI_IMM_COND(VALUE)             (CATH_SHIFT_R((VALUE)->WORD,  0, 19))
+    #define         SCU_DSP_GET_MVI_IMM_UNCOND(VALUE)           (CATH_SHIFT_R((VALUE)->WORD,  0, 25))
+
+    #define         SCU_DSP_IS_MVI(VALUE)                       \
+            ((CATH_SHIFT_R((VALUE)->WORD, 30, 2)) == 0x2)
+
+    #define         SCU_DSP_MVI_COND_MAX                        0x09
 
     // DEFINED ACCESS MASK VALUES FOR DETERMING THE CONTROL FLOW
     // OVER PARALLELISED INSTRUCTION FORMATS FOR COMBINATORIAL INSTRUCTIONS
@@ -198,7 +206,7 @@ extern "C" {
         || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_BTM_MASK                           \
         || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_LPS_MASK                           \
         || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_BF_MASK                            \
-        || (SCU_DSP_GET_MVI_COND(VALUE) & 0xFC) == 0x80                         \
+        || SCU_DSP_IS_MVI(VALUE)                                                \
         || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_MVI_MASK                           \
         || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_MOV_MASK                           \
         || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_DMA_MASK)
