@@ -178,8 +178,12 @@ extern "C" {
     #define         SCU_DSP_GET_MVI_IMM_COND(VALUE)             (CATH_SHIFT_R((VALUE)->WORD,  0, 19))
     #define         SCU_DSP_GET_MVI_IMM_UNCOND(VALUE)           (CATH_SHIFT_R((VALUE)->WORD,  0, 25))
 
-    #define         SCU_DSP_IS_MVI(VALUE)                       \
+    #define         SCU_DSP_IS_MVI(VALUE)                                   \
             ((CATH_SHIFT_R((VALUE)->WORD, 30, 2)) == 0x2)
+
+    #define         SCU_DSP_IS_DMA(VALUE)                                   \
+            (((VALUE)->WORD & 0xF0007C00) == 0xC0000000                     \
+            && ((VALUE)->WORD & 0x00010000))
 
     #define         SCU_DSP_MVI_COND_MAX                        0x09
 
@@ -207,9 +211,8 @@ extern "C" {
         || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_LPS_MASK                           \
         || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_BF_MASK                            \
         || SCU_DSP_IS_MVI(VALUE)                                                \
-        || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_MVI_MASK                           \
-        || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_MOV_MASK                           \
-        || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_DMA_MASK)
+        || SCU_DSP_IS_DMA(VALUE)                                                \
+        || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_MOV_MASK)                          \
 
     /////////////////////////////////////////////////////////
     //                FUNCTION PROTOTYPES
