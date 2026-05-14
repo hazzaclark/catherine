@@ -51,31 +51,33 @@ void CATH_DSP_INSTRUCTION_INIT(SH_DSP_INSTRUCTION* INSTR, U32 WORD, U32 ADDRESS)
 //
 // OTHERWISE, IT WILL JUST PRINT OUT THE FULL WORD WITH IT'S
 // RESPECTIVE OPERANDS
-static UNK CATH_DSP_EMIT_SLOT(const SH_DSP_PARALLEL_SLOT* SLOT,
-                               const SH_DSP_INSTRUCTION*   INSTR,
-                               char*                        BUFFER)
+STATIC
+UNK CATH_DSP_EMIT_SLOT(const SH_DSP_PARALLEL_SLOT* SLOT,
+                               const SH_DSP_INSTRUCTION* INSTR,
+                               char* BUFFER)
 {
     if(!SLOT->IS_ACTIVE) return 0;
+
+    const UNK SIZE = BUFFER ? 64 : 0;
 
     if(SLOT->SOURCE == DSP_OPERAND_IMM)
     {
         U8 SIMM = (U8)SCU_DSP_GET_D_SIMM(INSTR);
-        return snprintf(BUFFER, BUFFER ? 64 : 0,
+        return snprintf(BUFFER, SIZE,
             "%s #0x%02X, %s",
             SLOT->MNEMONIC, SIMM, SLOT->DEST_NAME);
     }
-    else if(SLOT->SRC_NAME)
+
+    if(SLOT->SRC_NAME)
     {
-        return snprintf(BUFFER, BUFFER ? 64 : 0,
+        return snprintf(BUFFER, SIZE,
             "%s %s, %s",
             SLOT->MNEMONIC, SLOT->SRC_NAME, SLOT->DEST_NAME);
     }
-    else
-    {
-        return snprintf(BUFFER, BUFFER ? 64 : 0,
+
+    return snprintf(BUFFER, SIZE,
             "%s %s",
             SLOT->MNEMONIC, SLOT->DEST_NAME);
-    }
 }
 
 // 12/05/26
@@ -147,6 +149,18 @@ UNK CATH_DSP_INSTRUCTION_DISASM(const SH_DSP_INSTRUCTION* INSTR, char* DEST)
     }
 
     TOTAL_SIZE += DSP_INSTR_LEN;
+
+    // FOR THOSE INSTRUCTIONS THAT ARE NON-PARALLEL
+    // EMIT THE OPERANDS DIRECTLY AFTER THE MNEMONIC
+    if(!INSTR->IS_PARALLEL && !INSTR->DESCRIPTOR->IS_NOP && !INSTR->DESCRIPTOR->IS_END)
+    {
+        if(BUFFER) { BUFFER[0] = ' '; BUFFER += 1; }
+        TOTAL_SIZE += 1;
+
+        UNK WRITTEN = CATH_DSP_INSTRUCTION_DISASM_OPERAND(INSTR, BUFFER);
+        if(BUFFER) BUFFER += WRITTEN;
+        TOTAL_SIZE += WRITTEN;
+    }
 
     // FOR THOSE INSTRUCTIONS BY WHICH THE LENGTHS OF THE 
     // COMBINATORIAL INSTRUCTION PATTERNS INVOLVE 
