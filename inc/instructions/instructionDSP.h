@@ -158,11 +158,6 @@ extern "C" {
     #define         SCU_DSP_ACC_CMP_MASK(VALUE)                 (((VALUE) & 0x01))
 
     #define         SCU_DSP_SLOT_COUNT(TABLE)                   (sizeof(TABLE) / sizeof(TABLE[0]))
-
-    #define         SCU_DSP_INSTR_VALID(VALUE)                  \              
-        ((VALUE) != NULL &&                                     \
-        (VALUE)->DESCRIPTOR != NULL &&                          \
-        (VALUE)->INSTR_ID != CATH_INSTR_ID_DSP_INVALID)          
         
     #define         SCU_DSP_D_OP_NOP                            0x00
     #define         SCU_DSP_D_OP_MOV_SIMM                       0x01
@@ -177,6 +172,16 @@ extern "C" {
     #define         SCU_DSP_GET_MVI_STATUS(VALUE)               (CATH_SHIFT_R((VALUE)->WORD, 19, 5))
     #define         SCU_DSP_GET_MVI_IMM_COND(VALUE)             (CATH_SHIFT_R((VALUE)->WORD,  0, 19))
     #define         SCU_DSP_GET_MVI_IMM_UNCOND(VALUE)           (CATH_SHIFT_R((VALUE)->WORD,  0, 25))
+
+    // EVALUATIVE MACROS FOR ACCESSING THE CORRESPONDENCE FOR THE 
+    // DMA CHANNELS
+    // 
+    // WITH DUE REGARD FOR THE SPECIFIC MODES AND CONDITIONS ENCOMPASSING SUCH
+
+    #define         SCU_DSP_GET_DMA_CHANNEL(VALUE)              (CATH_SHIFT_R((VALUE)->WORD, 12, 1))
+    #define         SCU_DSP_GET_DMA_RAM(VALUE)                  (CATH_SHIFT_R((VALUE)->WORD, 8, 2))
+    #define         SCU_DSP_GET_DMA_ADD_MODE(VALUE)             (CATH_SHIFT_R((VALUE)->WORD, 15, 3))
+    #define         SCU_DSP_GET_DMA_COUNT(VALUE)                (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
 
     #define         SCU_DSP_IS_MVI(VALUE)                                   \
             ((CATH_SHIFT_R((VALUE)->WORD, 30, 2)) == 0x2)
