@@ -16,11 +16,9 @@
 #include "instructions/registerDSP.h"
 #include "tables/tables.h"
 
-// STATIC CONDITION NAME TABLE INDEXXED BY THE 5-BIT STATUS FIELD
-// OF COMMON MVI ENCODINGS
-// 
-// AVAILABLE HERE TO NEGATE INCURRED RUNTIME OVERHEAD
-// WITH CONSTANT EVALUATIVE PROCESSING
+// STATIC CONDITION NAME TABLES FOR ALL OF THE ENCOMPASSING 
+// AREAS BY WHICH THEY ARE NEEDED FOR THE PURPOSES OF EVAUATING
+// CONDITIONS AND OPERANDS ACCESS
 STATIC const char* const SCU_DSP_MVI_COND_NAMES[][2] =
 {
     [0x01] = { "Z",   "NZ"  },
@@ -28,6 +26,14 @@ STATIC const char* const SCU_DSP_MVI_COND_NAMES[][2] =
     [0x03] = { "ZS",  "NZS" },
     [0x04] = { "C",   "NC"  },
     [0x08] = { "T0",  "NT0" },
+};
+
+STATIC const char* const SCU_DSP_DMA_RAM_NAMES[4] = 
+{
+    [0x0] = "MC0",
+    [0x1] = "MC1",
+    [0x2] = "MC2",
+    [0x3] = "MC3",
 };
 
 UNK CATH_DSP_OPERAND_TYPE_NONE(const struct SH_DSP_INSTRUCTION* INSTR, char* BUFFER, UNK SIZE)
@@ -299,4 +305,21 @@ UNK CATH_DSP_OPERAND_TYPE_AT_RAM3_ADR(const struct SH_DSP_INSTRUCTION* INSTR, ch
     U8 DEST = (U8)SCU_DSP_GET_DESTINATION(INSTR);
     U8 CT = SCU_DSP_GET_CT(DEST);
     return snprintf(BUFFER, SIZE, "@RAM3+%s", CATH_REGISTER_GET_CT_NAME(CT));
+}
+
+UNK CATH_DSP_OPERAND_TYPE_DMA(const struct SH_DSP_INSTRUCTION* INSTR, char* BUFFER, UNK SIZE)
+{
+    U8 CHANNEL = (U8)SCU_DSP_GET_DMA_CHANNEL(INSTR);
+    U8 RAM     = (U8)SCU_DSP_GET_DMA_RAM(INSTR);
+    U8 COUNT   = (U8)SCU_DSP_GET_DMA_COUNT(INSTR);
+
+    const char* CHANNEL_NAME  = CHANNEL ? "D1" : "D0";
+    const char* RAM_NAME = SCU_DSP_DMA_RAM_NAMES[RAM];
+
+    if(!RAM_NAME) RAM_NAME = "?";
+
+    if(!CHANNEL)
+        return snprintf(BUFFER, SIZE, "%s, %s, #0x%X", CHANNEL_NAME, RAM_NAME, COUNT);
+    
+    return snprintf(BUFFER, SIZE, "%s, %s, #0x%X", RAM_NAME, CHANNEL_NAME, COUNT);
 }
