@@ -56,7 +56,17 @@ UNK CATH_DSP_EMIT_SLOT(const SH_DSP_PARALLEL_SLOT* SLOT,
                                const SH_DSP_INSTRUCTION* INSTR,
                                char* BUFFER)
 {
-    if(!SLOT->IS_ACTIVE) return 0;
+    // ALL INACTIVE SLOTS STILL OCCUPY
+    // SPACE IN THE PARALLEL WORD REGARDLESS OF IT'S ENCODING
+    //
+    // ALL FOUR ENTRIES ARE ALWAYS PRESENT IN EVERY 32-BIT WORD
+    // THEREFORE, EMIT NOP TO REPRESENT THE ENCODED STUBS FOR THAT OPERATION
+
+    if(!SLOT->IS_ACTIVE)
+    {
+        if(BUFFER) return snprintf(BUFFER, 64, "NOP");
+        return sizeof("NOP") - 1;
+    }
 
     const UNK SIZE = BUFFER ? 64 : 0;
 
@@ -106,7 +116,6 @@ UNK CATH_DSP_INSTRUCTION_GET_SIZE(const SH_DSP_INSTRUCTION* INSTR)
 
             for(UNK INDEX = 0; INDEX < 3; INDEX++)
             {
-                if(!SLOTS[INDEX]->IS_ACTIVE) continue;
                 TOTAL_SIZE += 2;
                 TOTAL_SIZE += CATH_DSP_EMIT_SLOT(SLOTS[INDEX], INSTR, NULL);
             }
@@ -176,8 +185,6 @@ UNK CATH_DSP_INSTRUCTION_DISASM(const SH_DSP_INSTRUCTION* INSTR, char* DEST)
 
         for(UNK INDEX = 0; INDEX < 3; INDEX++)
         {
-            if(!SLOTS[INDEX]->IS_ACTIVE) continue;
-
             if(BUFFER) { BUFFER[0] = ' '; BUFFER[1] = ' '; BUFFER += 2; }
             TOTAL_SIZE += 2;
 
