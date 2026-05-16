@@ -132,6 +132,7 @@ extern "C" {
 
     #define         SCU_DSP_GET_JUMP_ADDR(VALUE)                (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
     #define         SCU_DSP_GET_COND(VALUE)                     (CATH_SHIFT_R((VALUE)->WORD, 8, 4))
+    #define         SCU_DSP_GET_JMP_PREFIX(VALUE)               (CATH_SHIFT_R((VALUE)->WORD, 27, 5))
 
     #define         SCU_DSP_PACK_OPERAND(WORD, VALUE)           (CATH_PACK_BITS((WORD), (VALUE), 26, 6))
     #define         SCU_DSP_PACK_SRC_X(WORD, VALUE)             (CATH_PACK_BITS((WORD), (VALUE), 20, 6))
@@ -191,33 +192,32 @@ extern "C" {
             && ((VALUE)->WORD & 0x00010000))
 
     #define         SCU_DSP_MVI_COND_MAX                        0x09
+    #define         SCU_DSP_JMP_PREF                            0x1A
 
     // DEFINED ACCESS MASK VALUES FOR DETERMING THE CONTROL FLOW
     // OVER PARALLELISED INSTRUCTION FORMATS FOR COMBINATORIAL INSTRUCTIONS
 
-    #define             SCU_DSP_END_MASK                    0x01
-    #define             SCU_DSP_ENDI_MASK                   0x02
-    #define             SCU_DSP_LOOP_MASK                   0x10
-    #define             SCU_DSP_BTM_MASK                    0x11
-    #define             SCU_DSP_LPS_MASK                    0x12
-    #define             SCU_DSP_BF_MASK                     0x18
-    #define             SCU_DSP_JMP_MASK                    0x20
+    #define             SCU_DSP_END_MASK                    0x3C
+    #define             SCU_DSP_ENDI_MASK                   0x3E
+    #define             SCU_DSP_BTM_MASK                    0x38
+    #define             SCU_DSP_LPS_MASK                    0x3A
+    #define             SCU_DSP_JMP_MASK                    0x34
     #define             SCU_DSP_MVI_MASK                    0x28
     #define             SCU_DSP_MOV_MASK                    0x30
     #define             SCU_DSP_DMA_MASK                    0x31
 
     // WHOLE-WORD EVALUATION DESIGNED TO DETECT THE TOP 6 BITS 
     // OF AN IDENTIFIED WORD TO DETERMINE ITS CONTROL FLOW STATE
+
     #define         SCU_DSP_IS_CONTROL_FLOW(VALUE)                              \
-        (SCU_DSP_GET_ALU(VALUE) == SCU_DSP_END_MASK                             \
-        || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_ENDI_MASK                          \
-        || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_LOOP_MASK                          \
-        || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_BTM_MASK                           \
+        (SCU_DSP_GET_ALU(VALUE) == SCU_DSP_BTM_MASK                             \
         || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_LPS_MASK                           \
-        || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_BF_MASK                            \
+        || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_END_MASK                           \
+        || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_ENDI_MASK                          \
+        || SCU_DSP_GET_JMP_PREFIX(VALUE) == SCU_DSP_JMP_PREF                    \
         || SCU_DSP_IS_MVI(VALUE)                                                \
         || SCU_DSP_IS_DMA(VALUE)                                                \
-        || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_MOV_MASK)                          \
+        || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_MOV_MASK)
 
     /////////////////////////////////////////////////////////
     //                FUNCTION PROTOTYPES
@@ -247,20 +247,20 @@ extern "C" {
     static const SH_DSP_D_OP_ENTRY CATH_DSP_X_OP_TABLE[] =
     {
         { .OP_MASK = 0x07, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL, .SOURCE = DSP_OPERAND_NONE },
+        { .OP_MASK = 0x07, .OP_PATTERN = 0x02, .MNEMONIC = "MOV", .DEST_NAME = "P",  .SOURCE = DSP_OPERAND_MUL },
+        { .OP_MASK = 0x07, .OP_PATTERN = 0x03, .MNEMONIC = "MOV", .DEST_NAME = "P",  .SOURCE = DSP_OPERAND_X   },
         { .OP_MASK = 0x04, .OP_PATTERN = 0x04, .MNEMONIC = "MOV", .DEST_NAME = "X",  .SOURCE = DSP_OPERAND_X   },
-        { .OP_MASK = 0x07, .OP_PATTERN = 0x02, .MNEMONIC = "MOV", .DEST_NAME = "P",  .SOURCE = DSP_OPERAND_MUL }, 
-        { .OP_MASK = 0x07, .OP_PATTERN = 0x03, .MNEMONIC = "MOV", .DEST_NAME = "P",  .SOURCE = DSP_OPERAND_X   }, 
-        { .OP_MASK = 0x00, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL, .SOURCE = DSP_OPERAND_NONE },
+        { .OP_MASK = 0x00, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL,  .SOURCE = DSP_OPERAND_NONE },
     };
 
     static const SH_DSP_D_OP_ENTRY CATH_DSP_Y_OP_TABLE[] =
     {
         { .OP_MASK = 0x07, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL, .SOURCE = DSP_OPERAND_NONE },
-        { .OP_MASK = 0x04, .OP_PATTERN = 0x04, .MNEMONIC = "MOV", .DEST_NAME = "Y",  .SOURCE = DSP_OPERAND_Y   }, 
-        { .OP_MASK = 0x07, .OP_PATTERN = 0x01, .MNEMONIC = "CLR", .DEST_NAME = "A",  .SOURCE = DSP_OPERAND_NONE }, 
-        { .OP_MASK = 0x07, .OP_PATTERN = 0x02, .MNEMONIC = "MOV", .DEST_NAME = "A",  .SOURCE = DSP_OPERAND_ALU }, 
+        { .OP_MASK = 0x07, .OP_PATTERN = 0x01, .MNEMONIC = "CLR", .DEST_NAME = "A",  .SOURCE = DSP_OPERAND_NONE },
+        { .OP_MASK = 0x07, .OP_PATTERN = 0x02, .MNEMONIC = "MOV", .DEST_NAME = "A",  .SOURCE = DSP_OPERAND_ALU  },
         { .OP_MASK = 0x07, .OP_PATTERN = 0x03, .MNEMONIC = "MOV", .DEST_NAME = "A",  .SOURCE = DSP_OPERAND_Y   },
-        { .OP_MASK = 0x00, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL, .SOURCE = DSP_OPERAND_NONE },
+        { .OP_MASK = 0x04, .OP_PATTERN = 0x04, .MNEMONIC = "MOV", .DEST_NAME = "Y",  .SOURCE = DSP_OPERAND_Y   },
+        { .OP_MASK = 0x00, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL,  .SOURCE = DSP_OPERAND_NONE },
     };
 
     static const SH_DSP_D_OP_ENTRY CATH_DSP_D_OP_TABLE[] =
