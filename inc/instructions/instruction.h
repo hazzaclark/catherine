@@ -19,6 +19,7 @@
 
 // SYSTEM INCLUDES
 
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
@@ -122,7 +123,7 @@ extern "C" {
     void CATH_INSTRUCTION_INIT(SH_INSTRUCTION*, U16, U32);
     void CATH_INSTRUCTION_PROCESS(SH_INSTRUCTION*);
     void CATH_INSTRUCTION_BUILD_ID_TABLE(void);
-    S32 CATH_INSTRUCTION_GET_IMM(const SH_INSTRUCTION*);
+    S16 CATH_INSTRUCTION_GET_IMM(const SH_INSTRUCTION*);
     S32 CATH_INSTRUCTION_GET_DISP(const SH_INSTRUCTION*);
 
     static inline U16 CATH_GET_RAW(const SH_INSTRUCTION* INSTR) { return INSTR->WORD; }
