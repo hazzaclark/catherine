@@ -85,10 +85,10 @@ static void CATH_DSP_DECODE_BUS_SLOT(SH_DSP_PARALLEL_SLOT* SLOT, const SH_DSP_IN
             {
                 case DSP_OPERAND_X:
                 {
-                    U8 SRC = (U8)(TABLE == CATH_DSP_X_OP_TABLE
+                    U8 SRC = (U8)((TABLE == CATH_DSP_XX_OP_TABLE || TABLE == CATH_DSP_XP_OP_TABLE)
                         ? SCU_DSP_GET_X_SRC(INSTR)
                         : SCU_DSP_GET_Y_SRC(INSTR));
-
+                
                     if(SOURCE) SLOT->SRC_NAME = SOURCE[SRC];
                     break;
                 }
@@ -192,7 +192,7 @@ void CATH_DSP_INSTRUCTION_PROCESS(SH_DSP_INSTRUCTION* INSTR)
     // WE ARE ONLY EVER CONCERNED WITH THE TOP 6 BITS OF
     // THE PROVIDED ALU FIELD
 
-    U32 ALU_WORD = INSTR->WORD & 0xFF000000;
+    U32 ALU_WORD = INSTR->WORD & 0xFC000000;
     INSTR->INSTR_ID = CATH_INSTR_ID_DSP_NOP;
     INSTR->DESCRIPTOR = &DSP_DESCRIPTORS[CATH_INSTR_ID_DSP_NOP];
 
@@ -215,20 +215,30 @@ void CATH_DSP_INSTRUCTION_PROCESS(SH_DSP_INSTRUCTION* INSTR)
     // NOW ALL OF THE CORRESPONDENCE FOR THE BUS EVALUATION AND ACCESS
     // GET PASSED THROUGH ONE LOCATION WITH DYNAMIC EVALUATION ACCORDINGLY
 
-    CATH_DSP_DECODE_BUS_SLOT(&INSTR->X_SLOT, INSTR, 
-                            CATH_DSP_X_OP_TABLE, 
-                            (U8)SCU_DSP_GET_X_OP(INSTR), 
-                            CATH_DSP_X_SRC_NAMES, NULL);
+    CATH_DSP_DECODE_BUS_SLOT(&INSTR->XP_SLOT, INSTR,
+                        CATH_DSP_XP_OP_TABLE,
+                        (U8)SCU_DSP_GET_XP_OP(INSTR),
+                        CATH_DSP_X_SRC_NAMES, NULL);
 
-    CATH_DSP_DECODE_BUS_SLOT(&INSTR->Y_SLOT, INSTR, 
-                            CATH_DSP_Y_OP_TABLE, 
-                            (U8)SCU_DSP_GET_Y_OP(INSTR), 
-                            CATH_DSP_Y_SRC_NAMES, NULL);
+    CATH_DSP_DECODE_BUS_SLOT(&INSTR->X_SLOT, INSTR,
+                        CATH_DSP_XX_OP_TABLE,
+                        (U8)SCU_DSP_GET_XX_OP(INSTR),
+                        CATH_DSP_X_SRC_NAMES, NULL);
 
-    CATH_DSP_DECODE_BUS_SLOT(&INSTR->D_SLOT, INSTR, 
-                            CATH_DSP_D_OP_TABLE, 
-                            (U8)SCU_DSP_GET_D_OP(INSTR), 
-                            CATH_DSP_D_SRC_NAMES, CATH_DSP_D_DEST_NAMES);
+    CATH_DSP_DECODE_BUS_SLOT(&INSTR->YA_SLOT, INSTR,
+                        CATH_DSP_YA_OP_TABLE,
+                        (U8)SCU_DSP_GET_YA_OP(INSTR),
+                        CATH_DSP_Y_SRC_NAMES, NULL);
+
+    CATH_DSP_DECODE_BUS_SLOT(&INSTR->Y_SLOT, INSTR,
+                        CATH_DSP_YY_OP_TABLE,
+                        (U8)SCU_DSP_GET_YY_OP(INSTR),
+                        CATH_DSP_Y_SRC_NAMES, NULL);
+
+    CATH_DSP_DECODE_BUS_SLOT(&INSTR->D_SLOT, INSTR,
+                        CATH_DSP_D_OP_TABLE,
+                        (U8)SCU_DSP_GET_D_OP(INSTR),
+                        CATH_DSP_D_SRC_NAMES, CATH_DSP_D_DEST_NAMES);
 
     return;
 
