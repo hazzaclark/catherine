@@ -188,6 +188,12 @@ extern "C" {
     #define         SCU_DSP_GET_MVI_IMM_COND(VALUE)             (CATH_SHIFT_R((VALUE)->WORD,  0, 19))
     #define         SCU_DSP_GET_MVI_IMM_UNCOND(VALUE)           (CATH_SHIFT_R((VALUE)->WORD,  0, 25))
 
+    #define         SCU_DSP_GET_JMP_COND(VALUE)                 (CATH_SHIFT_R((VALUE)->WORD, 19, 7))
+    #define         SCU_DSP_GET_JMP_ADDR(VALUE)                 (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
+    #define         SCU_DSP_GET_JMP_COND_ENABLE(VALUE)          (SCU_DSP_GET_JMP_COND(VALUE) & 0x01)
+    #define         SCU_DSP_GET_JMP_COND_NEGATE(VALUE)          (SCU_DSP_GET_JMP_COND(VALUE) >> 6 & 0x01)
+    #define         SCU_DSP_GET_JMP_COND_FLAG(VALUE)            (SCU_DSP_GET_JMP_COND(VALUE) >> 1 & 0x1F)
+
     // EVALUATIVE MACROS FOR ACCESSING THE CORRESPONDENCE FOR THE 
     // DMA CHANNELS
     // 
