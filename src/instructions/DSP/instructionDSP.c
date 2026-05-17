@@ -28,12 +28,14 @@ void CATH_DSP_INSTRUCTION_INIT(SH_DSP_INSTRUCTION* INSTR, U32 WORD, U32 ADDRESS)
 
     SH_DSP_PARALLEL_SLOT* SLOTS[] = 
     {
+        &INSTR->XP_SLOT,
         &INSTR->X_SLOT,
+        &INSTR->YA_SLOT,
         &INSTR->Y_SLOT,
         &INSTR->D_SLOT,
     };
 
-    for(UNK INDEX = 0; INDEX < 3; INDEX++)
+    for(UNK INDEX = 0; INDEX < 5; INDEX++)
     {
         SLOTS[INDEX]->IS_ACTIVE = false;
         SLOTS[INDEX]->MNEMONIC = NULL;
@@ -111,10 +113,8 @@ UNK CATH_DSP_INSTRUCTION_GET_SIZE(const SH_DSP_INSTRUCTION* INSTR)
     {
         if(INSTR->IS_PARALLEL)
         {
-            const SH_DSP_PARALLEL_SLOT* SLOTS[] =
-                { &INSTR->X_SLOT, &INSTR->Y_SLOT, &INSTR->D_SLOT };
-
-            for(UNK INDEX = 0; INDEX < 3; INDEX++)
+            SCU_DSP_CREATE_SLOTS(INSTR, SLOTS);
+            for(UNK INDEX = 0; INDEX < SCU_DSP_SLOT_COUNT; INDEX++)
             {
                 TOTAL_SIZE += 2;
                 TOTAL_SIZE += CATH_DSP_EMIT_SLOT(SLOTS[INDEX], INSTR, NULL);
@@ -129,12 +129,9 @@ UNK CATH_DSP_INSTRUCTION_GET_SIZE(const SH_DSP_INSTRUCTION* INSTR)
 
     if(INSTR->IS_PARALLEL)
     {
-        const SH_DSP_PARALLEL_SLOT* SLOTS[] =
-            { &INSTR->X_SLOT, &INSTR->Y_SLOT, &INSTR->D_SLOT };
-
-        for(UNK INDEX = 0; INDEX < 3; INDEX++)
+        SCU_DSP_CREATE_SLOTS(INSTR, SLOTS);
+        for(UNK INDEX = 0; INDEX < SCU_DSP_SLOT_COUNT; INDEX++)
         {
-            if(!SLOTS[INDEX]->IS_ACTIVE) continue;
             TOTAL_SIZE += 2;
             TOTAL_SIZE += CATH_DSP_EMIT_SLOT(SLOTS[INDEX], INSTR, NULL);
         }
@@ -180,10 +177,8 @@ UNK CATH_DSP_INSTRUCTION_DISASM(const SH_DSP_INSTRUCTION* INSTR, char* DEST)
     
     if(INSTR->IS_PARALLEL)
     {
-        const SH_DSP_PARALLEL_SLOT* SLOTS[] =
-            { &INSTR->X_SLOT, &INSTR->Y_SLOT, &INSTR->D_SLOT };
-
-        for(UNK INDEX = 0; INDEX < 3; INDEX++)
+        SCU_DSP_CREATE_SLOTS(INSTR, SLOTS);
+        for(UNK INDEX = 0; INDEX < SCU_DSP_SLOT_COUNT; INDEX++)
         {
             if(BUFFER) { BUFFER[0] = ' '; BUFFER[1] = ' '; BUFFER += 2; }
             TOTAL_SIZE += 2;
