@@ -233,6 +233,19 @@ extern "C" {
         || SCU_DSP_IS_DMA(VALUE)                                                \
         || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_MOV_MASK)
 
+    // DEFINER FOR CREATING SLOT ENTIRES DYNAMICALLY
+    // AMORTISE THE COSTS INCURRED BY CREATING THE SAME REFERENCES
+    // OVER AND OVER AGAIN WITHIN EACH EVALUATION OF PARALLELISED OR 
+    // OTHERWISE 
+
+    #define         SCU_DSP_CREATE_SLOTS(INSTR, NAME)                           \
+        const SH_DSP_PARALLEL_SLOT* NAME[] =                                    \
+        {                                                                       \
+            &(INSTR)->XP_SLOT, &(INSTR)->X_SLOT,                                \
+            &(INSTR)->YA_SLOT, &(INSTR)->Y_SLOT,                                \
+            &(INSTR)->D_SLOT                                                    \
+        }
+
     /////////////////////////////////////////////////////////
     //                FUNCTION PROTOTYPES
     /////////////////////////////////////////////////////////
@@ -258,22 +271,34 @@ extern "C" {
     
     #ifdef CATH_USE_BUS_DECODE_TABLE
 
-    static const SH_DSP_D_OP_ENTRY CATH_DSP_X_OP_TABLE[] =
+    static const SH_DSP_D_OP_ENTRY CATH_DSP_XP_OP_TABLE[] =
     {
-        { .OP_MASK = 0x07, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL, .SOURCE = DSP_OPERAND_NONE },
-        { .OP_MASK = 0x07, .OP_PATTERN = 0x02, .MNEMONIC = "MOV", .DEST_NAME = "P",  .SOURCE = DSP_OPERAND_MUL },
-        { .OP_MASK = 0x07, .OP_PATTERN = 0x03, .MNEMONIC = "MOV", .DEST_NAME = "P",  .SOURCE = DSP_OPERAND_X   },
-        { .OP_MASK = 0x04, .OP_PATTERN = 0x04, .MNEMONIC = "MOV", .DEST_NAME = "X",  .SOURCE = DSP_OPERAND_X   },
+        { .OP_MASK = 0x03, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL, .SOURCE = DSP_OPERAND_NONE },
+        { .OP_MASK = 0x03, .OP_PATTERN = 0x02, .MNEMONIC = "MOV", .DEST_NAME = "P",  .SOURCE = DSP_OPERAND_MUL  },
+        { .OP_MASK = 0x03, .OP_PATTERN = 0x03, .MNEMONIC = "MOV", .DEST_NAME = "P",  .SOURCE = DSP_OPERAND_X    },
         { .OP_MASK = 0x00, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL,  .SOURCE = DSP_OPERAND_NONE },
     };
 
-    static const SH_DSP_D_OP_ENTRY CATH_DSP_Y_OP_TABLE[] =
+    static const SH_DSP_D_OP_ENTRY CATH_DSP_XX_OP_TABLE[] =
     {
-        { .OP_MASK = 0x07, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL, .SOURCE = DSP_OPERAND_NONE },
-        { .OP_MASK = 0x07, .OP_PATTERN = 0x01, .MNEMONIC = "CLR", .DEST_NAME = "A",  .SOURCE = DSP_OPERAND_NONE },
-        { .OP_MASK = 0x07, .OP_PATTERN = 0x02, .MNEMONIC = "MOV", .DEST_NAME = "A",  .SOURCE = DSP_OPERAND_ALU  },
-        { .OP_MASK = 0x07, .OP_PATTERN = 0x03, .MNEMONIC = "MOV", .DEST_NAME = "A",  .SOURCE = DSP_OPERAND_Y   },
-        { .OP_MASK = 0x04, .OP_PATTERN = 0x04, .MNEMONIC = "MOV", .DEST_NAME = "Y",  .SOURCE = DSP_OPERAND_Y   },
+        { .OP_MASK = 0x01, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL, .SOURCE = DSP_OPERAND_NONE },
+        { .OP_MASK = 0x01, .OP_PATTERN = 0x01, .MNEMONIC = "MOV", .DEST_NAME = "X",  .SOURCE = DSP_OPERAND_X    },
+        { .OP_MASK = 0x00, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL,  .SOURCE = DSP_OPERAND_NONE },
+    };
+
+    static const SH_DSP_D_OP_ENTRY CATH_DSP_YA_OP_TABLE[] =
+    {
+        { .OP_MASK = 0x03, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL, .SOURCE = DSP_OPERAND_NONE },
+        { .OP_MASK = 0x03, .OP_PATTERN = 0x01, .MNEMONIC = "CLR", .DEST_NAME = "A",  .SOURCE = DSP_OPERAND_NONE },
+        { .OP_MASK = 0x03, .OP_PATTERN = 0x02, .MNEMONIC = "MOV", .DEST_NAME = "A",  .SOURCE = DSP_OPERAND_ALU  },
+        { .OP_MASK = 0x03, .OP_PATTERN = 0x03, .MNEMONIC = "MOV", .DEST_NAME = "A",  .SOURCE = DSP_OPERAND_Y    },
+        { .OP_MASK = 0x00, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL,  .SOURCE = DSP_OPERAND_NONE },
+    };
+
+    static const SH_DSP_D_OP_ENTRY CATH_DSP_YY_OP_TABLE[] =
+    {
+        { .OP_MASK = 0x01, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL, .SOURCE = DSP_OPERAND_NONE },
+        { .OP_MASK = 0x01, .OP_PATTERN = 0x01, .MNEMONIC = "MOV", .DEST_NAME = "Y",  .SOURCE = DSP_OPERAND_Y    },
         { .OP_MASK = 0x00, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL,  .SOURCE = DSP_OPERAND_NONE },
     };
 
@@ -284,6 +309,7 @@ extern "C" {
         { .OP_MASK = 0x03, .OP_PATTERN = 0x03, .MNEMONIC = "MOV", .DEST_NAME = NULL,  .SOURCE = DSP_OPERAND_STORE},
         { .OP_MASK = 0x00, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL,  .SOURCE = DSP_OPERAND_NONE },
     };
+
 
     #endif
 
