@@ -36,6 +36,20 @@ STATIC const char* const SCU_DSP_DMA_RAM_NAMES[4] =
     [0x3] = "MC3",
 };
 
+STATIC const char* const SCU_DSP_JMP_COND_NAMES[128] =
+{
+    [0x61] = "Z",
+    [0x41] = "NZ",
+    [0x21] = "S",
+    [0x11] = "NS",
+    [0x31] = "ZS",
+    [0x09] = "NZS",
+    [0x51] = "C",
+    [0x49] = "NC",   
+    [0x09] = "T0",   
+    [0x01] = "NT0",
+};
+
 UNK CATH_DSP_OPERAND_TYPE_NONE(const struct SH_DSP_INSTRUCTION* INSTR, char* BUFFER, UNK SIZE)
 {
     (void)INSTR;
@@ -152,6 +166,17 @@ UNK CATH_DSP_OPERAND_TYPE_MVI_COND(const struct SH_DSP_INSTRUCTION* INSTR, char*
     if(!SCU_DSP_MVI_COND_NAMES[STATUS][0]) return 0;
 
     return snprintf(BUFFER, SIZE, ",%s", SCU_DSP_MVI_COND_NAMES[STATUS][NEGATE]);
+}
+
+UNK CATH_DSP_OPERAND_TYPE_JMP_COND(const struct SH_DSP_INSTRUCTION* INSTR, char* BUFFER, UNK SIZE)
+{
+    if(!SCU_DSP_GET_JMP_COND_ENABLE(INSTR)) return 0;
+
+    U8 COND = (U8)SCU_DSP_GET_JMP_COND(INSTR);
+    const char* NAME = SCU_DSP_JMP_COND_NAMES[COND];
+
+    if(!NAME) return 0;
+    return snprintf(BUFFER, SIZE, "%s", NAME);
 }
 
 UNK CATH_DSP_OPERAND_TYPE_RAM0_ADDR(const struct SH_DSP_INSTRUCTION* INSTR, char* BUFFER, UNK SIZE)
