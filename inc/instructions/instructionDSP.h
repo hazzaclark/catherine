@@ -172,7 +172,7 @@ extern "C" {
     #define         SCU_DSP_GET_CT(VALUE)                       ((VALUE >> 2) & 0x3)
     #define         SCU_DSP_ACC_CMP_MASK(VALUE)                 (((VALUE) & 0x01))
 
-    #define         SCU_DSP_SLOT_COUNT(TABLE)                   (sizeof(TABLE) / sizeof(TABLE[0]))
+    #define         SCU_DSP_SLOT_COUNT                          5
         
     #define         SCU_DSP_D_OP_NOP                            0x00
     #define         SCU_DSP_D_OP_MOV_SIMM                       0x01
@@ -230,8 +230,7 @@ extern "C" {
         || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_ENDI_MASK                          \
         || SCU_DSP_GET_JMP_PREFIX(VALUE) == SCU_DSP_JMP_PREF                    \
         || SCU_DSP_IS_MVI(VALUE)                                                \
-        || SCU_DSP_IS_DMA(VALUE)                                                \
-        || SCU_DSP_GET_ALU(VALUE) == SCU_DSP_MOV_MASK)
+        || SCU_DSP_IS_DMA(VALUE))                                               \
 
     // DEFINER FOR CREATING SLOT ENTIRES DYNAMICALLY
     // AMORTISE THE COSTS INCURRED BY CREATING THE SAME REFERENCES
