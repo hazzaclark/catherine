@@ -83,9 +83,19 @@ extern "C" {
         U32 WORD;
 
         bool IS_PARALLEL;
-        SH_DSP_PARALLEL_SLOT X_SLOT;
-        SH_DSP_PARALLEL_SLOT Y_SLOT;
-        SH_DSP_PARALLEL_SLOT D_SLOT;
+
+        // INCLUSION OF COMBINED SLOTS FOR COMBINATORIAL BUS ENCODINGS
+        // WITH USING YMIR'S DISASSEMBLY FOR VALIDATION, THE EMULATOR
+        // COMBINES X BUS OPERATIONS WITH D1 BUS ACCESS WRTIES
+        //
+        // THE ORDERING OF THE BUS SLOTS GOES LIKE:
+        // ALU | XP | X | YA | Y | D
+        
+        SH_DSP_PARALLEL_SLOT XP_SLOT;                   // X-BUS, P WRITE   (24:23)
+        SH_DSP_PARALLEL_SLOT X_SLOT;                    // X BUS, X LOAD    (25)
+        SH_DSP_PARALLEL_SLOT YA_SLOT;                   // Y BUS, A WRITE   (18:17)
+        SH_DSP_PARALLEL_SLOT Y_SLOT;                    // Y BUS, Y LOAD    (19)
+        SH_DSP_PARALLEL_SLOT D_SLOT;                    // D1-BUS
 
     } SH_DSP_INSTRUCTION;
 
@@ -143,9 +153,13 @@ extern "C" {
     // ADDITIONAL PRE PROCESSOR DIRECTIVES TO HELP WITH ACCESS
     // TO SUB-FIELDS FOR PARALLLISED DECODING
 
+    #define         SCU_DSP_GET_XP_OP(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 23, 2))
+    #define         SCU_DSP_GET_XX_OP(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 25, 1))
     #define         SCU_DSP_GET_X_OP(VALUE)                     (CATH_SHIFT_R((VALUE)->WORD, 23, 3))
     #define         SCU_DSP_GET_X_SRC(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 20, 3))
 
+    #define         SCU_DSP_GET_YA_OP(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 17, 2))
+    #define         SCU_DSP_GET_YY_OP(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 19, 1))
     #define         SCU_DSP_GET_Y_OP(VALUE)                     (CATH_SHIFT_R((VALUE)->WORD, 17, 3))
     #define         SCU_DSP_GET_Y_SRC(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 14, 3))
 
