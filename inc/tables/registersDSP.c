@@ -56,52 +56,52 @@ const char* CATH_DSP_D_DEST_NAMES[16] =
     [0x9]   =   NULL,
     [0xA]   =   "LOP",
     [0xB]   =   "TOP",
-    [0xC]   =   "CT0",
-    [0xD]   =   "CT1",
-    [0xE]   =   "CT2",
-    [0xF]   =   "CT3",
+    [0xC]   =   "M0",
+    [0xD]   =   "M1",
+    [0xE]   =   "M2",
+    [0xF]   =   "M3",
 };
 
 const char* CATH_DSP_X_SRC_NAMES[8] =
 {
-    [0x0]   =   "DATA RAM0",
-    [0x1]   =   "DATA RAM1",
-    [0x2]   =   "DATA RAM2",
-    [0x3]   =   "DATA RAM3",
-    [0x4]   =   "DATA RAM0,CT0++",
-    [0x5]   =   "DATA RAM1,CT1++",
-    [0x6]   =   "DATA RAM2,CT2++",
-    [0x7]   =   "DATA RAM3,CT3++",
+    [0x0]   =   "M0",   
+    [0x1]   =   "M1",
+    [0x2]   =   "M2",   
+    [0x3]   =   "M3",
+    [0x4]   =   "MC0",  
+    [0x5]   =   "MC1",
+    [0x6]   =   "MC2",  
+    [0x7]   =   "MC3",
 };
 
 const char* CATH_DSP_Y_SRC_NAMES[8] =
 {
-    [0x0]   =   "DATA RAM0",
-    [0x1]   =   "DATA RAM1",
-    [0x2]   =   "DATA RAM2",
-    [0x3]   =   "DATA RAM3",
-    [0x4]   =   "DATA RAM0,CT0++",
-    [0x5]   =   "DATA RAM1,CT1++",
-    [0x6]   =   "DATA RAM2,CT2++",
-    [0x7]   =   "DATA RAM3,CT3++",
+    [0x0]   =   "M0",   
+    [0x1]   =   "M1",
+    [0x2]   =   "M2",   
+    [0x3]   =   "M3",
+    [0x4]   =   "MC0",  
+    [0x5]   =   "MC1",
+    [0x6]   =   "MC2",  
+    [0x7]   =   "MC3",
 };
 
 const char* CATH_DSP_D_SRC_NAMES[16] =
 {
-    [0x0]   =   "DATA RAM0",
-    [0x1]   =   "DATA RAM1",
-    [0x2]   =   "DATA RAM2",
-    [0x3]   =   "DATA RAM3",
-    [0x4]   =   "DATA RAM0,CT0++",
-    [0x5]   =   "DATA RAM1,CT1++",
-    [0x6]   =   "DATA RAM2,CT2++",
-    [0x7]   =   "DATA RAM3,CT3++",
+    [0x0]   =   "M0",   
+    [0x1]   =   "M1",
+    [0x2]   =   "M2",   
+    [0x3]   =   "M3",
+    [0x4]   =   "MC0",  
+    [0x5]   =   "MC1",
+    [0x6]   =   "MC2",  
+    [0x7]   =   "MC3",
     [0x8]   =   NULL,
     [0x9]   =   "ALU LOW",
     [0xA]   =   "ALU HIGH",
-    [0xB]   =   NULL,
+    [0xB]   =   NULL,   
     [0xC]   =   NULL,
-    [0xD]   =   NULL,
+    [0xD]   =   NULL,   
     [0xE]   =   NULL,
     [0xF]   =   NULL,
 };
@@ -115,4 +115,16 @@ const char* CATH_DSP_SPECIAL_NAMES[DSP_REG_SPECIAL_MAX] =
     [DSP_REG_TOP]   =   "TOP",
     [DSP_REG_LOP]   =   "LOP",
     [DSP_REG_ALL]   =   "ALL",
+};
+
+const char* CATH_DSP_MVI_DEST_NAMES[32] = 
+{
+    [0x00] = "MC0",  [0x01] = "MC1",
+    [0x02] = "MC2",  [0x03] = "MC3",
+    [0x04] = "RX",   [0x05] = NULL,
+    [0x06] = NULL,   [0x07] = NULL,
+    [0x08] = NULL,   [0x09] = NULL,
+    [0x0A] = "LOP",  [0x0B] = "TOP",
+    [0x0C] = "CT0",  [0x0D] = "CT1",
+    [0x0E] = "CT2",  [0x0F] = "CT3",
 };
