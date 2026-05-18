@@ -17,6 +17,7 @@
 #include "instructions/instructionDSP.h"
 #include "instructions/operandsDSP.h"
 #include "instructions/registerDSP.h"
+#include "enums/instructionsDSP.hpp"
 
 namespace catherine
 {
@@ -24,8 +25,22 @@ namespace catherine
     {
         protected:
             ::SH_DSP_INSTRUCTION INSTR;
+
             CATH_INSTRUCTION_DSP() = default;
             virtual ~CATH_INSTRUCTION_DSP() = default;
+
+        public:
+            // ACCESS THE RAW POINTER FOR THE INSTRUCTION
+            // WE CAN REFERENCE - NOT SURE IF THIS WILL BE NEEDED THOUGH
+            // I AM JUST LEVERAGING THE SAME DESIGN AS BEFORE
+            const SH_DSP_INSTRUCTION* CATH_DSP_GET_RAW_PTR() const;
+
+            // ACCESS THE UNIQUE INSTRUCTION MUCH SIMILAR TO THE 
+            // DESIGN OF INSTRUCTION.HPP
+            inline INSTR_ID_DSP::CATH_INSTR_ID_DSP_CXX CATH_DSP_GET_UNIQUE_ID() const
+            {
+                return static_cast<INSTR_ID_DSP::CATH_INSTR_ID_DSP_CXX>(this->INSTR.INSTR_ID);
+            }
     };
 }
 
