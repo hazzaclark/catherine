@@ -158,7 +158,7 @@ extern "C" {
     #define         SCU_DSP_GET_X_OP(VALUE)                     (CATH_SHIFT_R((VALUE)->WORD, 23, 3))
     #define         SCU_DSP_GET_X_SRC(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 20, 3))
 
-    #define         SCU_DSP_GET_YA_OP(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 17, 2))
+    #define         SCU_DSP_GET_YA_OP(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 16, 2))
     #define         SCU_DSP_GET_YY_OP(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 19, 1))
     #define         SCU_DSP_GET_Y_OP(VALUE)                     (CATH_SHIFT_R((VALUE)->WORD, 17, 3))
     #define         SCU_DSP_GET_Y_SRC(VALUE)                    (CATH_SHIFT_R((VALUE)->WORD, 14, 3))
@@ -293,9 +293,9 @@ extern "C" {
     static const SH_DSP_D_OP_ENTRY CATH_DSP_YA_OP_TABLE[] =
     {
         { .OP_MASK = 0x03, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL, .SOURCE = DSP_OPERAND_NONE },
-        { .OP_MASK = 0x03, .OP_PATTERN = 0x01, .MNEMONIC = "CLR", .DEST_NAME = "A",  .SOURCE = DSP_OPERAND_NONE },
-        { .OP_MASK = 0x03, .OP_PATTERN = 0x02, .MNEMONIC = "MOV", .DEST_NAME = "A",  .SOURCE = DSP_OPERAND_ALU  },
-        { .OP_MASK = 0x03, .OP_PATTERN = 0x03, .MNEMONIC = "MOV", .DEST_NAME = "A",  .SOURCE = DSP_OPERAND_Y    },
+        { .OP_MASK = 0x03, .OP_PATTERN = 0x01, .MNEMONIC = "MOV", .DEST_NAME = "A",  .SOURCE = DSP_OPERAND_ALU  },
+        { .OP_MASK = 0x03, .OP_PATTERN = 0x02, .MNEMONIC = "MOV", .DEST_NAME = "A",  .SOURCE = DSP_OPERAND_Y    },
+        { .OP_MASK = 0x03, .OP_PATTERN = 0x03, .MNEMONIC = "CLR", .DEST_NAME = "A",  .SOURCE = DSP_OPERAND_NONE },
         { .OP_MASK = 0x00, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL,  .SOURCE = DSP_OPERAND_NONE },
     };
 
