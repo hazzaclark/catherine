@@ -85,9 +85,9 @@ static void CATH_DSP_DECODE_BUS_SLOT(SH_DSP_PARALLEL_SLOT* SLOT, const SH_DSP_IN
             {
                 case DSP_OPERAND_X:
                 {
-                    U8 SRC = (U8)((TABLE == CATH_DSP_XX_OP_TABLE || TABLE == CATH_DSP_XP_OP_TABLE)
-                        ? SCU_DSP_GET_X_SRC(INSTR)
-                        : SCU_DSP_GET_Y_SRC(INSTR));
+                    U8 SRC = (U8)(TABLE == CATH_DSP_YY_OP_TABLE
+                        ? SCU_DSP_GET_Y_SRC(INSTR)
+                        : SCU_DSP_GET_X_SRC(INSTR));
                 
                     if(SOURCE) SLOT->SRC_NAME = SOURCE[SRC];
                     break;
@@ -115,8 +115,7 @@ static void CATH_DSP_DECODE_BUS_SLOT(SH_DSP_PARALLEL_SLOT* SLOT, const SH_DSP_IN
 
                 case DSP_OPERAND_MUL:
                 {
-                    U8 SRC = (U8)SCU_DSP_GET_D_SRC(INSTR);
-                    if(SOURCE) SLOT->SRC_NAME = SOURCE[SRC];
+                    SLOT->SRC_NAME = CATH_DSP_SPECIAL_NAMES[DSP_REG_MUL];
                     break;
                 }
             
@@ -228,7 +227,7 @@ void CATH_DSP_INSTRUCTION_PROCESS(SH_DSP_INSTRUCTION* INSTR)
     CATH_DSP_DECODE_BUS_SLOT(&INSTR->YA_SLOT, INSTR,
                         CATH_DSP_YA_OP_TABLE,
                         (U8)SCU_DSP_GET_YA_OP(INSTR),
-                        CATH_DSP_Y_SRC_NAMES, NULL);
+                        CATH_DSP_X_SRC_NAMES, NULL);
 
     CATH_DSP_DECODE_BUS_SLOT(&INSTR->Y_SLOT, INSTR,
                         CATH_DSP_YY_OP_TABLE,
