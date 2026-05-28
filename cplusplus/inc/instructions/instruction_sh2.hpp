@@ -19,7 +19,7 @@
 
 namespace catherine
 {    
-    using CATH_INSTR_DIR = catherine::CATH_INSTR_ID_CXX;
+    using CATH_INSTR_DIR = catherine::INSTR_ID::CATH_INSTR_ID_CXX;
 
 
     class CATH_INSTRUCTION_SH2 : public CATH_INSTRUCTION
@@ -65,21 +65,6 @@ namespace catherine
     inline bool CATH_INSTR_IS_JUMP_ADDRESS(const CATH_INSTRUCTION& INSTR)
     {
         return INSTR.CATH_GET_RAW_PTR()->DESCRIPTOR->IS_JUMP_ADDRESS;
-    }
-
-    inline bool CATH_INSTR_IS_FUNCTION_CALL(const CATH_INSTRUCTION& INSTR)
-    {
-        CATH_INSTR_DIR ID = INSTR.CATH_GET_UNIQUE_ID();
-        return (ID == CATH_INSTR_DIR::CATH_INSTR_ID_BSR     || 
-                ID == CATH_INSTR_DIR::CATH_INSTR_ID_BSRF    ||
-                ID == CATH_INSTR_DIR::CATH_INSTR_ID_JSR);
-    }
-
-    inline bool CATH_INSTR_IS_INDIRECT_JMP(const CATH_INSTRUCTION& INSTR)
-    {
-        CATH_INSTR_DIR ID = INSTR.CATH_GET_UNIQUE_ID();
-        return (ID == CATH_INSTR_DIR::CATH_INSTR_ID_JMP     ||
-                ID == CATH_INSTR_DIR::CATH_INSTR_ID_BRAF); 
     }
 }
 
