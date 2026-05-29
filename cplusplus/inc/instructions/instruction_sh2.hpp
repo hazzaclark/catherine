@@ -73,6 +73,14 @@ namespace catherine
         return (ID == CATH_INSTR_DIR::CATH_INSTR_ID_JMP     ||
                 ID == CATH_INSTR_DIR::CATH_INSTR_ID_BRAF); 
     }
+
+    inline bool CATH_INSTR_IS_FUNCTION_CALL(const CATH_INSTRUCTION& INSTR)
+    {
+        CATH_INSTR_DIR ID = INSTR.CATH_GET_UNIQUE_ID();
+        return (ID == CATH_INSTR_DIR::CATH_INSTR_ID_BSR     || 
+                ID == CATH_INSTR_DIR::CATH_INSTR_ID_BSRF    ||
+                ID == CATH_INSTR_DIR::CATH_INSTR_ID_JSR);
+    }
 }
 
 #endif
