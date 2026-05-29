@@ -66,6 +66,13 @@ namespace catherine
     {
         return INSTR.CATH_GET_RAW_PTR()->DESCRIPTOR->IS_JUMP_ADDRESS;
     }
+
+    inline bool CATH_INSTR_IS_INDIRECT_JMP(const CATH_INSTRUCTION& INSTR)
+    {
+        CATH_INSTR_DIR ID = INSTR.CATH_GET_UNIQUE_ID();
+        return (ID == CATH_INSTR_DIR::CATH_INSTR_ID_JMP     ||
+                ID == CATH_INSTR_DIR::CATH_INSTR_ID_BRAF); 
+    }
 }
 
 #endif
