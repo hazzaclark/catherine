@@ -111,6 +111,8 @@ namespace catherine
             static constexpr U16 CATH_SET_DISP8(U16 WORD, U8 VALUE) { return static_cast<U16>(CATH_PACK_BITS(WORD, VALUE, 0, 8)); }
             static constexpr U16 CATH_SET_DISP12(U16 WORD, U16 VALUE) { return static_cast<U16>(CATH_PACK_BITS(WORD, VALUE, 0, 12)); }
 
+            static constexpr U16 CATH_GET_DISP_SPECIAL(U16 WORD) { return static_cast<U16>(CATH_SHIFT_R(WORD, 4, 4)); }
+
             // MEMBER DECLARATIONS TO ACCESS CONSTEXPR'S
             inline U8 CATH_GET_OPCODE4() const { return CATH_GET_OPCODE4(INSTR.WORD); }
             inline U8 CATH_GET_OPCODE8() const { return CATH_GET_OPCODE8(INSTR.WORD); }
@@ -139,7 +141,7 @@ namespace catherine
     inline const SH_INSTRUCTION* CATH_INSTRUCTION::CATH_GET_RAW_PTR() const 
     {
         return &INSTR;
-    }
+    }     
 }
 
 #endif
