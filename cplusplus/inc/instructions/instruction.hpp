@@ -129,6 +129,7 @@ namespace catherine
             inline U8 CATH_GET_IMASK() const { return CATH_GET_IMASK(INSTR.WORD); }
             inline U8 CATH_GET_GBR_DISP() const { return CATH_GET_GBR_DISP(INSTR.WORD); }
             inline U8 CATH_GET_PC_DISP() const { return CATH_GET_PC_DISP(INSTR.WORD); }
+            inline U16 CATH_GET_DISP_SPECIAL() const { return CATH_GET_DISP_SPECIAL(INSTR.WORD); }
 
             std::string CATH_DISASSEMBLE_OPERANDS() const;
             std::string CATH_DISASSEMBLE_INSTR() const;
