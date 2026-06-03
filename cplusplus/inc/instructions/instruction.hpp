@@ -93,7 +93,7 @@ namespace catherine
 
             static constexpr U8 CATH_GET_DISP4(U16 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 0, 4)); }
             static constexpr U8 CATH_GET_DISP8(U16 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 0, 8)); }
-            static constexpr U16 CATH_GET_DISP12(U16 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 0, 12)); }
+            static constexpr U16 CATH_GET_DISP12(U16 WORD) { return static_cast<U16>(CATH_SHIFT_R(WORD, 0, 12)); }
 
             static constexpr U8 CATH_GET_CACHE(U16 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 0, 8)); }
             static constexpr U8 CATH_GET_MAC(U16 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 1, 1)); }
