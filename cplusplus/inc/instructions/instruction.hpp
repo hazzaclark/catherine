@@ -113,6 +113,12 @@ namespace catherine
 
             static constexpr U16 CATH_GET_DISP_SPECIAL(U16 WORD) { return static_cast<U16>(CATH_SHIFT_R(WORD, 4, 4)); }
 
+            static constexpr int CATH_GET_SHIFT_COUNT(U16 WORD)
+            {
+                return ((WORD & 0x00F0) == 0x0000) ? 2 :
+                       ((WORD & 0x00F0) == 0x0010) ? 8 : 16;
+            }
+
             // MEMBER DECLARATIONS TO ACCESS CONSTEXPR'S
             inline U8 CATH_GET_OPCODE4() const { return CATH_GET_OPCODE4(INSTR.WORD); }
             inline U8 CATH_GET_OPCODE8() const { return CATH_GET_OPCODE8(INSTR.WORD); }
@@ -130,6 +136,7 @@ namespace catherine
             inline U8 CATH_GET_GBR_DISP() const { return CATH_GET_GBR_DISP(INSTR.WORD); }
             inline U8 CATH_GET_PC_DISP() const { return CATH_GET_PC_DISP(INSTR.WORD); }
             inline U16 CATH_GET_DISP_SPECIAL() const { return CATH_GET_DISP_SPECIAL(INSTR.WORD); }
+            inline int CATH_GET_SHIFT_COUNT() const { return CATH_GET_SHIFT_COUNT(INSTR.WORD); }
 
             std::string CATH_DISASSEMBLE_OPERANDS() const;
             std::string CATH_DISASSEMBLE_INSTR() const;
