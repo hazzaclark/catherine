@@ -8,6 +8,8 @@
 // NESTED INCLUDES
 
 #include "enums/instructions.h"
+#include "instructions/instruction.h"
+#include "instructions/instructionDSP.h"
 
 const char* CATH_INSTR_ID_NAMES[] =
 {
@@ -120,9 +122,9 @@ const char* CATH_INSTR_ID_NAMES[] =
     [CATH_INSTR_ID_SHAL] = "SHAL",
     [CATH_INSTR_ID_SHAR] = "SHAR",
     [CATH_INSTR_ID_SHLL] = "SHLL",
-    [CATH_INSTR_ID_SHLLN] = "SHLL2/8/16",
+    [CATH_INSTR_ID_SHLLN] = "SHLL",
     [CATH_INSTR_ID_SHLR] = "SHLR",
-    [CATH_INSTR_ID_SHLRN] = "SHLR2/8/16",
+    [CATH_INSTR_ID_SHLRN] = "SHLR",
     [CATH_INSTR_ID_SLEEP] = "SLEEP",
     [CATH_INSTR_ID_STCSR] = "STC",
     [CATH_INSTR_ID_STCGBR] = "STC",
@@ -150,4 +152,33 @@ const char* CATH_INSTR_ID_NAMES[] =
     [CATH_INSTR_ID_XORI] = "XOR",
     [CATH_INSTR_ID_XORM] = "XOR.B",
     [CATH_INSTR_ID_XTRCT] = "XTRCT"
+};
+
+const char* CATH_DSP_INSTR_ID_NAMES[] =
+{
+    [CATH_INSTR_ID_DSP_INVALID] = "INVALID",
+    [CATH_INSTR_ID_DSP_AD2]     = "AD2",
+    [CATH_INSTR_ID_DSP_ADD]     = "ADD",
+    [CATH_INSTR_ID_DSP_AND]     = "AND",
+    [CATH_INSTR_ID_DSP_BF]      = "BF",
+    [CATH_INSTR_ID_DSP_BTM]     = "BTM",
+    [CATH_INSTR_ID_DSP_CLR]     = "CLR",
+    [CATH_INSTR_ID_DSP_DMA]     = "DMA",
+    [CATH_INSTR_ID_DSP_END]     = "END",
+    [CATH_INSTR_ID_DSP_ENDI]    = "ENDI",
+    [CATH_INSTR_ID_DSP_JMP]     = "JMP",
+    [CATH_INSTR_ID_DSP_LOOP]    = "LOOP",
+    [CATH_INSTR_ID_DSP_LPS]     = "LPS",
+    [CATH_INSTR_ID_DSP_MOV]     = "MOV",
+    [CATH_INSTR_ID_DSP_MUL]     = "MUL",
+    [CATH_INSTR_ID_DSP_MVI]     = "MVI",
+    [CATH_INSTR_ID_DSP_NOP]     = "NOP",
+    [CATH_INSTR_ID_DSP_NOT]     = "NOT",
+    [CATH_INSTR_ID_DSP_OR]      = "OR",
+    [CATH_INSTR_ID_DSP_RL]      = "RL",
+    [CATH_INSTR_ID_DSP_RR]      = "RR",
+    [CATH_INSTR_ID_DSP_SL]      = "SL",
+    [CATH_INSTR_ID_DSP_SR]      = "SR",
+    [CATH_INSTR_ID_DSP_SUB]     = "SUB",
+    [CATH_INSTR_ID_DSP_XOR]     = "XOR",
 };
