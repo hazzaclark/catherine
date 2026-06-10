@@ -271,15 +271,17 @@
 
         [CATH_INSTR_ID_JMP] = {
             .OPERAND_TYPE = {OPERAND_AT_RN, OPERAND_NONE},
-            .IS_BRANCH = false, .IS_JUMP = true, .IS_JUMP_ADDRESS = false,
-            .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = true,
+            .IS_BRANCH = false, .IS_JUMP = true, .IS_INDIRECT_JUMP = true,
+            .IS_JUMP_ADDRESS = false, .IS_TRAP = false, 
+            .IS_HALT = false, .HAS_DELAY_SLOT = true,
             .IS_FLOAT = false, .IS_UNSIGNED = false,
         },
 
         [CATH_INSTR_ID_JSR] = {
             .OPERAND_TYPE = {OPERAND_AT_RN, OPERAND_NONE},
-            .IS_BRANCH = false, .IS_JUMP = true, .IS_JUMP_ADDRESS = false,
-            .IS_TRAP = false, .IS_HALT = false, .HAS_DELAY_SLOT = true,
+            .IS_BRANCH = false, .IS_JUMP = true, .IS_INDIRECT_JUMP = true, 
+            .IS_JUMP_ADDRESS = false, .IS_TRAP = false, 
+            .IS_HALT = false, .HAS_DELAY_SLOT = true,
             .IS_FLOAT = false, .IS_UNSIGNED = false,
         },
 
