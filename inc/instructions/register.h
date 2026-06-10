@@ -19,7 +19,7 @@ extern "C" {
 
     // NESTED INCLUDES  
 
-    #include "util.h"
+    #include "cath_utils.h"
     #include "instructions/instruction.h"
 
     #include "enums/register.h"
