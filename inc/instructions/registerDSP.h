@@ -23,7 +23,7 @@ extern "C" {
 
     #include "enums/registerDSP.h"
     #include "instructions/instructionDSP.h"
-    #include "util.h"
+    #include "cath_utils.h"
 
     // DEFINE THE BASIS FOR THE LABELS ENCOMPASSING ALL REGISTER TYPES
     extern const char* CATH_DSP_MC_NAMES[DSP_REG_MC_MAX][2];
@@ -37,6 +37,7 @@ extern "C" {
     extern const char* CATH_DSP_Y_SRC_NAMES[8];
     extern const char* CATH_DSP_D_DEST_NAMES[16];
     extern const char* CATH_DSP_D_SRC_NAMES[16];
+    extern const char* CATH_DSP_MVI_DEST_NAMES[32];
 
     //////////////////////////////////////////
     //         FUNCTION PROTOTYPES
