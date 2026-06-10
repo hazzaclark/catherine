@@ -12,7 +12,7 @@
 
 #include <common.h>
 
-#include "util.h"
+#include "cath_utils.h"
 #include "instructions/operands.h"
 #include "enums/instructions.h"
 #include "enums/category.h"
@@ -42,6 +42,7 @@ extern "C" {
 
         bool IS_BRANCH;         // LOCAL BRANCH FOR CURRENT SYMBOL
         bool IS_JUMP;           // SAME CONDITION AS BRANCH EXCEPT FOR JUMP ROUTINES
+        bool IS_INDIRECT_JUMP;  // AS THE NAME WOULD IMPLY - FOR REGISTER INDIRECTS
         bool IS_JUMP_ADDRESS;    // DOES THE JUMP ENCOMPASS ANY SORT OF EA?
         bool IS_TRAP;           // DO WE HAVE SUPERVISOR MODE?
         bool IS_HALT;           // HAS THE HALT LINE BEEN ACTIVATED?
