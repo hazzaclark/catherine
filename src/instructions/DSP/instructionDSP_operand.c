@@ -71,32 +71,7 @@ UNK CATH_DSP_INSTRUCTION_DISASM_OPERAND(const SH_DSP_INSTRUCTION* INSTR, char* B
     // HELPS WITH DETERMINING THE CONDITIONS OF EACH RESPECTIVE "NTH_BUS"
 
     const SH_DSP_DESCRIPTOR* DSP_DESC = INSTR->DESCRIPTOR;
-    
-    // CHECK FOR SPECICAL CASES BEFORE THE DEFINITION OF 
-    // BUS LOCATION - HELPS WITH UNDERSTANDING THE LENGTH
-    // OF THE OPCODE 
-
-    if(DSP_DESC->IS_END)
-    {
-        if(BUFFER)
-        {
-            snprintf(BUFFER, 64, "ENDI");
-            return sizeof("ENDI") - 1;
-        }
-
-        return sizeof("ENDI") - 1;
-    }
-
-    if(DSP_DESC->IS_NOP)
-    {
-        if(BUFFER)
-        {
-            snprintf(BUFFER, 64, "NOP");
-            return sizeof("NOP") - 1;
-        }
-
-        return sizeof("NOP") - 1;
-    }
+    assert(!DSP_DESC->IS_NOP && !DSP_DESC->IS_END);
 
     // ENCODING SCHEME FOR SINGLE OPERAND PATHS SUCH AS DMA
     // WHEREBY THE ENCOMPASSING OPERANDS ONLY TAKE UP ONE SLOT 
@@ -177,6 +152,7 @@ UNK CATH_DSP_INSTRUCTION_DISASM_OPERAND(const SH_DSP_INSTRUCTION* INSTR, char* B
             UNK WRITTEN = CB(INSTR, BUFFER + TOTAL_SIZE, 64 - TOTAL_SIZE);
             TOTAL_SIZE += WRITTEN;
         }
+        
         else
         {
             TOTAL_SIZE += CB(INSTR, NULL, 0);
