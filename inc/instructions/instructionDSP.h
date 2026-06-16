@@ -198,7 +198,7 @@ extern "C" {
     // 
     // WITH DUE REGARD FOR THE SPECIFIC MODES AND CONDITIONS ENCOMPASSING SUCH
 
-    #define         SCU_DSP_GET_DMA_CHANNEL(VALUE)              (CATH_SHIFT_R((VALUE)->WORD, 12, 1))
+    #define         SCU_DSP_GET_DMA_CHANNEL(VALUE)              (CATH_SHIFT_R((VALUE)->WORD, 13, 1))
     #define         SCU_DSP_GET_DMA_RAM(VALUE)                  (CATH_SHIFT_R((VALUE)->WORD, 8, 2))
     #define         SCU_DSP_GET_DMA_ADD_MODE(VALUE)             (CATH_SHIFT_R((VALUE)->WORD, 15, 3))
     #define         SCU_DSP_GET_DMA_COUNT(VALUE)                (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
@@ -207,9 +207,9 @@ extern "C" {
             ((CATH_SHIFT_R((VALUE)->WORD, 30, 2)) == 0x2)
 
     #define         SCU_DSP_IS_DMA(VALUE)                                   \
-            (((VALUE)->WORD & 0xF0007C00) == 0xC0000000                     \
-            && ((VALUE)->WORD & 0x00010000))
-
+            (((VALUE)->WORD & 0xC0000000) == 0xC0000000                     \
+            && (((VALUE)->WORD & 0x0010000) != 0))                          \
+            
     #define         SCU_DSP_MVI_COND_MAX                        0x09
     #define         SCU_DSP_JMP_PREF                            0x1A
 
@@ -308,10 +308,10 @@ extern "C" {
 
     static const SH_DSP_D_OP_ENTRY CATH_DSP_D_OP_TABLE[] =
     {
-        { .OP_MASK = 0x03, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL,  .SOURCE = DSP_OPERAND_NONE },
-        { .OP_MASK = 0x03, .OP_PATTERN = 0x01, .MNEMONIC = "MOV", .DEST_NAME = NULL,  .SOURCE = DSP_OPERAND_IMM  },
-        { .OP_MASK = 0x03, .OP_PATTERN = 0x03, .MNEMONIC = "MOV", .DEST_NAME = NULL,  .SOURCE = DSP_OPERAND_STORE},
-        { .OP_MASK = 0x00, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL,  .SOURCE = DSP_OPERAND_NONE },
+        { .OP_MASK = 0x03, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL,  .SOURCE = DSP_OPERAND_NONE    },
+        { .OP_MASK = 0x03, .OP_PATTERN = 0x01, .MNEMONIC = "MOV", .DEST_NAME = NULL,  .SOURCE = DSP_OPERAND_IMM     },
+        { .OP_MASK = 0x03, .OP_PATTERN = 0x03, .MNEMONIC = "MOV", .DEST_NAME = NULL,  .SOURCE = DSP_OPERAND_STORE   },
+        { .OP_MASK = 0x00, .OP_PATTERN = 0x00, .MNEMONIC = NULL,  .DEST_NAME = NULL,  .SOURCE = DSP_OPERAND_NONE    },
     };
 
 
