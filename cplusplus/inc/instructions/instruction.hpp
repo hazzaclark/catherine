@@ -13,7 +13,7 @@
 // NESTED INCLUDES
 
 #include "common.h"
-#include "util.h"
+#include "cath_utils.h"
 #include "instructions/instruction.h"
 #include "instructions/operands.h"
 #include "enums/category.h"
@@ -140,7 +140,6 @@ namespace catherine
 
             std::string CATH_DISASSEMBLE_OPERANDS() const;
             std::string CATH_DISASSEMBLE_INSTR() const;
-            std::string CATH_DISASSEMBLE_DATA() const;
             std::string CATH_DISASSEMBLE() const;
     };
 
@@ -153,4 +152,3 @@ namespace catherine
 }
 
 #endif
-
