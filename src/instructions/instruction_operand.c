@@ -46,22 +46,54 @@ UNK CATH_INSTRUCTION_DISASM_OPERAND(const SH_INSTRUCTION* INSTR, char* DEST, UNK
 
        if(INDEX > 0 && TOTAL_SIZE > 0)
        {
-            if(TOTAL_SIZE + 2 >= BUFFER_SIZE) break;
+            // 19/06/26
+            // FREAKY FIX DESIGNED SUCH THAT THE BUFFER ONLY
+            // EVER STOPS TRUNCATING ONCE THE TOTAL SIZE 
+            // HAS EVER EXCEEDED IN CONJUNCTION
+            //
+            // I AM NEVER TOUCHING THIS AGAIN!!
+            if(DEST != NULL && TOTAL_SIZE + 2 >= BUFFER_SIZE) break;
             
-            DEST[TOTAL_SIZE++] = ',';
-            DEST[TOTAL_SIZE++] = ' ';
+            if(DEST != NULL)
+            {
+                DEST[TOTAL_SIZE] = ',';
+                DEST[TOTAL_SIZE + 1] = ' ';
+            }
+
+            TOTAL_SIZE += 2;
        }
 
        // ACCOUNT FOR ANY AND ALL REMAINING SPACE WITHIN THE BUFFER ITSELF
        // THIS WILL HELP WHEN REFERENCING THE OPERAND SIZE
-       UNK REMAINING_SIZE = BUFFER_SIZE - TOTAL_SIZE - 1;
+       //
+       // 19/06/26
+       // ORIGINALLY, THE BUFFER WOULD UNDERFLOLW AS A RESULT
+       // OF WHEN BUFFER SIZE ENDS UP B BEING ZEROED
+       // 
+       // THE FIX BEING TO ONLY SUBTRACT WHEN THERE IS ROOM LEFT 
+       // IN THE BUFFER FOR AT LEAST ONE BYTE PLUS THE NULL TERM
+       UNK REMAINING_SIZE = (BUFFER_SIZE > TOTAL_SIZE + 1) ? (BUFFER_SIZE - TOTAL_SIZE - 1) : 0;
 
        // AUTOMATICALLY ASSIGN THE SIZE BASED ON WHAT IS BEING DISASSEMBLED
+       //
+       // 19/06/26
+       // FIXED TO PROPERLY GUARD AGINST THE NULL TERM
+       // TO PREVENT THE AFOREMENTIONED UNDERFLOW
        UNK OPERAND_SIZE = CATH_OPERAND_TYPE_DISASM(
                             INSTR->DESCRIPTOR->OPERAND_TYPE[INDEX], 
                             INSTR, 
-                            DEST + TOTAL_SIZE,
+                            (DEST != NULL) ? (DEST + TOTAL_SIZE) : NULL,
                             REMAINING_SIZE);
+
+        // WITH ALL OF THESE ADJUSTMENTS, WE CAN ONLY EVER ASSUME
+        // THAT THE REMAINING SIZE BYTES CLAMP PROPERLY SUCH
+        // THAT TOTAL SIZE NEVER OUTGROWS THE BUDGET OF THE BUFFER
+        // THAT WAS GIVEN DYNAMICALLY PER OPERAND
+
+        if(DEST != NULL && OPERAND_SIZE > REMAINING_SIZE)
+        {
+            OPERAND_SIZE = REMAINING_SIZE;
+        }
 
        TOTAL_SIZE += OPERAND_SIZE;
     }
