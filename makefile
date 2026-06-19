@@ -57,9 +57,9 @@ TEST_BINS       := $(patsubst $(TESTS_DIR)/%.c,build/tests/%,$(TESTS_C))
 
 .PHONY: all clean dirs cxx tests
 
-all: dirs build/libcath.a build/libcath.so build/catherine
+all: dirs build/libcath.a build/libcath.so
 
-cxx: dirs build/libcath.a build/libcath.so build/cathcxx
+cxx: dirs build/libcath.a build/libcath.so
 
 dirs:
 	@mkdir -p build/instructions
@@ -97,12 +97,6 @@ build/libcath.so: build/libcath.a
 
 build/libcathcxx.a: $(OXX_FILES)
 	$(AR) rcs $@ $^
-
-build/catherine: $(O_FILES)
-	$(CC) $^ $(LDFLAGS) -o $@
-
-build/cathcxx: $(OXX_FILES) build/libcath.a
-	$(CXX) $(OXX_FILES) $(LDXXFLAGS) -o $@
 
 build/tests/%: $(TESTS_DIR)/%.c build/libcath.a
 	$(CC) $(CSTD) $(IINC) $(WARNINGS) $(CFLAGS) $< -Lbuild -lcath -o $@
