@@ -13,7 +13,7 @@
 // NESTED INCLUDES
 
 #include "common.h"
-#include "util.h"
+#include "cath_utils.h"
 #include "instructions/instructionDSP.h"
 #include "instructions/operandsDSP.h"
 #include "instructions/registerDSP.h"
@@ -41,6 +41,21 @@ namespace catherine
             {
                 return static_cast<INSTR_ID_DSP::CATH_INSTR_ID_DSP_CXX>(this->INSTR.INSTR_ID);
             }
+
+            // ACCESS ALL OF THE CONTENTS OF THE RESPECTIVE FIELD
+            // LEVERAGE CONSTEXPR FOR COMPILE TIME EVALUATION
+
+            static constexpr U8 CATH_DSP_GET_OPERAND(U32 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 26, 6)); }
+            static constexpr U8 CATH_DSP_GET_END(U32 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 15, 1)); }         
+    };
+
+    // ABSTRACTED METHOD ALL FOR THE PURPOSE OF INNATE INSTRUCTION 
+    // ACCESS BASED ON THE CHARACTERISTICS OF THE ABOVE CLASS
+    
+    class CATH_INSTRUCTION_SCU_DSP : public CATH_INSTRUCTION_DSP
+    {
+        CATH_INSTRUCTION_SCU_DSP(U32 WORD, U32 ADDRESS);
+        virtual ~CATH_INSTRUCTION_SCU_DSP() = default;
     };
 }
 
