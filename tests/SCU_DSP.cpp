@@ -3,15 +3,19 @@
 
 // NESTED INCLUDES
 
-#include "instructions/instructionDSP.h"
+#include "common.h"
+#include "instructions/instructionDSP.hpp"
 
 // SYSTEM INCLUDES
 
-#include <assert.h>
+#include <cstdio>
+#include <vector>
+
+using namespace catherine;
 
 int main(void)
 {
-    volatile U32 WORD[] = 
+    const std::vector<U32> WORD =
     {
         0x00001C02,
         0x00003600,
@@ -269,26 +273,17 @@ int main(void)
         0xF0000000,
         0xF0000000,
         0xF0000000,
-    };  
+    };
 
-    SH_DSP_INSTRUCTION DSP_INSTR = {0};
-    U32 DSP_ADDRESS = 0x00000000;
-    UNK DSP_WORD_COUNT = sizeof(WORD) / sizeof(WORD[0]);
-
-    for (UNK INDEX = 0; INDEX < DSP_WORD_COUNT; INDEX++)
+    U32 ADDRESS = 0x00000000;
+    for(const U32& MNEMONIC : WORD)
     {
-        CATH_DSP_INSTRUCTION_INIT(&DSP_INSTR, WORD[INDEX], DSP_ADDRESS);
-        CATH_DSP_INSTRUCTION_PROCESS(&DSP_INSTR);
+        CATH_INSTRUCTION_SCU_DSP DSP_INSTR(MNEMONIC, ADDRESS);
 
-        UNK BUFFER_SIZE = CATH_DSP_INSTRUCTION_GET_SIZE(&DSP_INSTR);
-        char* BUFFER = malloc(BUFFER_SIZE + 1);
-        assert(BUFFER != NULL);
+        std::string DISASM = DSP_INSTR.CATH_DSP_DISASSEMBLE_INSTR();
+        printf("%X:  0x%08X  %s\n", ADDRESS, MNEMONIC, DISASM.c_str());
 
-        CATH_DSP_INSTRUCTION_DISASM(&DSP_INSTR, BUFFER, BUFFER_SIZE + 1);
-        printf("%X:  0x%08X  %s\n", DSP_ADDRESS, WORD[INDEX], BUFFER);
-
-        free(BUFFER);
-        DSP_ADDRESS++;
+        ADDRESS++;
     }
 
     return 0;

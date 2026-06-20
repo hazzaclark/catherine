@@ -13,18 +13,9 @@
 
 int main(void)
 {
-    printf("HARRY CLARK - HITACHI SUPERH INSTRUCTION DECODER\n");
-
     volatile U32 DSP_WORD[] =
     {
-        0x00000000,
-        0x82100040,
-        0x10000000,
-        0x00001F03,
-        0x00003005,
-        0xC000B300,
-        0x00823500,
-        0x83100000,
+        0x1B6D1E06,
     };
 
     SH_DSP_INSTRUCTION DSP_INSTR = {0};
@@ -40,7 +31,7 @@ int main(void)
         char* BUFFER = malloc(BUFFER_SIZE + 1);
         assert(BUFFER != NULL);
 
-        CATH_DSP_INSTRUCTION_DISASM(&DSP_INSTR, BUFFER);
+        CATH_DSP_INSTRUCTION_DISASM(&DSP_INSTR, BUFFER, BUFFER_SIZE + 1);
         printf("0x%08X:  0x%08X  %s\n", DSP_ADDRESS, DSP_WORD[INDEX], BUFFER);
 
         free(BUFFER);
