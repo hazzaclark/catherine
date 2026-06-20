@@ -48,6 +48,7 @@ namespace catherine
             static constexpr U8 CATH_DSP_GET_OPERAND(U32 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 26, 6)); }
             static constexpr U8 CATH_DSP_GET_END(U32 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 15, 1)); }
             
+        protected:
             std::string CATH_DSP_DISASSEMBLE_OPERANDS() const;
             std::string CATH_DSP_DISASSEMBLE_INSTR() const;
             std::string CATH_DSP_DISASSEMBLE_DATA() const;
