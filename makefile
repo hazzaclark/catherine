@@ -51,14 +51,15 @@ OXX_FILES       := $(patsubst $(SRCX_DIR)/%.cpp,build/cxx/%.o,$(CXX_FILES))
 TESTS_DIR		:= 	tests
 TESTS_C			:= 	$(wildcard $(TESTS_DIR)/*.c)
 TESTS_CXX       := 	$(wildcard $(TESTS_DIR)/*.cpp)
-TEST_BINS       := 	$(patsubst $(TESTS_DIR)/%.c,build/tests/%,$(TESTS_C)) \
-					$(patsubst $(TESTS_DIR)/%.cpp,build/tests/%,$(TESTS_CXX))
+TEST_BINS_C     := 	$(patsubst $(TESTS_DIR)/%.c,build/tests/c_%,$(TESTS_C))
+TEST_BINS_CXX	:= 	$(patsubst $(TESTS_DIR)/%.cpp,build/tests/cxx_%,$(TESTS_CXX))
+TEST_BINS		:=	$(TEST_BINS_C) $(TEST_BINS_CXX)
 
 #####################################
 ##              TARGETS
 #####################################
 
-.PHONY: all clean dirs cxx tests
+.PHONY: all clean dirs cxx tests tests-c test-cxx
 
 all: dirs build/libcath.a build/libcath.so
 cxx: dirs build/libcathcxx.a build/libcathcxx.so
@@ -70,6 +71,8 @@ dirs:
 	@mkdir -p build/tests
 
 tests: dirs build/libcath.a build/libcathcxx.a $(TEST_BINS)
+tests-c: dirs build/libcath.a $(TEST_BINS_C)
+tests-cxx: dirs build/libcath.a build/libcathcxx.a $(TEST_BINS_CXX)
 
 build/%.o: $(SRC_DIR)/%.c $(H_FILES) $(INC_FILES)
 	$(CC) -c $(CSTD) $(IINC) $(WARNINGS) $(CFLAGS) -o $@ $<
@@ -103,10 +106,10 @@ build/libcathcxx.a: $(OXX_FILES)
 build/libcathcxx.so: build/libcathcxx.a build/libcath.a
 	$(CXX) -shared -o $@ -Wl,--whole-archive $< -Wl,--no-whole-archive -Lbuild -lcath
 
-build/tests/%: $(TESTS_DIR)/%.c build/libcath.a
+build/tests/c_%: $(TESTS_DIR)/%.c build/libcath.a
 	$(CC) $(CSTD) $(IINC) $(WARNINGS) $(CFLAGS) $< -Lbuild -lcath -o $@
 
-build/tests/%: $(TESTS_DIR)/%.cpp build/libcath.a build/libcathcxx.a
+build/tests/cxx_%: $(TESTS_DIR)/%.cpp build/libcath.a build/libcathcxx.a
 	$(CXX) $(CXX_STD) $(IINC_XX) $(WARNINGS) $(CXXFLAGS) $< -Lbuild -lcathcxx -lcath -o $@
 
 clean:
