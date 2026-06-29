@@ -21,6 +21,9 @@ typedef enum CATH_DSP_MC_REG
 typedef enum CATH_DSP_RA_REG
 {
     DSP_REG_RA0 = 0,
+    DSP_REG_RA1,
+    DSP_REG_RA2,
+    DSP_REG_RA3,
     DSP_REG_RA_MAX
      
 } CATH_DSP_RA_REG;
@@ -34,5 +37,19 @@ typedef enum CATH_DSP_CT_REG
     DSP_REG_CT_MAX
 
 } CATH_DSP_CT_REG;
+
+typedef enum CATH_DSP_SPECIAL_REG
+{
+    DSP_REG_ACC = 0,
+    DSP_REG_ALU,
+    DSP_REG_MUL,
+    DSP_REG_PC,
+    DSP_REG_TOP,
+    DSP_REG_LOP,
+    DSP_REG_DMA,
+    DSP_REG_ALL,
+    DSP_REG_SPECIAL_MAX 
+    
+} CATH_DSP_SPECIAL_REG;
 
 #endif
