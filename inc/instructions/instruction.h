@@ -42,6 +42,7 @@ extern "C" {
 
         bool IS_BRANCH;         // LOCAL BRANCH FOR CURRENT SYMBOL
         bool IS_JUMP;           // SAME CONDITION AS BRANCH EXCEPT FOR JUMP ROUTINES
+        bool IS_INDIRECT_JUMP;  // AS THE NAME WOULD IMPLY - FOR REGISTER INDIRECTS
         bool IS_JUMP_ADDRESS;    // DOES THE JUMP ENCOMPASS ANY SORT OF EA?
         bool IS_TRAP;           // DO WE HAVE SUPERVISOR MODE?
         bool IS_HALT;           // HAS THE HALT LINE BEEN ACTIVATED?
@@ -110,6 +111,10 @@ extern "C" {
     #define         SH2_INSTR_GET_GBR_DISP(VALUE)               (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
     #define         SH2_INSTR_GET_PC_DISP(VALUE)                (CATH_SHIFT_R((VALUE)->WORD, 0, 8))
 
+    #define         SH2_INSTR_GET_SHIFT_COUNT(VALUE)                \
+                        (((VALUE)->WORD & 0x00F0) == 0x0000 ? 2 :   \
+                        ((VALUE)->WORD & 0x00F0) == 0x0010 ? 8 : 16)
+
     #define         SH2_BYTE_ALIGN(PC)                          ((PC) + 4)
     #define         SH2_WORD_ALIGN(PC)                          (((PC) + 4) & ~1)
     #define         SH2_LONG_ALIGN(PC)                          (((PC) + 4) & ~3)
@@ -134,16 +139,16 @@ extern "C" {
         return INSTR->PC + 4 + (DISP); 
     }
 
-    UNK CATH_INSTRUCTION_DISASM_DATA(const SH_INSTRUCTION*, char*, UNK);
+    UNK CATH_INSTRUCTION_DISASM_DATA(const SH_INSTRUCTION*, char*);
     UNK CATH_INSTRUCTION_GET_SIZE(const SH_INSTRUCTION*);
 
     extern const SH_DESCRIPTOR INSTR_DESCRIPTORS[];
     extern const char* CATH_INSTR_ID_NAMES[];
     extern const char* CATH_GET_OPCODE_NAME(CATH_INSTR_ID INSTR_ID);
 
-    UNK CATH_INSTRUCTION_DISASM_INSTR(const SH_INSTRUCTION*, char*, UNK);
-    UNK CATH_INSTRUCTION_DISASM_OPERAND(const SH_INSTRUCTION*, char*, UNK);
-    UNK CATH_INSTRUCTION_DISASM(const SH_INSTRUCTION*, char*, UNK);
+    UNK CATH_INSTRUCTION_DISASM_INSTR(const SH_INSTRUCTION*, char*);
+    UNK CATH_INSTRUCTION_DISASM_OPERAND(const SH_INSTRUCTION*, char*);
+    UNK CATH_INSTRUCTION_DISASM(const SH_INSTRUCTION*, char*);
 
 #ifdef __cplusplus
 }
