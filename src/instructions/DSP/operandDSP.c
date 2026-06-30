@@ -16,7 +16,7 @@
 #include "instructions/registerDSP.h"
 #include "tables/tables.h"
 
-// STATIC CONDITION NAME TABLES FOR ALL OF THE ENCOMPASSING
+// STATIC CONDITION NAME TABLES FOR ALL OF THE ENCOMPASSING 
 // AREAS BY WHICH THEY ARE NEEDED FOR THE PURPOSES OF EVAUATING
 // CONDITIONS AND OPERANDS ACCESS
 STATIC const char* const SCU_DSP_MVI_COND_NAMES[][2] =
@@ -28,7 +28,7 @@ STATIC const char* const SCU_DSP_MVI_COND_NAMES[][2] =
     [0x08] = { "T0",  "NT0" },
 };
 
-STATIC const char* const SCU_DSP_DMA_RAM_NAMES[4] =
+STATIC const char* const SCU_DSP_DMA_RAM_NAMES[4] = 
 {
     [0x0] = "MC0",
     [0x1] = "MC1",
@@ -91,9 +91,9 @@ UNK CATH_DSP_OPERAND_TYPE_X(const struct SH_DSP_INSTRUCTION* INSTR, char* BUFFER
     U8 RAM = SCU_DSP_GET_RAM_BANK(SRC);
     U8 CT = SCU_DSP_GET_CT(SRC);
 
-    return snprintf(BUFFER, SIZE, "@%s+%s",
-                    CATH_REGISTER_GET_RAM_ADDR_NAME(RAM),
-                    CATH_REGISTER_GET_CT_NAME(CT));
+    return snprintf(BUFFER, SIZE, "@%s+%s", 
+        CATH_REGISTER_GET_RAM_ADDR_NAME(RAM), 
+        CATH_REGISTER_GET_CT_NAME(CT));
 }
 
 UNK CATH_DSP_OPERAND_TYPE_Y(const struct SH_DSP_INSTRUCTION* INSTR, char* BUFFER, UNK SIZE)
@@ -102,9 +102,9 @@ UNK CATH_DSP_OPERAND_TYPE_Y(const struct SH_DSP_INSTRUCTION* INSTR, char* BUFFER
     U8 RAM = SCU_DSP_GET_RAM_BANK(SRC);
     U8 CT = SCU_DSP_GET_CT(SRC);
 
-    return snprintf(BUFFER, SIZE, "@%s+%s",
-                    CATH_REGISTER_GET_RAM_ADDR_NAME(RAM),
-                    CATH_REGISTER_GET_CT_NAME(CT));
+    return snprintf(BUFFER, SIZE, "@%s+%s", 
+        CATH_REGISTER_GET_RAM_ADDR_NAME(RAM), 
+        CATH_REGISTER_GET_CT_NAME(CT));
 }
 
 UNK CATH_DSP_OPERAND_TYPE_P(const struct SH_DSP_INSTRUCTION* INSTR, char* BUFFER, UNK SIZE)
@@ -113,9 +113,9 @@ UNK CATH_DSP_OPERAND_TYPE_P(const struct SH_DSP_INSTRUCTION* INSTR, char* BUFFER
     U8 RAM = SCU_DSP_GET_RAM_BANK(SRC);
     U8 CT = SCU_DSP_GET_CT(SRC);
 
-    return snprintf(BUFFER, SIZE, "@%s+%s",
-                    CATH_REGISTER_GET_RAM_ADDR_NAME(RAM),
-                    CATH_REGISTER_GET_CT_NAME(CT));
+    return snprintf(BUFFER, SIZE, "@%s+%s", 
+        CATH_REGISTER_GET_RAM_ADDR_NAME(RAM), 
+        CATH_REGISTER_GET_CT_NAME(CT));
 }
 
 UNK CATH_DSP_OPERAND_TYPE_MUL(const struct SH_DSP_INSTRUCTION* INSTR, char* BUFFER, UNK SIZE)
@@ -149,8 +149,8 @@ UNK CATH_DSP_OPERAND_TYPE_MVI_DEST(const struct SH_DSP_INSTRUCTION* INSTR, char*
 UNK CATH_DSP_OPERAND_TYPE_MVI_IMM(const struct SH_DSP_INSTRUCTION* INSTR, char* BUFFER, UNK SIZE)
 {
     U32 IMM = SCU_DSP_GET_MVI_COND_BIT(INSTR)
-    ? SCU_DSP_GET_MVI_IMM_COND(INSTR)
-    : SCU_DSP_GET_MVI_IMM_UNCOND(INSTR);
+        ? SCU_DSP_GET_MVI_IMM_COND(INSTR)
+        : SCU_DSP_GET_MVI_IMM_UNCOND(INSTR);
 
     return snprintf(BUFFER, SIZE, "#0x%X", IMM);
 }
@@ -264,7 +264,7 @@ UNK CATH_DSP_OPERAND_TYPE_RY(const struct SH_DSP_INSTRUCTION* INSTR, char* BUFFE
     (void)INSTR;
     return snprintf(BUFFER, SIZE, "RY");
 }
-
+    
 UNK CATH_DSP_OPERAND_TYPE_ALL(const struct SH_DSP_INSTRUCTION* INSTR, char* BUFFER, UNK SIZE)
 {
     (void)INSTR;
@@ -343,6 +343,6 @@ UNK CATH_DSP_OPERAND_TYPE_DMA(const struct SH_DSP_INSTRUCTION* INSTR, char* BUFF
 
     if(!CHANNEL)
         return snprintf(BUFFER, SIZE, "%s, %s, #0x%X", CHANNEL_NAME, RAM_NAME, COUNT);
-
+    
     return snprintf(BUFFER, SIZE, "%s, %s, #0x%X", RAM_NAME, CHANNEL_NAME, COUNT);
 }
