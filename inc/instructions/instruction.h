@@ -119,7 +119,7 @@ extern "C" {
     #define         SH2_WORD_ALIGN(PC)                          (((PC) + 4) & ~1)
     #define         SH2_LONG_ALIGN(PC)                          (((PC) + 4) & ~3)
 
-    #define         SH2_INSTR_VALID(VALUE)                      ((VALUE)->INSTR_ID == CATH_INSTR_ID_INVALID || (VALUE)->DESCRIPTOR == NULL)
+    #define         SH2_INSTR_VALID(VALUE)                      ((VALUE)->INSTR_ID != CATH_INSTR_ID_INVALID && (VALUE)->DESCRIPTOR == NULL)
 
     /////////////////////////////////////////////////////////
     //                FUNCTION PROTOTYPES
@@ -140,7 +140,7 @@ extern "C" {
     }
 
     UNK CATH_INSTRUCTION_DISASM_DATA(const SH_INSTRUCTION*, char*);
-    UNK CATH_INSTRUCTION_GET_SIZE(const SH_INSTRUCTION*);
+    UNK CATH_INSTRUCTION_GET_SIZE(const SH_INSTRUCTION*, char*);
 
     extern const SH_DESCRIPTOR INSTR_DESCRIPTORS[];
     extern const char* CATH_INSTR_ID_NAMES[];
