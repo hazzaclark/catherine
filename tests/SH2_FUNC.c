@@ -18,7 +18,7 @@ int main(void)
     
     volatile U16 WORD[] = 
     {
-        0xC6BB,
+        0xC980,
     };
 
     SH_INSTRUCTION INSTR = {0};
@@ -31,11 +31,11 @@ int main(void)
         CATH_INSTRUCTION_PROCESS(&INSTR);
 
         UNK BUFFER_SIZE = CATH_INSTRUCTION_GET_SIZE(&INSTR);
-        char* BUFFER = malloc(BUFFER_SIZE + 1);
+        char* BUFFER = (char*)malloc(BUFFER_SIZE + 1);
         assert(BUFFER != NULL);
 
-        CATH_INSTRUCTION_DISASM(&INSTR, BUFFER, BUFFER_SIZE + 1);
-        printf("0x%08X:  %04X  %s\n", ADDRESS, WORD[INDEX], BUFFER);
+        CATH_INSTRUCTION_DISASM(&INSTR, BUFFER);
+        printf("0x%08X:  %s\n", ADDRESS, BUFFER);
 
         free(BUFFER);
         ADDRESS += 2;
