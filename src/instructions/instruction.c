@@ -150,7 +150,7 @@ UNK CATH_INSTRUCTION_GET_SIZE(const SH_INSTRUCTION* INSTR)
 
     if(SH2_INSTR_VALID(INSTR))
     {
-        TOTAL_SIZE += snprintf(NULL, 0, " ", CATH_GET_RAW(INSTR));
+        TOTAL_SIZE += snprintf(NULL, 0, "0x%04x", CATH_GET_RAW(INSTR));
     }
 
     TOTAL_SIZE += strlen(CATH_GET_OPCODE_NAME(INSTR->INSTR_ID));
