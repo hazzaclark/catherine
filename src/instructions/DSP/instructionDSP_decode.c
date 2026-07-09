@@ -49,6 +49,13 @@ const UNK CATH_DSP_ENTRY_TABLE_SIZE = sizeof(CATH_DSP_ENTRY_TABLE) / sizeof(CATH
 // FROM ACCESSING OF THE 8 BIT AND 16 BIT FIELD - THE LATTER OF WHICH 
 // GOES DIRECTLY INTO THE BUFFER, WITH THE FORMER BEING A DERIVATIVE OF 
 // THE SOURCE NAME FOR THE TABLE ENTRY 
+//
+// 09/07/26
+// CHANGES HAVE BEEN MADE SUCH THAT THEY ACCOUNT FOR THE PROPER SIZE
+// OF A GIVEN OPERAND SLOT
+// 
+// THE "SRC" OF THE OPERAND WILL VARY BASED ON BUS NAME TABLES
+// SO, WE NEED TO MAKE THAT IDENTIFICATION EXPLICIT RATHER THAN ASSUMED
 static void CATH_DSP_DECODE_BUS_SLOT(SH_DSP_PARALLEL_SLOT* SLOT, const SH_DSP_INSTRUCTION* INSTR,
                                     const SH_DSP_D_OP_ENTRY* TABLE, U8 OPERATION,
                                     const char* const* SOURCE, const char* const* DEST)
@@ -91,6 +98,8 @@ static void CATH_DSP_DECODE_BUS_SLOT(SH_DSP_PARALLEL_SLOT* SLOT, const SH_DSP_IN
                     U8 SRC = (U8)(TABLE == CATH_DSP_YY_OP_TABLE
                         ? SCU_DSP_GET_Y_SRC(INSTR)
                         : SCU_DSP_GET_X_SRC(INSTR));
+
+                    assert(SRC < 8);
                 
                     if(SOURCE) SLOT->SRC_NAME = SOURCE[SRC];
                     break;
@@ -99,6 +108,8 @@ static void CATH_DSP_DECODE_BUS_SLOT(SH_DSP_PARALLEL_SLOT* SLOT, const SH_DSP_IN
                 case DSP_OPERAND_Y:
                 {
                     U8 SRC = (U8)SCU_DSP_GET_Y_SRC(INSTR);
+                    assert(SRC < 8);
+
                     if(SOURCE) SLOT->SRC_NAME = SOURCE[SRC];
                     break;
                 }
@@ -106,6 +117,8 @@ static void CATH_DSP_DECODE_BUS_SLOT(SH_DSP_PARALLEL_SLOT* SLOT, const SH_DSP_IN
                 case DSP_OPERAND_STORE:
                 {
                     U8 SRC = (U8)SCU_DSP_GET_D_SRC(INSTR);
+                    assert(SRC < 16);
+
                     if(SOURCE) SLOT->SRC_NAME = SOURCE[SRC];
                     break;
                 }
@@ -132,6 +145,8 @@ static void CATH_DSP_DECODE_BUS_SLOT(SH_DSP_PARALLEL_SLOT* SLOT, const SH_DSP_IN
             if(!PARALLEL->DEST_NAME && DEST)
             {
                 U8 DEST_LOC = (U8)SCU_DSP_GET_D_DEST(INSTR);
+                assert(DEST_LOC < 16);
+
                 SLOT->DEST_NAME = DEST[DEST_LOC];
 
                 if(!SLOT->DEST_NAME) SLOT->IS_ACTIVE = false;
