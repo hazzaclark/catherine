@@ -68,13 +68,13 @@ namespace catherine
             // PROVIDED FOR A GIVEN PROCESSED VALUE
             // ONLY EVER ACCESSED DURING FUNCTION CALL RUNTIMES
             
-            S32 CATH_GET_PROC_IMM() const;
             S32 CATH_GET_PROC_DISP() const;
             S32 CATH_GET_BRA_TARGET() const;
 
             inline U16 CATH_GET_RAW_INSTR() const { return CATH_GET_RAW(&INSTR); }
             inline U32 CATH_GET_RAW_PC() const { return CATH_GET_PC(&INSTR); }
             inline S32 CATH_GET_BRA_OFFSET() const { return CATH_GET_BRANCH_OFFSET(&INSTR); }
+            inline S32 CATH_GET_PROC_IMM() const { return CATH_INSTRUCTION_GET_IMM(&INSTR); }
 
             // ACCESS ALL OF THE CONTENTS OF THE RESPECTIVE FIELD
             // LEVERAGE CONSTEXPR FOR COMPILE TIME EVALUATION
