@@ -1,5 +1,5 @@
 # catherine
-Hitachi SuperH Instruction Decoder
+Multi-purpose SEGA Saturn Instruction Decoder
 
 ## Motive:
 
@@ -16,7 +16,6 @@ Given that this API is developed with the SEGA Saturn's architectural design, ar
   - Simple per-word instruction decoding
   - Static Analysis for handling said decoding
   - Bindings for C++
-  - Multiple SH architectures aim to be suppoerted: with the main focus on SuperH2.
   - SEGA Saturn DSP (SCU)
 
 ## Implementation:
@@ -82,8 +81,6 @@ Demonstrated by this snippet of Assembly code from NiGHTS into Dreams [MK-81020]
 Note that the following contexts of the Emulator in question serves to provide a differing means of accessing current PC and SR values. Therefore, results of current values passed in through Operand Types such as PC Displacement will differ from source to decoder as we are not too concerned with accessing verbatim SP values (of course barring the fact that the emulator is *emulating* a system and all I am doing is decoding to get matching ASM)
 
 <img width="2062" height="780" alt="image" src="https://github.com/user-attachments/assets/179945fd-43b1-4a41-93b1-ac6c6a18c7ac" />
-
-
 
 
 ## References:
