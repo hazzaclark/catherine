@@ -68,11 +68,6 @@ extern "C" {
         U16 WORD;
         U32 BITS;
 
-        U8 RN;
-        U8 RM;
-        S32 IMM;
-        S32 DISP;
-
     } SH_INSTRUCTION;
 
     typedef struct SH_ENTRY
