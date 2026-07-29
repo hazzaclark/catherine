@@ -1,5 +1,5 @@
 # catherine
-Multi-purpose Instruction Decoder for the Hitachi SuperH ISA
+Multi-purpose Instruction Decoder for the SEGA Saturn
 
 ## Motive:
 
