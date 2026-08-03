@@ -87,6 +87,21 @@ namespace catherine
         return (ID == CATH_INSTR_DIR::CATH_INSTR_ID_RTS     ||
                 ID == CATH_INSTR_DIR::CATH_INSTR_ID_RTE);
     }
+
+    inline bool CATH_INSTR_IS_DELAY_SLOT(const CATH_INSTRUCTION& INSTR)
+    {
+        CATH_INSTR_DIR ID = INSTR.CATH_GET_UNIQUE_ID();
+        return (ID == CATH_INSTR_DIR::CATH_INSTR_ID_RTS     ||
+                ID == CATH_INSTR_DIR::CATH_INSTR_ID_RTE     ||
+                ID == CATH_INSTR_DIR::CATH_INSTR_ID_BRA     ||
+                ID == CATH_INSTR_DIR::CATH_INSTR_ID_BSR     ||
+                ID == CATH_INSTR_DIR::CATH_INSTR_ID_BTS     ||
+                ID == CATH_INSTR_DIR::CATH_INSTR_ID_BFS     ||
+                ID == CATH_INSTR_DIR::CATH_INSTR_ID_JMP     ||
+                ID == CATH_INSTR_DIR::CATH_INSTR_ID_JSR     ||
+                ID == CATH_INSTR_DIR::CATH_INSTR_ID_BRAF    ||
+                ID == CATH_INSTR_DIR::CATH_INSTR_ID_BSRF);
+    }
 }
 
 #endif
