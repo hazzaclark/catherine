@@ -19,6 +19,10 @@
 #include "instructions/registerDSP.h"
 #include "enums/instructionsDSP.hpp"
 
+// SYSTEM INCLUDES
+
+#include <array>
+
 namespace catherine
 {
     class CATH_INSTRUCTION_DSP
@@ -57,6 +61,13 @@ namespace catherine
             inline U32 CATH_DSP_GET_WORD() const { return this->INSTR.WORD; }
             inline U32 CATH_DSP_GET_PC() const { return this->INSTR.PC; }
             inline bool CATH_DSP_IS_PARALLEL() const { return this->INSTR.IS_PARALLEL; }
+
+            // ACCESS THE SLOTS THAT ENCOMPASS A COMMON DSP INSTRUCTION
+            inline std::array<const SH_DSP_PARALLEL_SLOT*, SCU_DSP_SLOT_COUNT> CATH_DSP_GET_SLOTS() const
+            {
+                return { &this->INSTR.XP_SLOT, &this->INSTR.X_SLOT, &this->INSTR.YA_SLOT,
+                    &this->INSTR.Y_SLOT, &this->INSTR.D_SLOT };
+            }
 
             // ACCESS ALL OF THE CONTENTS OF THE RESPECTIVE FIELD
             // LEVERAGE CONSTEXPR FOR COMPILE TIME EVALUATION
