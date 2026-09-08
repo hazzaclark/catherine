@@ -42,6 +42,15 @@ namespace catherine
                 return static_cast<INSTR_ID_DSP::CATH_INSTR_ID_DSP_CXX>(this->INSTR.INSTR_ID);
             }
 
+            // ACCESS THE UNIQUE INSTRUCTION DESCRIPTOR BY READING OPERAND ROLES
+            // AND CATEGORY FLAGS WITHOUT GOING THROUGH THE RAW POINTER
+            //
+            // OTHER FIELDS REMAIN HERE FOR THE SAKE OF DOCUMENTATION
+            inline const SH_DSP_DESCRIPTOR* CATH_DSP_GET_DESCRIPTOR() const
+            {
+                return this->INSTR.DESCRIPTOR;
+            }
+
             // ACCESS ALL OF THE CONTENTS OF THE RESPECTIVE FIELD
             // LEVERAGE CONSTEXPR FOR COMPILE TIME EVALUATION
 
