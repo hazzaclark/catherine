@@ -51,10 +51,17 @@ namespace catherine
                 return this->INSTR.DESCRIPTOR;
             }
 
+            // ACCESS DIRECTLY THE METHODS AND THE FIELDS ENCOMPASSING THE DSP OPCODE'S
+            // RAW WORD, ITS ADDRESS, AND THE FORMAT OF THE INSTRUCTION (PARALLEL OR COMBINATORIAL)
+            
+            inline U32 CATH_DSP_GET_WORD() const { return this->INSTR.WORD; }
+            inline U32 CATH_DSP_GET_PC() const { return this->INSTR.PC; }
+            inline bool CATH_DSP_IS_PARALLEL() const { return this->INSTR.IS_PARALLEL; }
+
             // ACCESS ALL OF THE CONTENTS OF THE RESPECTIVE FIELD
             // LEVERAGE CONSTEXPR FOR COMPILE TIME EVALUATION
 
-            static constexpr U8 CATH_DSP_GET_OPERAND(U32 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 26, 6)); }
+            static constexpr U8 CATH_DSP_GET_OPCODE(U32 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 26, 6)); }
             static constexpr U8 CATH_DSP_GET_END(U32 WORD) { return static_cast<U8>(CATH_SHIFT_R(WORD, 15, 1)); }
             
             std::string CATH_DSP_DISASSEMBLE_OPERANDS() const;
