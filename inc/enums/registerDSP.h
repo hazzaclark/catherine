@@ -21,9 +21,6 @@ typedef enum CATH_DSP_MC_REG
 typedef enum CATH_DSP_RA_REG
 {
     DSP_REG_RA0 = 0,
-    DSP_REG_RA1,
-    DSP_REG_RA2,
-    DSP_REG_RA3,
     DSP_REG_RA_MAX
      
 } CATH_DSP_RA_REG;
