@@ -40,14 +40,14 @@ STATIC const char* const SCU_DSP_JMP_COND_NAMES[128] =
 {
     [0x61] = "Z",
     [0x41] = "NZ",
-    [0x62] = "S",
-    [0x42] = "NS",
-    [0x64] = "C",
-    [0x44] = "NC",
-    [0x68] = "T0",
-    [0x48] = "NT0",
-    [0x63] = "ZS",
-    [0x43] = "NZS",
+    [0x21] = "S",
+    [0x11] = "NS",
+    [0x31] = "ZS",
+    [0x09] = "NZS",
+    [0x51] = "C",
+    [0x49] = "NC",   
+    [0x08] = "T0",   
+    [0x01] = "NT0",
 };
 
 UNK CATH_DSP_OPERAND_TYPE_NONE(const struct SH_DSP_INSTRUCTION* INSTR, char* BUFFER, UNK SIZE)
@@ -170,6 +170,8 @@ UNK CATH_DSP_OPERAND_TYPE_MVI_COND(const struct SH_DSP_INSTRUCTION* INSTR, char*
 
 UNK CATH_DSP_OPERAND_TYPE_JMP_COND(const struct SH_DSP_INSTRUCTION* INSTR, char* BUFFER, UNK SIZE)
 {
+    if(!SCU_DSP_GET_JMP_COND_NEGATE(INSTR)) return 0;
+
     U8 COND = (U8)SCU_DSP_GET_JMP_COND(INSTR);
     const char* NAME = SCU_DSP_JMP_COND_NAMES[COND];
 
