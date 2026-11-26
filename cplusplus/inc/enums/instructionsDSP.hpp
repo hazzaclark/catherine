@@ -60,8 +60,8 @@ namespace catherine
 
         // ACCESS THE PROVIDED OPCODE NAME IN CONJUNCTION WITH THE PROVIDED API
         // AS PER INSTRUCTION.HPP, CAST ACCORDINGLY TO ACCESS
-        STATIC INLINE 
-        std::string CATH_GET_DSP_OPCODE_NAME_CXX(CATH_INSTR_ID_DSP UNIQUE)
+         
+        inline std::string CATH_GET_DSP_OPCODE_NAME_CXX(CATH_INSTR_ID_DSP UNIQUE)
         {
             CATH_INSTR_ID_DSP ID = static_cast<CATH_INSTR_ID_DSP>(UNIQUE);
             return std::string(CATH_GET_DSP_OPCODE_NAME(ID));
